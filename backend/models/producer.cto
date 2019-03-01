@@ -1,0 +1,11 @@
+namespace gridly.producer
+
+import gridly.user.*
+import gridly.consumer.*
+import gridly.battery.*
+
+participant Producer extends Consumer {
+  o Boolean producerStatus
+  o Double minSellingPrice
+  --> Battery[] battery   
+}

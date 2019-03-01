@@ -1,0 +1,24 @@
+namespace gridly.user 
+
+import gridly.userAccount.*
+
+participant User identified by userId {
+  o String userId
+  o String fname
+  o String lname
+  o String email
+  o Address address
+  o String homePhoneNo
+  o String mobilePhoneNo
+  o String accountStatus
+  --> UserAccount account 
+}
+ 
+concept Address {
+  o Integer streetNo
+  o String streetName
+  o String city
+  o String postalCode 
+  o String province
+  o String country default="Canada"
+}
