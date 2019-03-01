@@ -1,0 +1,10 @@
+namespace gridly.battery 
+
+asset Battery identified by batteryId {
+  o String batteryId
+  o String serialNo 
+  o String manufacturer optional 
+  o String model optional
+  o Integer maxCapacity
+    
+}

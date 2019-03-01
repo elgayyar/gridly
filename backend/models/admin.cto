@@ -1,0 +1,11 @@
+namespace gridly.admin
+
+import gridly.user.*
+
+participant Admin extends User {
+  o String londonHydroId
+  o DateTime datehired
+  o DateTime dateFinished optional 
+  o String jobTitle 
+
+}

@@ -1,0 +1,20 @@
+namespace gridly.userAccount
+
+participant UserAccount identified by userAccountName {
+  o String userAccountName
+  o String encryptedPassword
+  o Boolean isAdmin default=false
+  o Boolean isActive  
+}
+
+// Creates a new user account
+transaction CreateUserAccount {
+  o String userAccountName
+  o String encryptedPassword
+  o Boolean isAdmin 
+}
+
+// Event indicating that user account was created
+event UserAccountCreated {
+  o Boolean accountStatus 
+}
