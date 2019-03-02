@@ -4,7 +4,7 @@
       [mode]="(isHandset$ | async) ? 'over' : 'side'"
       [opened]="!(isHandset$ | async)">
     <mat-toolbar>
-      Gridly<i class="material-icons sidebar-icon">
+      <span class="title">Gridly</span><i class="material-icons sidebar-icon">
       blur_on
       </i> </mat-toolbar>
     <mat-nav-list>
@@ -35,8 +35,15 @@
         *ngIf="isHandset$ | async">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <span></span>
+      <div  *ngIf="isHandset$ | async">
+          <span class="title mobile-title">Gridly</span><i class="material-icons sidebar-icon">
+              blur_on
+              </i> 
+      </div>
+      <span class="fill-space"></span>
+      <button mat-stroked-button class="logout-button">Logout</button>
     </mat-toolbar>
     <!-- Add Content Here -->
+    <ng-content></ng-content>
   </mat-sidenav-content>
 </mat-sidenav-container>

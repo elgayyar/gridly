@@ -16,6 +16,7 @@ html, body{
 
 .sidebar-icon {
     padding-right: 7%;
+    color: #F1F1F1;
 }
 
 a:hover{
@@ -24,4 +25,23 @@ a:hover{
 
 .fill-space {
     flex: 1 1 auto;
+}
+
+.logout-button {
+    background: #F1F1F1;
+    color: #B00F3B;
+}
+
+.logout-button:hover {
+    background: #373B46;
+    color: #F1F1F1;
+}
+
+.title {
+    font-size: xx-large;
+    color: #F1F1F1;
+}
+
+.mobile-title {
+    padding-left: 70%;
 }
