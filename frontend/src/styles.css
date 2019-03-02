@@ -1,14 +1,47 @@
-/*
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- * 
- * http://www.apache.org/licenses/LICENSE-2.0
- * 
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 /* You can add global styles to this file, and also import other style files */
+html, body{
+    margin: 0;
+    font-family: 'Roboto';
+}
+
+.sidebar{
+    background: #373B46;
+    color: #F1F1F1;
+}
+
+.toolbar {
+    background: #B00F3B;
+    color: #F1F1F1;
+}
+
+.sidebar-icon {
+    padding-right: 7%;
+    color: #F1F1F1;
+}
+
+a:hover{
+    background: #B00F3B;
+}
+
+.fill-space {
+    flex: 1 1 auto;
+}
+
+.logout-button {
+    background: #F1F1F1;
+    color: #B00F3B;
+}
+
+.logout-button:hover {
+    background: #373B46;
+    color: #F1F1F1;
+}
+
+.title {
+    font-size: xx-large;
+    color: #F1F1F1;
+}
+
+.mobile-title {
+    padding-left: 70%;
+}

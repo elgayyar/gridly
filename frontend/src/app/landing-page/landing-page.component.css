@@ -1,0 +1,8 @@
+.right-padding {
+    padding-right: 2%;
+}
+
+.right-padding:hover {
+    color: #373B46;
+    cursor: pointer;
+}

@@ -1,0 +1,19 @@
+.login-card{
+    margin-top: 20%;
+    background: #373B46;
+}
+
+.title {
+    font-size: xx-large;
+    color: #F1F1F1;
+}
+
+.login-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+}
+
+.full-width {
+    width: 100%;
+}
