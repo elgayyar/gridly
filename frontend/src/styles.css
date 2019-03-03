@@ -46,3 +46,13 @@ a:hover{
 .mobile-title {
     padding-left: 70%;
 }
+
+.home-card {
+    max-height: 500px;
+    background: #F5F5F5;
+    margin: 5%;
+}
+
+.card-title {
+    font-size: x-large;
+}
