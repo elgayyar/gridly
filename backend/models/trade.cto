@@ -1,0 +1,18 @@
+namespace gridly.trade
+import gridly.consumer.*
+import gridly.producer.*
+
+//What the front-end has to send to back-end to update information
+//Implies the logic required to execute the match exists on the front-end. Query?
+transaction Trade {
+	//Note: Transactions automatically create an associated ID and timestamp
+  o Double unitElectricityPrice
+  o Double electricityQuantity 
+  o Double totalPrice
+  --> Consumer buyer 
+  --> Producer seller
+}
+
+//Needed only to set up demo information
+transaction DemoSetup {
+}

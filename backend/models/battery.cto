@@ -6,5 +6,5 @@ asset Battery identified by batteryId {
   o String manufacturer optional 
   o String model optional
   o Integer maxCapacity
-    
+  o Integer currentCapacity
 }
