@@ -40,8 +40,19 @@ a:hover{
 .title {
     font-size: xx-large;
     color: #F1F1F1;
+    cursor: pointer;
 }
 
 .mobile-title {
     padding-left: 70%;
+}
+
+.home-card {
+    max-height: 500px;
+    background: #F5F5F5;
+    margin: 5%;
+}
+
+.card-title {
+    font-size: x-large;
 }
