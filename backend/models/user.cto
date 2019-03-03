@@ -1,17 +1,13 @@
 namespace gridly.user 
 
-import gridly.userAccount.*
-
-participant User identified by userId {
-  o String userId
+participant User identified by email {
+  o String email
   o String fname
   o String lname
-  o String email
   o Address address
   o String homePhoneNo
   o String mobilePhoneNo
   o String accountStatus
-  --> UserAccount account 
 }
  
 concept Address {

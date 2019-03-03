@@ -15,30 +15,8 @@
 /**
  * Sample access control list.
  */
-rule EverybodyCanReadEverything {
-    description: "Allow all participants read access to all resources"
-    participant: "gridly.SampleParticipant"
-    operation: READ
-    resource: "gridly.*"
-    action: ALLOW
-}
 
-rule EverybodyCanSubmitTransactions {
-    description: "Allow all participants to submit transactions"
-    participant: "gridly.SampleParticipant"
-    operation: CREATE
-    resource: "gridly.SampleTransaction"
-    action: ALLOW
-}
-
-rule OwnerHasFullAccessToTheirAssets {
-    description: "Allow all participants full access to their assets"
-    participant(p): "gridly.SampleParticipant"
-    operation: ALL
-    resource(r): "gridly.SampleAsset"
-    condition: (r.owner.getIdentifier() === p.getIdentifier())
-    action: ALLOW
-}
+//Need to fill in access control for Gridly participants here
 
 rule SystemACL {
   description:  "System ACL to permit all access"

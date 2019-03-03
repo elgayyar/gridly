@@ -4,7 +4,7 @@ import gridly.user.*
 
 participant Consumer extends User {
   o Boolean consumerStatus
-  o String greenButtonId optional 
-  o Double maxPurchasePrice optional 
+  o String greenButtonId optional
+  o Double maxPurchasePrice optional
   o Double balance default=0.00 
 }

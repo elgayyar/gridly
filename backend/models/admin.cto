@@ -7,5 +7,4 @@ participant Admin extends User {
   o DateTime datehired
   o DateTime dateFinished optional 
   o String jobTitle 
-
 }
