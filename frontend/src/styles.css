@@ -40,6 +40,7 @@ a:hover{
 .title {
     font-size: xx-large;
     color: #F1F1F1;
+    cursor: pointer;
 }
 
 .mobile-title {
