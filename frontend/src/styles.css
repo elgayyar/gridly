@@ -1,7 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
+@import "../node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css";
+
+
 html, body{
     margin: 0;
     font-family: 'Roboto';
+    height: 100%;
 }
 
 .sidebar{
@@ -56,3 +60,20 @@ a:hover{
 .card-title {
     font-size: x-large;
 }
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+
+  }
+  
+  .form-container > * {
+    width: 100%;
+  }
+
+  .form-space {
+    margin-left: 2%;
+    margin-right: 2%;
+  }
+
+  
