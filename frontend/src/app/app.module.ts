@@ -14,6 +14,8 @@ import { HomeComponent } from './home/home.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { RegisterComponent } from './register/register.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { UseageModalComponent } from './useage-modal/useage-modal.component';
 
 
 @NgModule({
@@ -24,7 +26,8 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
     HomeComponent,
     LandingPageComponent,
     RegisterComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    UseageModalComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +45,8 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
     MatTabsModule,
     MatSelectModule,
     BrowserAnimationsModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    NgxChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

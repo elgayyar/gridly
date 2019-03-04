@@ -6,6 +6,7 @@ html, body{
     margin: 0;
     font-family: 'Roboto';
     height: 100%;
+    color: #F1F1F1;
 }
 
 .sidebar{
@@ -58,7 +59,7 @@ a:hover{
 }
 
 .card-title {
-    font-size: x-large;
+    font-size: xx-large;
 }
 
 .form-container {
