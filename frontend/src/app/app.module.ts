@@ -16,6 +16,7 @@ import { RegisterComponent } from './register/register.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { UseageModalComponent } from './useage-modal/useage-modal.component';
+import { SettingsComponent } from './settings/settings.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { UseageModalComponent } from './useage-modal/useage-modal.component';
     LandingPageComponent,
     RegisterComponent,
     UserProfileComponent,
-    UseageModalComponent
+    UseageModalComponent,
+    SettingsComponent
   ],
   imports: [
     BrowserModule,
