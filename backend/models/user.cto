@@ -4,5 +4,17 @@ participant User identified by email {
   o String email
   o String fname
   o String lname
+  o Address address
+  o String homePhoneNo
+  o String mobilePhoneNo
+  o String accountStatus
 }
  
+concept Address {
+  o Integer streetNo
+  o String streetName
+  o String city
+  o String postalCode 
+  o String province
+  o String country default="Canada"
+}
