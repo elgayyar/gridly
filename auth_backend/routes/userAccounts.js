@@ -1,14 +1,13 @@
 var express = require('express');
 var router = express.Router();
-var UserAccounts = require('../Models/UserAccount');
-var Administrators = require('../Models/Administrator');
-var Physiotherapists = require('../Models/Physiotherapist');
-var PatientProfiles = require('../Models/PatientProfile');
+var UserAccounts = require('../models/userAccount');
+var administratorProfiles = require('../models/administratorProfile');
+var consumerProfiles = require('../models/consumerProfile');
+var producerProfiles= require('../models/producerProfile');
 
 //for tokens & verification & login sessions
 const jwt = require('jsonwebtoken');
-const config = require('../Config/Database');
-const nodemailer = require('nodemailer');
+const config = require('../config/database');
 
 const loginPage = '"http://localhost:8080/login"';
 
@@ -32,14 +31,14 @@ router.route('/login')
                 //get the profile associated with this account
                 let profileID;
                 let profileType;
-                if (userAccount.patientProfile){
-                    profileID = userAccount.patientProfile;
-                    profileType = "patient"
-                } else if (userAccount.physiotherapist){
-                    profileID = userAccount.physiotherapist;
-                    profileType = "physiotherapist"
-                } else if (userAccount.administrator) {
-                    profileID = userAccount.administrator;
+                if (userAccount.consumerProfile){
+                    profileID = userAccount.consumerProfile;
+                    profileType = "consumer"
+                } else if (userAccount.producerProfile){
+                    profileID = userAccount.producerProfile;
+                    profileType = "producer"
+                } else if (userAccount.administratorProfile) {
+                    profileID = userAccount.administratorProfile;
                     profileType= "administrator";
                 }
 
@@ -71,24 +70,24 @@ router.route('/')
             var tempAccount = userAccount;
             console.log ("Success! this is the account that was just added: ", tempAccount)
 
-            if(userAccount.patientProfile){
-                PatientProfiles.getOne(userAccount.patientProfile).then(function(patientProfile){
-                    console.log('found the patient profile to link to', patientProfile);
+            if(userAccount.consumerProfile){
+                consumerProfiles.getOne(userAccount.consumerProfile).then(function(consumerProfile){
+                    console.log('found the patient profile to link to', consumerProfile);
 
                     //update the reference to the userAccount just created in the patient's profile
-                    tempProfile = patientProfile;
+                    tempProfile = consumerProfile;
                     tempProfile.account = userAccount._id; //for physio & admin, its tempProfile.userAccount, naming differences in model
 
-                    PatientProfiles.update(tempProfile._id, tempProfile).then(function(document){
+                    consumerProfiles.update(tempProfile._id, tempProfile).then(function(document){
                         console.log("Success! Here is the updated profile with the ref to the userAccount: ", document);
                     }).catch(function(err){
                         console.log(err);
                     });
 
                     //update the reference to the patient profile in the just created UserAccount
-                    tempAccount.patientProfile = tempProfile._id;
+                    tempAccount.consumerProfile = tempProfile._id;
                     UserAccounts.update(tempAccount._id, tempAccount).then(function(document) {
-                        console.log ("UserAccount successfully updated! It's patientProfile field should be filled! ", document);
+                        console.log ("UserAccount successfully updated! It's consumerProfile field should be filled! ", document);
                     }).catch(function(err){
                         console.log(err);
                     })
@@ -97,23 +96,23 @@ router.route('/')
                     console.log(err);
                 });
 
-            } else if(userAccount.administrator){
-                Administrators.getOne(userAccount.administrator).then(function(adminProfile){
-                    console.log('found the administrator to link to', adminProfile);
+            } else if(userAccount.administratorProfile){
+                administratorProfiles.getOne(userAccount.administratorProfile).then(function(adminProfile){
+                    console.log('found the administratorProfile to link to', adminProfile);
                     tempProfile = adminProfile;
                     tempProfile.userAccount = userAccount._id;
 
                     //update the profile with the ref to the user Account
-                    Administrators.update(tempProfile._id, tempProfile).then(function(document){
+                    administratorProfiles.update(tempProfile._id, tempProfile).then(function(document){
                         console.log("Success! Here is the updated profile with the ref to the userAccount: ", document);
                     }).catch(function(err){
                         console.log(err);
                     });
 
                     //update the reference to the admin profile in the just created UserAccount
-                    tempAccount.administrator = tempProfile._id;
+                    tempAccount.administratorProfile = tempProfile._id;
                     UserAccounts.update(tempAccount._id, tempAccount).then(function(document) {
-                        console.log ("UserAccount successfully updated! It's administrator field should be filled! ", document);
+                        console.log ("UserAccount successfully updated! It's administratorProfile field should be filled! ", document);
                     }).catch(function(err){
                         console.log(err);
                     })
@@ -122,25 +121,25 @@ router.route('/')
                     console.log(err);
                 });
 
-            } else if(userAccount.physiotherapist){
-                Physiotherapists.getOne(userAccount.physiotherapist).then(function(physioProfile){
-                    console.log('found the physiotherapist profile to link to', physioProfile);
+            } else if(userAccount.producerProfile){
+                producerProfiles.getOne(userAccount.producerProfile).then(function(physioProfile){
+                    console.log('found the producerProfile profile to link to', producerProfile);
 
-                    tempProfile = physioProfile;
+                    tempProfile = producerProfile;
                     tempProfile.userAccount = userAccount._id;
 
                     //update the reference to useraccount in the profile
-                    Physiotherapists.update(tempProfile._id, tempProfile).then(function(document){
+                    producerProfiles.update(tempProfile._id, tempProfile).then(function(document){
                         console.log("Success! Here is the updated profile with the ref to the userAccount: ", document);
                     }).catch(function(err){
                         console.log(err);
                     });
 
-                    tempAccount.physiotherapist= tempProfile._id;
+                    tempAccount.producerProfile= tempProfile._id;
 
-                    //update the reference to the physiotherapist profile in the just created UserAccount
+                    //update the reference to the producerProfile profile in the just created UserAccount
                     UserAccounts.update(tempAccount._id, tempAccount).then(function(document) {
-                        console.log ("UserAccount successfully updated! It's physiotherapist field should be filled! ", document);
+                        console.log ("UserAccount successfully updated! It's producerProfile field should be filled! ", document);
                     }).catch(function(err){
                         console.log(err);
                     })                }).catch(function(err){
@@ -148,8 +147,8 @@ router.route('/')
                 });
             }
 
-            // userAccount.administrator = administrator._id;
-            // UserAccounts.update(userAccount._id, userAccount).then(function(userAccount){   // I then update the administrator reference of the associated userAccount
+            // userAccount.administratorProfile = administratorProfile._id;
+            // UserAccounts.update(userAccount._id, userAccount).then(function(userAccount){   // I then update the administratorProfile reference of the associated userAccount
             //     console.log(userAccount);
             // }).catch(function(err){
             //     console.log(err);
@@ -165,21 +164,21 @@ router.route('/')
     .get(function (request, response) {
         UserAccounts.getAll().then(function(userAccounts){
             userAccounts.forEach(function(userAccount){
-                if(userAccount.administrator){
-                    Administrators.getOne(userAccount.administrator).then(function(document){
-                        userAccount.administrator = document;   // Replace the id in the field with the object so you have the needed data on the front end
+                if(userAccount.administratorProfile){
+                    administratorProfiles.getOne(userAccount.administratorProfile).then(function(document){
+                        userAccount.administratorProfile = document;   // Replace the id in the field with the object so you have the needed data on the front end
                     }).catch(function(err){
                         console.log(err);
                     });
-                }else if(userAccount.physiotherapist){
-                    Physiotherapists.getOne(userAccount.physiotherapist).then(function(document){
-                        userAccount.physiotherapist = document; // Replace the id in the field with the object so you have the needed data on the front end
+                }else if(userAccount.producerProfile){
+                    producerProfiles.getOne(userAccount.producerProfile).then(function(document){
+                        userAccount.producerProfile = document; // Replace the id in the field with the object so you have the needed data on the front end
                     }).catch(function(err){
                         console.log(err);
                     });
-                }else if(userAccount.patientProfile){
-                    PatientProfiles.getOne(userAccount.patientProfile).then(function(document){
-                        userAccount.patientProfile = document;  // Replace the id in the field with the object so you have the needed data on the front end
+                }else if(userAccount.consumerProfile){
+                    consumerProfiles.getOne(userAccount.consumerProfile).then(function(document){
+                        userAccount.consumerProfile = document;  // Replace the id in the field with the object so you have the needed data on the front end
                     }).catch(function(err){
                         console.log(err);
                     });
@@ -210,67 +209,6 @@ router.route('/:username')
         )
     });
 
-router.route('/updatePassword/:object_id')
-    .put(function (request, response) {
-        console.log ("in update user account password route, here's the new password: ", request.body.user.encryptedPassword);
-        var newPassword = request.body.user.encryptedPassword;
-        if (!request.params.object_id) {
-            response.json({success: false, message: 'id was not provided'});
-        }
-        UserAccounts.updatePassword(request.params.object_id, request.body.user).then(function(userAccount){
-            //email only sends when its resetting password to a temporary password, not for saving a new password
-            if (request.body.reset) {
-                console.log("sending temporary password to: ", request.body.email);
-
-                // create reusable transporter object using the default SMTP transport
-                var transporter = nodemailer.createTransport({
-                    host: "smtp-mail.outlook.com", // hostname
-                    secureConnection: false, // TLS requires secureConnection to be false
-                    port: 587, // port for secure SMTP
-                    tls: {
-                        ciphers: 'SSLv3'
-                    },
-                    auth: {
-                        user: 'selfstart1@hotmail.com',
-                        pass: 'ademidun1'
-                    }
-                });
-
-                // setup email data with unicode symbols
-                var mailOptions = {
-                    from: '"Admin" <selfstart1@hotmail.com>', // sender address
-                    to: request.body.email, // list of receivers
-                    subject: 'Password Reset Notice!', // Subject line
-                    text: " ", // plain text body
-                    html: `
-<p>Your password has been reset! here is your new temporary password: ${newPassword}</p>
-<a href = ${loginPage}>click to login</a>
-`// html body
-                };
-
-                // send mail with defined transport object
-                transporter.sendMail(mailOptions, function (error, info) {
-                    if (error) {
-                        return console.log(error);
-                    }
-                    console.log('Message sent: %s', info.messageId);
-                    // Preview only available when sending through an Ethereal account
-                    console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
-
-                    transporter.verify(function (error, success) {
-                        if (error) {
-                            console.log(error);
-                        } else {
-                            console.log('Server is ready to take our messages');
-                        }
-                    });
-                });
-            }
-                response.json({success: true, userAccount: userAccount});
-        }).catch(function(err){
-            response.json({success: false, message: err});
-        })
-    });
 
 router.route('/id/:object_id')
     .get(function (request, response) {
@@ -278,21 +216,21 @@ router.route('/id/:object_id')
             response.json({success: false, message: 'id was not provided'});
         }
         UserAccounts.getOne(request.params.object_id).then(function(userAccount){
-            if(userAccount.administrator){
-                Administrators.getOne(userAccount.administrator).then(function(document){
-                    userAccount.administrator = document;   // Replace the id in the field with the object so you have the needed data on the front end
+            if(userAccount.administratorProfile){
+                administratorProfiles.getOne(userAccount.administratorProfile).then(function(document){
+                    userAccount.administratorProfile = document;   // Replace the id in the field with the object so you have the needed data on the front end
                 }).catch(function(err){
                     console.log(err);
                 });
-            }else if(userAccount.physiotherapist){
-                Physiotherapists.getOne(userAccount.physiotherapist).then(function(document){
-                    userAccount.physiotherapist = document; // Replace the id in the field with the object so you have the needed data on the front end
+            }else if(userAccount.producerProfile){
+                producerProfiles.getOne(userAccount.producerProfile).then(function(document){
+                    userAccount.producerProfile = document; // Replace the id in the field with the object so you have the needed data on the front end
                 }).catch(function(err){
                     console.log(err);
                 });
-            }else if(userAccount.patientProfile){
-                PatientProfiles.getOne(userAccount.patientProfile).then(function(document){
-                    userAccount.patientProfile = document;  // Replace the id in the field with the object so you have the needed data on the front end
+            }else if(userAccount.consumerProfile){
+                consumerProfiles.getOne(userAccount.consumerProfile).then(function(document){
+                    userAccount.consumerProfile = document;  // Replace the id in the field with the object so you have the needed data on the front end
                 }).catch(function(err){
                     console.log(err);
                 });

@@ -6,16 +6,6 @@ var router = express.Router();
 var bodyParser = require('body-parser');
 const cors = require('cors');
 
-/* 
-const MongoClient = require('mongodb').MongoClient;
-const uri = "mongodb+srv://dbAdmin:dbPassword@cluster0-hdse0.mongodb.net/test?retryWrites=true";
-const client = new MongoClient(uri, { useNewUrlParser: true });
-client.connect(err => {
-  const collection = client.db("Gridly_auth").collection("useraccounts");
-  // perform actions on the collection object
-  client.close();
-}); */
-
 const uri = "mongodb+srv://dbAdmin:dbAdminPassword@cluster0-hdse0.mongodb.net/test?retryWrites=true";
 const options = {
     useNewUrlParser: true,
@@ -38,6 +28,22 @@ db.once('open', function() {
   console.log("connected database:", options.dbName);
 });
 
+//our defined routes
+const userAccounts = require('./routes/userAccounts');
+const administrators = require('./routes/administrators');
+
+
+//default
+router.get('/', function(req, res) {
+    res.json({ message: 'Hello World!' });   
+});
+
+//models
+app.use('/UserAccounts', userAccounts);
+app.use('/adminstratorProfiles', administrators);
+// app.use('/consumerProfiles', consumerProfile);
+// app.use('/producerProfiles', producerProfile);
+app.use('/', router);
 app.use(cors());
 
 //setting request headers
@@ -51,24 +57,6 @@ app.use(function (request, response, next) {
 // the following 2 middleware convert the URL req and res to json format
 app.use(bodyParser.json({limit: '10mb'}));
 app.use(bodyParser.urlencoded({limit: '10mb', extended: true}));
-
-/* // connect to mongoDB using mongoose driver
-mongoose.Promise = global.Promise;
-mongoose.connect('mongodb+srv://dbAdmin:dbPassword@cluster0-hdse0.mongodb.net/test?retryWrites=true');
-var goose = mongoose;
-var conn = mongoose.connection; */
-
-
-//our defined routes
-//const Administrators = require('./Routes/Administrators');
-router.get('/', function(req, res) {
-    res.json({ message: 'Hello World!' });   
-});
-
-//models
-app.use('/', router);
-//app.use('/Administrators', Administrators);
-
 
 //middleware
 app.listen(3700, function () {
