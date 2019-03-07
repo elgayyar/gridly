@@ -35,6 +35,7 @@ function add(object){
                 if (error){
                     reject(error);
                 } else{
+                    console.log ("admin account registered");
                     resolve(document);
                 }
             });

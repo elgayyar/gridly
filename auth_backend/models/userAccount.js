@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt-nodejs'); // A native JS bcrypt library for NodeJ
 
 var userAccountSchema = mongoose.Schema(
     {
-        userAccountName: String,
+        username: String,
         encryptedPassword: String,
         //Check which of the following FKs is non-null to see what type of user (Admin, Producer Consumer) the user is.
         administratorProfile: {type: mongoose.Schema.ObjectId, ref: 'administratorProfile'},
@@ -28,8 +28,8 @@ function add(object){
         console.log("within add of UserAccount Model");
         let document = new UserAccounts(object);
 
-        if (!document.userAccountName){
-            error = "No userAccountName detected.";
+        if (!document.username){
+            error = "No username detected.";
             reject(error);
         } else if (!document.encryptedPassword){
             error = "No encryptedPassword detected.";
@@ -93,8 +93,8 @@ function deleteOne(id){
 
 function update(id, updatedDocument){
     return new Promise (function (resolve, reject) {
-        if (!updatedDocument.userAccountName){
-            error = "No userAccountName detected.";
+        if (!updatedDocument.username){
+            error = "No username detected.";
             reject(error);
         } else if (!updatedDocument.encryptedPassword){
             error = "No encryptedPassword detected.";
@@ -102,13 +102,11 @@ function update(id, updatedDocument){
         } else {
             // updatedDocument.encryptedPassword = bcrypt.hashSync(updatedDocument.encryptedPassword,10);
             UserAccounts.findById(id, function (error, document) {
-                console.log("in model update, found the account to be updated! ", document);
-
                 if (error) {
                     reject(error);
                 }
                 else {
-                    document.userAccountName = updatedDocument.userAccountName;
+                    document.username = updatedDocument.username;
                     document.encryptedPassword = updatedDocument.encryptedPassword;
                     document.administrator = updatedDocument.administrator;
                     document.consumerProfile = updatedDocument.physiotherapist;
@@ -144,7 +142,7 @@ function getOne(id){
 function getByName(name){
     return new Promise (function (resolve, reject) {
         console.log("in Model, getByName name is: ", name);
-        UserAccounts.find({userAccountName: name}, function (error, document) {
+        UserAccounts.find({username: name}, function (error, document) {
             if (error){
                 reject(error);
             }else{
