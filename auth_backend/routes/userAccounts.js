@@ -144,14 +144,6 @@ router.route('/')
                     console.log(err);
                 });
             }
-
-            // userAccount.administratorProfile = administratorProfile._id;
-            // UserAccounts.update(userAccount._id, userAccount).then(function(userAccount){   // I then update the administratorProfile reference of the associated userAccount
-            //     console.log(userAccount);
-            // }).catch(function(err){
-            //     console.log(err);
-            // });
-
             response.json({userAccount: userAccount});
 
         }).catch(function(err){
