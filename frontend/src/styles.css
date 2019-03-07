@@ -53,8 +53,14 @@ a:hover{
 }
 
 .home-card {
-    max-height: 500px;
     background: #F5F5F5;
+    color: #373B46;
+    margin: 5%;
+}
+
+.register-card {
+    background: #373B46;
+    color: #F1F1F1;
     margin: 5%;
 }
 
@@ -65,16 +71,49 @@ a:hover{
 .form-container {
     display: flex;
     flex-direction: column;
-
+    margin-left: 2%;
+    margin-right: 2%;
   }
   
   .form-container > * {
     width: 100%;
   }
 
-  .form-space {
-    margin-left: 2%;
-    margin-right: 2%;
+
+  .red-button {
+    background: #B00F3B;
+    color: #F1F1F1;
   }
 
-  
+  .red-button:hover{
+    background: #F1F1F1;
+    color: #B00F3B;
+  }
+
+  .red-button:disabled {
+    background: #F1F1F1;
+    color: #B00F3B;
+  }
+
+  .button-space {
+      margin-top: 5%;
+      margin-bottom: 5%;
+  }
+
+  .mat-step-header .mat-step-icon-selected {
+    background-color: #B00F3B; 
+ }
+
+.stepper {
+    background: #F5F5F5;
+    color: #373B46;
+}
+
+.button-container {
+    margin-top: 5%;
+}
+
+.paragraph-text {
+    font-size: large;
+    color: #373B46;
+}

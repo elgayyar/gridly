@@ -6,7 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MainNavComponent } from './main-nav/main-nav.component';
 import { LayoutModule } from '@angular/cdk/layout';
-import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatDividerModule, MatCardModule, MatInputModule, MatFormFieldModule, MatTabsModule, MatSelectModule } from '@angular/material';
+import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatDividerModule, MatCardModule, MatInputModule, MatFormFieldModule, MatTabsModule, MatSelectModule, MatStepperModule } from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { LoginComponent } from './login/login.component';
@@ -17,6 +17,7 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { UseageModalComponent } from './useage-modal/useage-modal.component';
 import { SettingsComponent } from './settings/settings.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -46,9 +47,11 @@ import { SettingsComponent } from './settings/settings.component';
     MatFormFieldModule,
     MatTabsModule,
     MatSelectModule,
+    MatStepperModule,
     BrowserAnimationsModule,
     FlexLayoutModule,
-    NgxChartsModule
+    NgxChartsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
