@@ -13,7 +13,9 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent  },
   { path: 'home', component: HomeComponent },
   { path: 'profile', component: UserProfileComponent },
-  { path: 'settings', component: SettingsComponent }
+  { path: 'settings', component: SettingsComponent },
+  //{ path: '**', redirectTo: '/home'}// The "Catch-All" Route
+
 ];
 
 @NgModule({

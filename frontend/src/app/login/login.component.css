@@ -1,19 +1,31 @@
 .login-card{
-    margin-top: 20%;
-    background: #373B46;
+    margin-top: 2%;
+    text-align: center;
 }
 
 .title {
     font-size: xx-large;
-    color: #F1F1F1;
+    color: #F1F1F2;
 }
 
 .login-form {
     min-width: 150px;
-    max-width: 500px;
-    width: 100%;
+    max-width: 800px;
+    width: 800px;
 }
 
 .full-width {
     width: 100%;
+}
+
+.fields{
+    display: inline-block;
+}
+
+.login-button{
+    color: #B00F3B;
+}
+.mat-redButton {
+    background-color: #B00F38;
+    color: #fff;
 }
