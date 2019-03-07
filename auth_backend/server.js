@@ -42,9 +42,6 @@ app.use(bodyParser.urlencoded({limit: '10mb', extended: true}));
 
 //our defined routes
 const userAccounts = require('./routes/userAccounts');
-const administrators = require('./routes/administrators');
-const consumerProfiles = require ('./routes/consumers');
-const producerProfiles = require ('./routes/producers');
 
 
 //default
@@ -54,9 +51,6 @@ router.get('/', function(req, res) {
 
 //models
 app.use('/UserAccounts', userAccounts);
-app.use('/administratorProfiles', administrators);
-app.use('/consumerProfiles', consumerProfiles);
-app.use('/producerProfiles', producerProfiles);
 app.use('/', router);
 app.use(cors());
 
