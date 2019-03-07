@@ -16,7 +16,7 @@ router.route('/login')
         console.log("in login route, will be verifying account with username: ", request.body);
 
         //get the account by checking the unique name
-        UserAccounts.getByName(request.body.userAccountName).then(function(userAccount){
+        UserAccounts.getByName(request.body.username).then(function(userAccount){
 
             console.log ("password entered by user is: ", request.body.encryptedPassword);
             console.log ("accToVerifyPasswordOn is: ", userAccount);
@@ -72,11 +72,10 @@ router.route('/')
 
             if(userAccount.consumerProfile){
                 consumerProfiles.getOne(userAccount.consumerProfile).then(function(consumerProfile){
-                    console.log('found the patient profile to link to', consumerProfile);
+                    console.log('found the consumer profile to link to', consumerProfile);
 
-                    //update the reference to the userAccount just created in the patient's profile
                     tempProfile = consumerProfile;
-                    tempProfile.account = userAccount._id; //for physio & admin, its tempProfile.userAccount, naming differences in model
+                    tempProfile.account = userAccount._id; 
 
                     consumerProfiles.update(tempProfile._id, tempProfile).then(function(document){
                         console.log("Success! Here is the updated profile with the ref to the userAccount: ", document);
@@ -84,7 +83,6 @@ router.route('/')
                         console.log(err);
                     });
 
-                    //update the reference to the patient profile in the just created UserAccount
                     tempAccount.consumerProfile = tempProfile._id;
                     UserAccounts.update(tempAccount._id, tempAccount).then(function(document) {
                         console.log ("UserAccount successfully updated! It's consumerProfile field should be filled! ", document);
@@ -100,7 +98,7 @@ router.route('/')
                 administratorProfiles.getOne(userAccount.administratorProfile).then(function(adminProfile){
                     console.log('found the administratorProfile to link to', adminProfile);
                     tempProfile = adminProfile;
-                    tempProfile.userAccount = userAccount._id;
+                    tempProfile.account = userAccount._id;
 
                     //update the profile with the ref to the user Account
                     administratorProfiles.update(tempProfile._id, tempProfile).then(function(document){
@@ -122,11 +120,11 @@ router.route('/')
                 });
 
             } else if(userAccount.producerProfile){
-                producerProfiles.getOne(userAccount.producerProfile).then(function(physioProfile){
+                producerProfiles.getOne(userAccount.producerProfile).then(function(producerProfile){
                     console.log('found the producerProfile profile to link to', producerProfile);
 
                     tempProfile = producerProfile;
-                    tempProfile.userAccount = userAccount._id;
+                    tempProfile.account = userAccount._id;
 
                     //update the reference to useraccount in the profile
                     producerProfiles.update(tempProfile._id, tempProfile).then(function(document){
@@ -289,9 +287,9 @@ router.use(function (req, res, next) {
     }
 });
 
-router.route('/activeUser/editProfile')
+router.route('/editProfile')
     .get (function(req, res) {
-        console.log("in user accounts getActiveUser route, looking for id: ", req.decoded._id);
+        console.log("in user accounts edit profile route, looking for id: ", req.decoded._id);
         if (!req.decoded._id) {
             res.json({success: false, message: 'user account ID was not provided'});
         }

@@ -28,9 +28,23 @@ db.once('open', function() {
   console.log("connected database:", options.dbName);
 });
 
+//setting request headers
+app.use(function (request, response, next) {
+  response.setHeader('Access-Control-Allow-Origin', '*');
+  response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  response.header('Access-Control-Allow-Methods', 'POST, PATCH, GET, PUT, DELETE, OPTIONS');
+  next();
+});
+
+// the following 2 middleware convert the URL req and res to json format
+app.use(bodyParser.json({limit: '10mb'}));
+app.use(bodyParser.urlencoded({limit: '10mb', extended: true}));
+
 //our defined routes
 const userAccounts = require('./routes/userAccounts');
 const administrators = require('./routes/administrators');
+const consumerProfiles = require ('./routes/consumers');
+const producerProfiles = require ('./routes/producers');
 
 
 //default
@@ -40,9 +54,9 @@ router.get('/', function(req, res) {
 
 //models
 app.use('/UserAccounts', userAccounts);
-app.use('/adminstratorProfiles', administrators);
-// app.use('/consumerProfiles', consumerProfile);
-// app.use('/producerProfiles', producerProfile);
+app.use('/administratorProfiles', administrators);
+app.use('/consumerProfiles', consumerProfiles);
+app.use('/producerProfiles', producerProfiles);
 app.use('/', router);
 app.use(cors());
 
@@ -53,10 +67,6 @@ app.use(function (request, response, next) {
     response.header('Access-Control-Allow-Methods', 'POST, PATCH, GET, PUT, DELETE, OPTIONS');
     next();
 });
-
-// the following 2 middleware convert the URL req and res to json format
-app.use(bodyParser.json({limit: '10mb'}));
-app.use(bodyParser.urlencoded({limit: '10mb', extended: true}));
 
 //middleware
 app.listen(3700, function () {
