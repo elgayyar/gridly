@@ -5,5 +5,30 @@
     <span class="title">Gridly</span><i class="material-icons sidebar-icon">blur_on</i> 
 </mat-toolbar>
 
+<!-- <div class="background" *ngIf ="!deactivatedUser && !changingPassword && !forgotPassword && clickedLogin"> -->
+
+<div>
+    <mat-card class="login-card">
+        <div class ="fields">
+            <mat-form-field class ="login-form">
+                <input matInput #name placeholder="Username" [(ngModel)]="username">
+            </mat-form-field>
+            <br />
+            <mat-form-field class ="login-form">
+                <input matInput type="password" #description placeholder="Password"[(ngModel)]="password">
+            </mat-form-field>
+        </div>
+        <br /><br /><br />
+        <!-- <h2 style="color:Tomato" *ngIf="statusMessage && triedLogin">{{statusMessage}}</h2>
+        <h2 style="color:#196804"  *ngIf="!statusMessage && triedLogin">Success! Password verified! Redirecting to home page...</h2> -->
+        <!-- <b style="color:Tomato" *ngIf="statusMessage && triedLogin">{{statusMessage}}<br/></b>
+        <b style="color:#196804"  *ngIf="!statusMessage && triedLogin">Success! Password verified! Redirecting to home page...<br /></b> -->
+        <button mat-raised-button color = "redButton" class="login-button" [disabled] = "processing"  (click)="submitLogin()">Submit</button> <br />
+        <br/>
+        <!-- <a *ngIf="!processing" (click) = "forgotPasswordClicked()">Forgot Password?</a> -->
+        <br /><br />
+
+    </mat-card>
+</div>
 
 
