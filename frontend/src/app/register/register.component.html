@@ -3,3 +3,147 @@
 <mat-toolbar class="toolbar">
     <span class="title">Gridly</span><i class="material-icons sidebar-icon">blur_on</i> 
 </mat-toolbar>
+
+<div class="gridly-theme">
+<div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayout="2%" fxLayoutAlign="center">
+    <div fxFlex="50%" fxFlex.xs="100%">
+        <mat-card class="home-card">
+            <mat-card-header class="card-title">
+              <mat-card-title>Register</mat-card-title>
+              <span class="fill-space"></span>
+            </mat-card-header>
+            <mat-card-content>
+                <mat-horizontal-stepper [linear]="isLinear" #stepper class="stepper">
+                                        <!-- Account Type Step -->
+                                        <mat-step>
+                                                <ng-template matStepLabel>Account Type</ng-template>
+                                                <div class="form-container">
+                                                    <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayout="2%" fxLayoutAlign="center" class="form-container">
+                                                        <p class="paragraph-text">Would you like to be a producer or consumer?</p>
+                                                    </div>
+                                                    <!-- Consumer -->
+                                                    <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayout="2%" fxLayoutAlign="center" class="form-container button-container ">
+                                                            <button mat-button matStepperNext class="red-button button-space" (click)="isConsumer()">Consumer</button>
+                                                    </div>
+                                                    <!-- Producer -->
+                                                    <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayout="2%" fxLayoutAlign="center" class="form-container button-container ">
+                                                        <button mat-button matStepperNext class="red-button button-space" (click)="isProducer()">Producer</button>
+                                                    </div>
+                                                </div>
+                                            </mat-step>
+
+                    <!-- User Account Step -->
+                    <mat-step [stepControl]="userAccountForm">
+                        <form [formGroup]="userAccountForm" (ngSubmit)="userAccountForm.valid && registerUserAccount()" novalidate>
+                            <ng-template matStepLabel>Account Information</ng-template>
+                            <div class="form-container">
+                                <!-- User Name -->
+                                <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayout="2%" fxLayoutAlign="center" class="form-container">
+                                    <mat-form-field>
+                                        <input id="userAccountName" matInput formControlName="userAccountName" [(ngModel)]="userAccount.userAccountName" placeholder="Enter your emial" />
+                                    </mat-form-field>
+                                </div>
+                                <!-- Password  -->
+                                <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayout="2%" fxLayoutAlign="center" class="form-container">
+                                    <mat-form-field>
+                                        <input id="password" matInput formControlName="password" [(ngModel)]="userAccount.password" placeholder="Enter your password" />
+                                    </mat-form-field>
+                                </div>
+                                <!-- Next Button -->
+                                <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayout="2%" fxLayoutAlign="center" class="form-container">
+                                    <span class="fill-space"></span>    
+                                    <button mat-button matStepperNext class="red-button" [disabled]="!userAccountForm.valid">Next</button>
+                                </div>
+                            </div>
+                        </form>
+                    </mat-step>
+
+                    <!-- Personal Information Step -->
+                    <mat-step>
+                        <ng-template matStepLabel>Personal Information</ng-template>
+                        <form [formGroup]="userForm" (ngSubmit)="userForm.valid && registerUser()" novalidate>
+                                <div class="form-container">
+                                        <!-- Name -->
+                                        <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayout="2%" fxLayoutAlign="center" class="form-container">
+                                                <p class="paragraph-text">Name</p>
+                                        </div>    
+                                        <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayout="2%" fxLayoutAlign="center" class="form-container">
+                                            <mat-form-field class="form-space">
+                                                <input id="fName" matInput formControlName="fName" [(ngModel)]="user.fName" placeholder="First name">
+                                                </mat-form-field>
+                                                <mat-form-field class="form-space">
+                                                  <input id="lName" matInput formControlName="lName" [(ngModel)]="user.lName" placeholder="Last name">
+                                              </mat-form-field>
+                                        </div>
+                                        
+                                        <!-- Contact -->
+                                        <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayout="2%" fxLayoutAlign="center" class="form-container">
+                                                <p class="paragraph-text">Contact</p>
+                                        </div>                                              
+                                        <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayout="2%" fxLayoutAlign="center" class="form-container">
+                                          <mat-form-field class="form-space">
+                                              <input id="email" matInput formControlName="email" [(ngModel)]="user.email" placeholder="Email">
+                                          </mat-form-field>
+                                        </div>
+                                        <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayout="2%" fxLayoutAlign="center" class="form-container">
+                                            <mat-form-field class="form-space">
+                                                <input id="homePhoneNo" matInput formControlName="homePhoneNo" [(ngModel)]="user.homePhoneNo" placeholder="Home Phone" type="number">
+                                                </mat-form-field>
+                                                <mat-form-field class="form-space">
+                                                  <input id="mobilePhoneNo" matInput formControlName="mobilePhoneNo" [(ngModel)]="user.mobilePhoneNo" placeholder="Mobile Phone" type="number">
+                                              </mat-form-field>
+                                        </div>
+                                        
+                                        <!-- Address -->
+                                        <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayout="2%" fxLayoutAlign="center" class="form-container">
+                                            <p class="paragraph-text">Address</p>
+                                        </div>    
+                                        <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayout="2%" fxLayoutAlign="center" class="form-container">
+                                            <mat-form-field class="form-space">
+                                                <input id="streetNo" matInput formControlName="streetNo" [(ngModel)]="user.streetNo" placeholder="Street Number" type="number">
+                                                </mat-form-field>
+                                                <mat-form-field class="form-space">
+                                                  <input id="streetName" matInput formControlName="streetName" [(ngModel)]="user.streetName" placeholder="Street Name">
+                                              </mat-form-field>
+                                              <mat-form-field class="form-space">
+                                                  <input id="city" matInput formControlName="city" [(ngModel)]="user.city" placeholder="City">
+                                              </mat-form-field>
+                                        </div>
+                                        <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayout="2%" fxLayoutAlign="center" class="form-container">
+                                            <mat-form-field class="form-space">
+                                                <input id="postalCode" matInput formControlName="postalCode" [(ngModel)]="user.postalCode" placeholder="Postal Code">
+                                            </mat-form-field>
+                                            <mat-form-field class="form-space">
+                                                    <input id="province" matInput formControlName="province" [(ngModel)]="user.province" placeholder="Province">
+                                                </mat-form-field>
+                                            <!--
+                                            <mat-form-field class="form-space">
+                                              <mat-select id="province" matInput formControlName="province" [(ngModel)]="producer.province "placeholder="Province">
+                                                <mat-option *ngFor="let province of provinces">
+                                                  {{province}}
+                                                </mat-option>
+                                              </mat-select>
+                                            </mat-form-field>
+                                            -->
+                                            <mat-form-field class="form-space">
+                                                <input id="country" matInput formControlName="country" [(ngModel)]="user.country" placeholder="Country">
+                                            </mat-form-field>
+                                        </div>
+
+                                        <!-- Finish Button -->
+                                        <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayout="2%" fxLayoutAlign="center" class="form-container">
+                                            <span class="fill-space"></span>    
+                                            <button mat-button matStepperNext class="red-button">Finish</button>
+                                        </div>
+                            </div>
+                        </form>
+                    </mat-step>
+ 
+                  </mat-horizontal-stepper>
+            </mat-card-content>
+            <mat-card-actions>
+            </mat-card-actions>
+          </mat-card>
+    </div>
+  </div>
+</div>
