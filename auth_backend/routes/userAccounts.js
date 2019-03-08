@@ -42,7 +42,7 @@ router.route('/login')
                     profileType= "administrator";
                 }
 
-                const token = jwt.sign({_id: userAccount._id, profileID: profileID,  profileType: profileType}, config.secret, {expiresIn: '24h'});
+                const token = jwt.sign({_id: userAccount._id, email:userAccount.email, profileID: profileID,  profileType: profileType}, config.secret, {expiresIn: '24h'});
                 console.log("token made: ", token);
 
                 response.json({success: true, message: "Account authenticated!", token: token, userAccount: userAccount});
@@ -65,7 +65,7 @@ router.route('/')
         console.log ("in user account post route, about to add account :", request.body);
         UserAccounts.add(request.body).then(function(userAccount){
             console.log ('the userAccount registered is: ', userAccount);
-            response.json({userAccount: userAccount});
+            response.json({success: true, userAccount: userAccount});
         }).catch(function(err){
             response.json({success: false, message: err});
         })
@@ -73,7 +73,7 @@ router.route('/')
     })
     .get(function (request, response) {
         UserAccounts.getAll().then(function(userAccounts){
-            response.json({userAccount: userAccounts});
+            response.json({success: true, userAccounts: userAccounts});
         }).catch(function(err){
             response.json({success: false, message: err});
         })

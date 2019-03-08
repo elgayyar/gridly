@@ -8,12 +8,13 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { SettingsComponent } from './settings/settings.component';
 
 const routes: Routes = [
-  { path: '', component: LandingPageComponent },
   { path: 'login', component: LoginComponent  },
   { path: 'register', component: RegisterComponent  },
   { path: 'home', component: HomeComponent },
   { path: 'profile', component: UserProfileComponent },
   { path: 'settings', component: SettingsComponent },
+  { path: '', component: LandingPageComponent },
+
   //{ path: '**', redirectTo: '/home'}// The "Catch-All" Route
 
 ];
