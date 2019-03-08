@@ -17,6 +17,11 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { UseageModalComponent } from './useage-modal/useage-modal.component';
 import { SettingsComponent } from './settings/settings.component';
+
+import { HttpClient,HttpClientModule} from '@angular/common/http'
+//authentication
+import { AuthGuard} from './guards/auth.guard';
+import { AuthService} from './services/auth.service';
 import { ReactiveFormsModule } from '@angular/forms';
 
 
@@ -30,10 +35,11 @@ import { ReactiveFormsModule } from '@angular/forms';
     RegisterComponent,
     UserProfileComponent,
     UseageModalComponent,
-    SettingsComponent
+    SettingsComponent,
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     FormsModule,
     AppRoutingModule,
     LayoutModule,
@@ -53,7 +59,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     NgxChartsModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [AuthGuard, AuthService,HttpClient],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

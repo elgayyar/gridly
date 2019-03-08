@@ -3,12 +3,12 @@ const bcrypt = require('bcrypt-nodejs'); // A native JS bcrypt library for NodeJ
 
 var userAccountSchema = mongoose.Schema(
     {
-        username: String,
+        email: String,
         encryptedPassword: String,
         //Check which of the following FKs is non-null to see what type of user (Admin, Producer Consumer) the user is.
-        administratorProfile: {type: mongoose.Schema.ObjectId, ref: 'administratorProfile'},
-        producerProfile: {type: mongoose.Schema.ObjectId, ref: 'producerProfile'},
-        consumerProfile: {type: mongoose.Schema.ObjectId, ref: 'consumerProfile'}
+        administratorProfile: {},
+        producerProfile: {},
+        consumerProfile: {}
     }
 );
 var UserAccounts = module.exports =  mongoose.model('userAccount', userAccountSchema);
@@ -17,7 +17,7 @@ module.exports = {
     add:add,
     getAll:getAll,
     getOne:getOne,
-    getByName:getByName,
+    getByEmail:getByEmail,
     update:update,
     deleteOne:deleteOne,
     login:login,
@@ -28,8 +28,8 @@ function add(object){
         console.log("within add of UserAccount Model");
         let document = new UserAccounts(object);
 
-        if (!document.username){
-            error = "No username detected.";
+        if (!document.email){
+            error = "No email detected.";
             reject(error);
         } else if (!document.encryptedPassword){
             error = "No encryptedPassword detected.";
@@ -93,8 +93,8 @@ function deleteOne(id){
 
 function update(id, updatedDocument){
     return new Promise (function (resolve, reject) {
-        if (!updatedDocument.username){
-            error = "No username detected.";
+        if (!updatedDocument.email){
+            error = "No email detected.";
             reject(error);
         } else if (!updatedDocument.encryptedPassword){
             error = "No encryptedPassword detected.";
@@ -106,11 +106,11 @@ function update(id, updatedDocument){
                     reject(error);
                 }
                 else {
-                    document.username = updatedDocument.username;
+                    document.email = updatedDocument.email;
                     document.encryptedPassword = updatedDocument.encryptedPassword;
-                    document.administrator = updatedDocument.administrator;
-                    document.consumerProfile = updatedDocument.physiotherapist;
-                    document.producerProfile = updatedDocument.patientProfile;
+                    document.administratorProfile = updatedDocument.administratorProfile;
+                    document.consumerProfile = updatedDocument.consumerProfile;
+                    document.producerProfile = updatedDocument.producerProfile;
 
                     document.save(function (error) {
                         if (error) {
@@ -139,14 +139,14 @@ function getOne(id){
     });
 }
 
-function getByName(name){
+function getByEmail(email){
     return new Promise (function (resolve, reject) {
-        console.log("in Model, getByName name is: ", name);
-        UserAccounts.find({username: name}, function (error, document) {
+        console.log("in Model, getByEmail email is: ", email);
+        UserAccounts.find({email: email}, function (error, document) {
             if (error){
                 reject(error);
             }else{
-                console.log("in Model, getByName: ", document[0]);
+                console.log("in Model, getByEmail: ", document[0]);
                 resolve(document[0]);
             }
         });
