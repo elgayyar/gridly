@@ -4,6 +4,7 @@ import { UserModel } from '../models/user.model';
 import { ConsumerModel } from '../models/consumer.model';
 import { ProducerModel } from '../models/producer.model';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { RegisterService } from '../services/register.service';
 
 @Component({
   selector: 'app-register',
@@ -23,7 +24,8 @@ export class RegisterComponent implements OnInit {
   accountType: boolean;
   provinces = ["AB", "BC", "MB", "NB", "NL", "NT", "NT", "NS", "NU", "ON", "PE", "QC", "SK", "YT"]
   
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder,
+              private registerService: RegisterService) { }
 
   ngOnInit() {
     //User account form
@@ -77,90 +79,31 @@ export class RegisterComponent implements OnInit {
       ]],      
     });
 
-    /** 
-    //Consumer form
-    this.consumerForm = this.formBuilder.group({
-      'fName': [this.consumer.fName, [
-        Validators.required
-      ]],
-      'lName': [this.consumer.lName, [
-        Validators.required
-      ]],
-      'email': [this.consumer.email, [
-        Validators.required,
-        Validators.email
-      ]],
-      'homePhoneNo': [this.consumer.homePhoneNo, [
-        Validators.required
-      ]],
-      'mobilePhoneNo': [this.consumer.mobilePhoneNo, [
-        Validators.required
-      ]],
-      'streetNo': [this.consumer.streetNo, [
-        Validators.required
-      ]],
-      'streetName': [this.consumer.streetName, [
-        Validators.required
-      ]],
-      'city': [this.consumer.city, [
-        Validators.required
-      ]],
-      'postalCode': [this.consumer.postalCode, [
-        Validators.required
-      ]],
-      'province': [this.consumer.province, [
-        Validators.required
-      ]],
-      'country': [this.consumer.country, [
-        Validators.required
-      ]],      
-    });
-
-    //Producer form
-    this.producerForm = this.formBuilder.group({
-      'fName': [this.producer.fName, [
-        Validators.required
-      ]],
-      'lName': [this.producer.lName, [
-        Validators.required
-      ]],
-      'email': [this.producer.email, [
-        Validators.required,
-        Validators.email
-      ]],
-      'homePhoneNo': [this.producer.homePhoneNo, [
-        Validators.required
-      ]],
-      'mobilePhoneNo': [this.producer.mobilePhoneNo, [
-        Validators.required
-      ]],
-      'streetNo': [this.producer.streetNo, [
-        Validators.required
-      ]],
-      'streetName': [this.producer.streetName, [
-        Validators.required
-      ]],
-      'city': [this.producer.city, [
-        Validators.required
-      ]],
-      'postalCode': [this.producer.postalCode, [
-        Validators.required
-      ]],
-      'province': [this.producer.province, [
-        Validators.required
-      ]],
-      'country': [this.producer.country, [
-        Validators.required
-      ]],      
-    });
-
-    **/
-
   }
 
   //Register the user account
   registerUserAccount() {
     console.log(this.userAccount);
+    const accountData = {
+      email: this.userAccount.userAccountName,
+      encryptedPassword: this.userAccount.password
+      /*
+      administratorProfile: {},
+      producerProfile: {},
+      consumerProfile: {
+        email: this.userAccount.userAccountName
+      }
+      */
+    }
+    this.registerService.registerUserAccount(accountData).subscribe(
+      res => {
+        console.log("Response from auth server:");
+        console.log(res);
+
+      },
+      error => {
+        console.log("Error response from hyperledger");
+      });
   }
 
   //User wants to be a consumer
@@ -179,12 +122,71 @@ export class RegisterComponent implements OnInit {
 
   //Register a consumer
   registerConsumer() {
-    console.log(this.consumer);
+    //Format the data for HYPERLEDGER
+    const consumerData = {
+      $class: "gridly.consumer.Consumer",
+      consumerStatus: true,
+      email: this.user.email,
+      fname: this.user.fName,
+      lname: this.user.lName,
+      address: {
+        $class: "gridly.user.Address",
+        streetNo: this.user.streetNo,
+        streetName: this.user.streetName,
+        city: this.user.city,
+        postalCode: this.user.postalCode,
+        province: this.user.province,
+        country: this.user.country
+      },
+      homePhoneNo: this.user.homePhoneNo,
+      mobilePhoneNo: this.user.mobilePhoneNo,
+      accountStatus: "CONSUMER"
+    }
+    console.log("This is the data being sent to the backend", consumerData);
+    //Send data to register service
+    this.registerService.registerConsumer(consumerData).subscribe(
+      res => {
+        console.log(res);
+
+      },
+      error => {
+        console.log("Error response from hyperledger");
+      });
   }
 
   //Register a producer
   registerProducer() {
-    console.log(this.producer);
+    //Format the data for HYPERLEDGER
+    const producerData = {
+      $class: "gridly.producer.Producer",
+      producerStatus: true,
+      consumerStatus: false,
+      email: this.user.email,
+      fname: this.user.fName,
+      lname: this.user.lName,
+      address: {
+        $class: "gridly.user.Address",
+        streetNo: this.user.streetNo,
+        streetName: this.user.streetName,
+        city: this.user.city,
+        postalCode: this.user.postalCode,
+        province: this.user.province,
+        country: this.user.country
+      },
+      homePhoneNo: this.user.homePhoneNo,
+      mobilePhoneNo: this.user.mobilePhoneNo,
+      accountStatus: "PRODUCER"
+    }
+    console.log("This is the data being sent to the backend", producerData);
+    //Send data to register service
+    this.registerService.registerProducer(producerData).subscribe(
+      res => {
+        console.log(res);
+
+      },
+      error => {
+        console.log("Error response from hyperledger");
+      });
   }
 
   //Register a user
@@ -192,13 +194,12 @@ export class RegisterComponent implements OnInit {
     //Create a producer
     if(this.accountType == true) {
       console.log("Producer");
-      console.log(this.user);
-
+      this.registerProducer()
     }
     //Create a consumer 
     else {
       console.log("Consumer");
-      console.log(this.user);
+      this.registerConsumer()
     }
   }
 

@@ -55,13 +55,13 @@ a:hover{
 .home-card {
     background: #F5F5F5;
     color: #373B46;
-    margin: 5%;
+    margin: 3%;
 }
 
 .register-card {
     background: #373B46;
     color: #F1F1F1;
-    margin: 5%;
+    margin: 3%;
 }
 
 .card-title {
@@ -117,3 +117,4 @@ a:hover{
     font-size: large;
     color: #373B46;
 }
+
