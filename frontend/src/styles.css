@@ -66,6 +66,7 @@ a:hover{
 
 .card-title {
     font-size: xx-large;
+    margin-left: 1%;
 }
 
 .form-container {
@@ -118,3 +119,6 @@ a:hover{
     color: #373B46;
 }
 
+.back {
+    z-index: -10;
+}

@@ -1,0 +1,12 @@
+body {
+    background-color: #fff;
+    z-index: -10;
+  }
+  
+  svg {
+  
+    top: 0;
+    left: 0;
+    background-color: #fff;
+
+  }

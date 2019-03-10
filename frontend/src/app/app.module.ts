@@ -23,6 +23,7 @@ import { HttpClient,HttpClientModule} from '@angular/common/http'
 import { AuthGuard} from './guards/auth.guard';
 import { AuthService} from './services/auth.service';
 import { ReactiveFormsModule } from '@angular/forms';
+import { BackgroundGraphicComponent } from './background-graphic/background-graphic.component';
 
 
 @NgModule({
@@ -36,6 +37,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     UserProfileComponent,
     UseageModalComponent,
     SettingsComponent,
+    BackgroundGraphicComponent,
   ],
   imports: [
     BrowserModule,
