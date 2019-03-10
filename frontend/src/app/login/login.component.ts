@@ -54,7 +54,7 @@ export class LoginComponent implements OnInit {
         
 
           //navigate to appropriate home page after 2 second delay
-
+          console.log("Users email", data.userAccount.email);
          this.authService.getProfile(data.userAccount.email).subscribe(res => {
             console.log("in login component: here's what getProfile returned: ", res);
             this.processing = true;
@@ -81,12 +81,18 @@ export class LoginComponent implements OnInit {
           if (role ==="gridly.admin.Admin"){
                 this.authService.setActiveProfile(this.retrievedProfile);
                 this.authService.setActiveProfileType("admin"); //admin = 1
+                localStorage.setItem("activeProfile", this.retrievedProfile);
+                localStorage.setItem("activeProfileType", this.authService.activeProfileType);
            } else if (role ==="gridly.consumer.Consumer"){
              this.authService.setActiveProfile(this.retrievedProfile);
              this.authService.setActiveProfileType("consumer"); //consumer = 2
+             localStorage.setItem("activeProfile", this.retrievedProfile);
+             localStorage.setItem("activeProfileType", this.authService.activeProfileType);
            } else if (role ==="gridly.producer.Producer"){
              this.authService.setActiveProfile(this.retrievedProfile);
              this.authService.setActiveProfileType("producer"); //producer = 3
+             localStorage.setItem("activeProfile", this.retrievedProfile);
+             localStorage.setItem("activeProfileType", this.authService.activeProfileType);
 
              //redirect to admin home page
              setTimeout(() => {
