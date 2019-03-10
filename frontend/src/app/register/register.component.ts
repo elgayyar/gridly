@@ -5,6 +5,7 @@ import { ConsumerModel } from '../models/consumer.model';
 import { ProducerModel } from '../models/producer.model';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { RegisterService } from '../services/register.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -25,7 +26,8 @@ export class RegisterComponent implements OnInit {
   provinces = ["AB", "BC", "MB", "NB", "NL", "NT", "NT", "NS", "NU", "ON", "PE", "QC", "SK", "YT"]
   
   constructor(private formBuilder: FormBuilder,
-              private registerService: RegisterService) { }
+              private registerService: RegisterService,
+              private router: Router) { }
 
   ngOnInit() {
     //User account form
@@ -147,6 +149,7 @@ export class RegisterComponent implements OnInit {
     this.registerService.registerConsumer(consumerData).subscribe(
       res => {
         console.log(res);
+        this.router.navigate(['login']);
 
       },
       error => {
@@ -182,6 +185,7 @@ export class RegisterComponent implements OnInit {
     this.registerService.registerProducer(producerData).subscribe(
       res => {
         console.log(res);
+        this.router.navigate(['login']);
 
       },
       error => {
