@@ -60,7 +60,7 @@ import { BackgroundGraphicComponent } from './background-graphic/background-grap
     BrowserAnimationsModule,
     FlexLayoutModule,
     NgxChartsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   providers: [AuthGuard, AuthService,HttpClient],
   bootstrap: [AppComponent]

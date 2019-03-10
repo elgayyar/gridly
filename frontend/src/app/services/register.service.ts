@@ -31,4 +31,14 @@ export class RegisterService {
     return this.http.post<JSON>(this.ledgerDomain+'/gridly.producer.Producer', producer);
   }
 
+  //Update a consumers profile
+  updateConsumer(consumer, email) {
+    return this.http.put<JSON>(this.ledgerDomain+'/gridly.consumer.Consumer/'+ email, consumer);
+  }
+
+  //Update a producers profile
+  updateProducer(producer, email) {
+    return this.http.put<JSON>(this.ledgerDomain+'/gridly.producer.Producer/'+ email, producer);
+  }
+
 }

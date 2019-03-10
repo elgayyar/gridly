@@ -1,7 +1,8 @@
+
 <app-main-nav>
     <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayout="2%" fxLayoutAlign="center">
         <div fxFlex="70%" fxFlex.xs="100%">
-            <mat-card class="home-card">
+            <mat-card class="home-card animated fadeIn">
                 <mat-card-header class="card-title">
                   <mat-card-title>My Profile</mat-card-title>
                   <span class="fill-space"></span>
@@ -90,10 +91,10 @@
                                 <div class="form-container">
                                   <!-- Row 1 -->
                                   <mat-form-field>
-                                    <input matInput placeholder="Username">
+                                    <input matInput placeholder="Username" [(ngModel)]="userProfile.email" name="userProfile.email" disabled>
                                     </mat-form-field>
                                     <mat-form-field>
-                                      <input matInput placeholder="Password" type="password">
+                                      <input matInput placeholder="Password" type="password" value="AAAAAAAAAAAAAAAAAAAAAAA" disabled>
                                     </mat-form-field>
                                 </div>
                               </form>
@@ -104,5 +105,6 @@
                 </mat-card-actions>
               </mat-card>
         </div>
-      </div>
+      </div>    
 </app-main-nav>
+
