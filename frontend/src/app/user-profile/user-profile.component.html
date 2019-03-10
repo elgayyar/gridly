@@ -5,9 +5,15 @@
                 <mat-card-header class="card-title">
                   <mat-card-title>My Profile</mat-card-title>
                   <span class="fill-space"></span>
-                  <span><i class="material-icons">edit</i></span>
+                  <div *ngIf="disabled; else edit">
+                        <span><i class="material-icons profile-icon" (click)="editProfile()" matTooltip="Edit profile">edit</i></span>
+                  </div>
+                  <ng-template #edit>
+                        <span><i class="material-icons profile-icon" (click)="save()" matTooltip="Save changes">save</i></span>
+                        <span><i class="material-icons profile-icon" (click)="cancel()" matTooltip="Cancel changes">close</i></span>
+                  </ng-template>
                 </mat-card-header>
-                <mat-card-content>
+                <mat-card-content >
                     <mat-tab-group>
                       <!-- Personal information tab --> 
                         <mat-tab label="Personal">
@@ -15,58 +21,63 @@
                                 <div class="form-container">
                                   <!-- Row 1 -->
                                   <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayout="2%" fxLayoutAlign="center" class="form-container">
-                                      <mat-form-field class="form-space">
-                                          <input matInput placeholder="First name">
+                                        <p class="paragraph-text">Name</p>
+                                </div>    
+                                  <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayout="2%" fxLayoutAlign="center" class="form-container">
+                                      <mat-form-field class="form-space" >
+                                          <input matInput placeholder="First name" [(ngModel)]="userProfile.fname" name="userProfile.fname" [disabled]="disabled">
                                           </mat-form-field>
                                           <mat-form-field class="form-space">
-                                            <input matInput placeholder="Last name">
+                                            <input matInput placeholder="Last name" [(ngModel)]="userProfile.lname" name="userProfile.lname" [disabled]="disabled">
                                         </mat-form-field>
                                   </div>
                                   
                                   <!-- Row 2 -->
                                   <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayout="2%" fxLayoutAlign="center" class="form-container">
+                                        <p class="paragraph-text">Contact</p>
+                                </div>   
+                                  <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayout="2%" fxLayoutAlign="center" class="form-container">
                                     <mat-form-field class="form-space">
-                                        <input matInput placeholder="Email">
+                                        <input matInput placeholder="Email" [(ngModel)]="userProfile.email" name="userProfile.email" [disabled]="disabled">
                                     </mat-form-field>
                                   </div>
 
                                   <!-- Row 3 -->
                                   <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayout="2%" fxLayoutAlign="center" class="form-container">
                                       <mat-form-field class="form-space">
-                                          <input matInput placeholder="Home Phone" type="number">
+                                          <input matInput placeholder="Home Phone" [(ngModel)]="userProfile.homePhoneNo" name="userProfile.homePhoneNo" [disabled]="disabled">
                                           </mat-form-field>
                                           <mat-form-field class="form-space">
-                                            <input matInput placeholder="Mobile Phone" type="number">
+                                            <input matInput placeholder="Mobile Phone" [(ngModel)]="userProfile.mobilePhoneNo" name="userProfile.mobilePhoneNo" [disabled]="disabled">
                                         </mat-form-field>
                                   </div>
                                   
                                   <!-- Row 4 -->
                                   <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayout="2%" fxLayoutAlign="center" class="form-container">
+                                        <p class="paragraph-text">Address</p>
+                                </div>   
+                                  <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayout="2%" fxLayoutAlign="center" class="form-container">
                                       <mat-form-field class="form-space">
-                                          <input matInput placeholder="Street Number" type="number">
+                                          <input matInput placeholder="Street Number" type="number" [(ngModel)]="userProfile.address.streetNo" name="userProfile.address.streetNo" [disabled]="disabled">
                                           </mat-form-field>
                                           <mat-form-field class="form-space">
-                                            <input matInput placeholder="Street Name">
+                                            <input matInput placeholder="Street Name" [(ngModel)]="userProfile.address.streetName" name="userProfile.address.streetName" [disabled]="disabled">
                                         </mat-form-field>
                                         <mat-form-field class="form-space">
-                                            <input matInput placeholder="City">
+                                            <input matInput placeholder="City" [(ngModel)]="userProfile.address.city" name="userProfile.address.city" [disabled]="disabled">
                                         </mat-form-field>
                                   </div>
 
                                   <!-- Row 4 -->
                                   <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayout="2%" fxLayoutAlign="center" class="form-container">
                                       <mat-form-field class="form-space">
-                                          <input matInput placeholder="Postal Code">
+                                          <input matInput placeholder="Postal Code" [(ngModel)]="userProfile.address.postalCode" name="userProfile.address.postalCode" [disabled]="disabled">
                                       </mat-form-field>
                                       <mat-form-field class="form-space">
-                                        <mat-select placeholder="Province">
-                                          <mat-option *ngFor="let province of provinces">
-                                            {{province}}
-                                          </mat-option>
-                                        </mat-select>
-                                      </mat-form-field>
+                                            <input matInput placeholder="Province" [(ngModel)]="userProfile.address.province" name="userProfile.address.province" [disabled]="disabled">
+                                        </mat-form-field>
                                       <mat-form-field class="form-space">
-                                          <input matInput placeholder="Country">
+                                          <input matInput placeholder="Country" [(ngModel)]="userProfile.address.country" name="userProfile.address.country" [disabled]="disabled">
                                       </mat-form-field>
                                   </div>
                                 </div>
@@ -75,7 +86,7 @@
                         
                         <!-- Account information tab --> 
                         <mat-tab label="Account">
-                            <form>
+                            <form class="tab-space">
                                 <div class="form-container">
                                   <!-- Row 1 -->
                                   <mat-form-field>

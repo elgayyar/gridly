@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../services/auth.service';
+import { AuthGuard } from '../guards/auth.guard';
 
 @Component({
   selector: 'app-user-profile',
@@ -6,12 +8,25 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./user-profile.component.css']
 })
 export class UserProfileComponent implements OnInit {
+  userProfile;
+  disabled = true;
 
-  provinces = ["AB", "BC", "MB", "NB", "NL", "NT", "NT", "NS", "NU", "ON", "PE", "QC", "SK", "YT"]
-
-  constructor() { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit() {
+    this.userProfile = JSON.parse(localStorage.getItem("activeProfile"));
+    console.log(this.userProfile);
+
+  }
+
+  //Make profile fields accesible
+  editProfile() {
+    this.disabled = false;
+  }
+
+  //Cancel changes to profile
+  cancel() {
+    this.disabled = true;
   }
 
 }
