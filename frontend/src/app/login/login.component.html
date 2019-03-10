@@ -7,28 +7,41 @@
 
 <!-- <div class="background" *ngIf ="!deactivatedUser && !changingPassword && !forgotPassword && clickedLogin"> -->
 
-<div>
-    <mat-card class="login-card">
-        <div class ="fields">
-            <mat-form-field class ="login-form">
-                <input matInput #name placeholder="Email" [(ngModel)]="email">
-            </mat-form-field>
-            <br />
-            <mat-form-field class ="login-form">
-                <input matInput type="password" #description placeholder="Password"[(ngModel)]="password">
-            </mat-form-field>
+<div class="background">
+    <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayout="2%" fxLayoutAlign="center">
+        <div fxFlex="50%" fxFlex.xs="100%">
+            <mat-card class="login-card">
+                <mat-card-header class="card-title">
+                    <mat-card-title><h2>Login</h2></mat-card-title>
+                        <span class="fill-space"></span>
+                    </mat-card-header> 
+                    <mat-card-content>
+                            <div class="form-container">
+                                <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayout="2%" fxLayoutAlign="center" class="form-container">
+                                    <mat-form-field class ="login-form">
+                                        <input matInput #name placeholder="Email" [(ngModel)]="email">
+                                    </mat-form-field>
+                                </div>
+                                <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayout="2%" fxLayoutAlign="center" class="form-container">
+                                    <mat-form-field class ="login-form">
+                                        <input matInput type="password" #description placeholder="Password"[(ngModel)]="password">
+                                    </mat-form-field>
+                                </div>
+                                <!-- <h2 style="color:Tomato" *ngIf="statusMessage && triedLogin">{{statusMessage}}</h2>
+                                <h2 style="color:#196804"  *ngIf="!statusMessage && triedLogin">Success! Password verified! Redirecting to home page...</h2> -->
+                                <!-- <b style="color:Tomato" *ngIf="statusMessage && triedLogin">{{statusMessage}}<br/></b>
+                                <b style="color:#196804"  *ngIf="!statusMessage && triedLogin">Success! Password verified! Redirecting to home page...<br /></b> -->
+                                <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayout="2%" fxLayoutAlign="center" class="form-container button-container ">
+                                    <button mat-raised-button class="login-button red-button" [disabled] = "processing"  (click)="submitLogin()">Login</button>
+                                </div>
+                                <br/>
+                                <!-- <a *ngIf="!processing" (click) = "forgotPasswordClicked()">Forgot Password?</a> -->
+                                <br /><br />
+                            </div>
+                    </mat-card-content>
+            </mat-card>
         </div>
-        <br /><br /><br />
-        <!-- <h2 style="color:Tomato" *ngIf="statusMessage && triedLogin">{{statusMessage}}</h2>
-        <h2 style="color:#196804"  *ngIf="!statusMessage && triedLogin">Success! Password verified! Redirecting to home page...</h2> -->
-        <!-- <b style="color:Tomato" *ngIf="statusMessage && triedLogin">{{statusMessage}}<br/></b>
-        <b style="color:#196804"  *ngIf="!statusMessage && triedLogin">Success! Password verified! Redirecting to home page...<br /></b> -->
-        <button mat-raised-button color = "redButton" class="login-button" [disabled] = "processing"  (click)="submitLogin()">Submit</button> <br />
-        <br/>
-        <!-- <a *ngIf="!processing" (click) = "forgotPasswordClicked()">Forgot Password?</a> -->
-        <br /><br />
-
-    </mat-card>
+    </div>
 </div>
 
 

@@ -55,7 +55,7 @@ a:hover{
 .home-card {
     background: #F5F5F5;
     color: #373B46;
-    margin: 3%;
+    margin: 15%;
 }
 
 .register-card {
@@ -121,4 +121,10 @@ a:hover{
 
 .back {
     z-index: -10;
+}
+
+.login-card {
+        background: #F5F5F5;
+        color: #373B46;
+        margin: 15%;
 }
