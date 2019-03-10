@@ -2,8 +2,8 @@ export class UserModel {
     fName: String;
     lName: String;
     email: String;
-    homePhoneNo: number;
-    mobilePhoneNo: number;
+    homePhoneNo: String;
+    mobilePhoneNo: String;
     streetNo: number;
     streetName: String;
     city: String;

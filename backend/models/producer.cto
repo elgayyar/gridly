@@ -6,6 +6,6 @@ import gridly.battery.*
 
 participant Producer extends Consumer {
   o Boolean producerStatus
-  o Double minSellingPrice
-  --> Battery battery   
+  o Double minSellingPrice optional
+  o Battery battery optional 
 }

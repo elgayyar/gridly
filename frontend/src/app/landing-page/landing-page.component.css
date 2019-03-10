@@ -6,3 +6,17 @@
     color: #373B46;
     cursor: pointer;
 }
+
+.background {
+    background-image: linear-gradient(
+        rgba(255,255,255,0.7),
+        rgba(0,0,0,0.3)),url("../gridly-background.jpeg");
+    
+        height: 100%;
+    
+        /* Create the parallax scrolling effect */
+        background-attachment: fixed;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+}

@@ -1,10 +1,12 @@
 <router-outlet></router-outlet>
 
 <mat-toolbar class="toolbar">
-    <span class="title">Gridly</span><i class="material-icons sidebar-icon">blur_on</i> 
+    <div routerLink="/">
+        <span class="title">Gridly</span><i class="material-icons sidebar-icon">blur_on</i>
+    </div> 
 </mat-toolbar>
 
-<div class="gridly-theme">
+<div class="background">
 <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayout="2%" fxLayoutAlign="center">
     <div fxFlex="50%" fxFlex.xs="100%">
         <mat-card class="home-card">
@@ -14,23 +16,23 @@
             </mat-card-header>
             <mat-card-content>
                 <mat-horizontal-stepper [linear]="isLinear" #stepper class="stepper">
-                                        <!-- Account Type Step -->
-                                        <mat-step>
-                                                <ng-template matStepLabel>Account Type</ng-template>
-                                                <div class="form-container">
-                                                    <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayout="2%" fxLayoutAlign="center" class="form-container">
-                                                        <p class="paragraph-text">Would you like to be a producer or consumer?</p>
-                                                    </div>
-                                                    <!-- Consumer -->
-                                                    <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayout="2%" fxLayoutAlign="center" class="form-container button-container ">
-                                                            <button mat-button matStepperNext class="red-button button-space" (click)="isConsumer()">Consumer</button>
-                                                    </div>
-                                                    <!-- Producer -->
-                                                    <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayout="2%" fxLayoutAlign="center" class="form-container button-container ">
-                                                        <button mat-button matStepperNext class="red-button button-space" (click)="isProducer()">Producer</button>
-                                                    </div>
-                                                </div>
-                                            </mat-step>
+                <!-- Account Type Step -->
+                    <mat-step>
+                        <ng-template matStepLabel>Account Type</ng-template>
+                            <div class="form-container">
+                                <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayout="2%" fxLayoutAlign="center" class="form-container">
+                                    <p class="paragraph-text">Would you like to be a producer or consumer?</p>
+                                </div>
+                                <!-- Consumer -->
+                                <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayout="2%" fxLayoutAlign="center" class="form-container button-container ">
+                                    <button mat-button matStepperNext class="red-button button-space" (click)="isConsumer()">Consumer</button>
+                                </div>
+                                <!-- Producer -->
+                                <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayout="2%" fxLayoutAlign="center" class="form-container button-container ">
+                                    <button mat-button matStepperNext class="red-button button-space" (click)="isProducer()">Producer</button>
+                                </div>
+                            </div>
+                        </mat-step>
 
                     <!-- User Account Step -->
                     <mat-step [stepControl]="userAccountForm">
@@ -87,10 +89,10 @@
                                         </div>
                                         <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayout="2%" fxLayoutAlign="center" class="form-container">
                                             <mat-form-field class="form-space">
-                                                <input id="homePhoneNo" matInput formControlName="homePhoneNo" [(ngModel)]="user.homePhoneNo" placeholder="Home Phone" type="number">
+                                                <input id="homePhoneNo" matInput formControlName="homePhoneNo" [(ngModel)]="user.homePhoneNo" placeholder="Home Phone">
                                                 </mat-form-field>
                                                 <mat-form-field class="form-space">
-                                                  <input id="mobilePhoneNo" matInput formControlName="mobilePhoneNo" [(ngModel)]="user.mobilePhoneNo" placeholder="Mobile Phone" type="number">
+                                                  <input id="mobilePhoneNo" matInput formControlName="mobilePhoneNo" [(ngModel)]="user.mobilePhoneNo" placeholder="Mobile Phone">
                                               </mat-form-field>
                                         </div>
                                         
