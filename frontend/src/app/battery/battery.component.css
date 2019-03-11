@@ -10,9 +10,9 @@
     --color: 176, 15, 59 !important;
   }
 
-  .scanning-title {
-      color: 176, 15, 59;
-  }
+.scanning-title {
+    color: 176, 15, 59;
+}
 
 /* Spinner */
 .spinner {
@@ -66,4 +66,10 @@
         calc(-1 * var(--vertical-horizontal-offset)) 0 0 var(--circle-size) rgba(var(--color), 0.15),
          /* top-left circle */
         calc(-1 * var(--diagonal-offset)) calc(-1 * var(--diagonal-offset)) 0 var(--circle-size) rgba(var(--color), 0.4);
+  }
+
+  .battery-list:hover {
+    background: #373B46;
+    cursor: pointer;
+    color: #F1F1F1;
   }

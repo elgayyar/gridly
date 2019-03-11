@@ -41,4 +41,9 @@ export class RegisterService {
     return this.http.put<JSON>(this.ledgerDomain+'/gridly.producer.Producer/'+ email, producer);
   }
 
+  //Add a battery to a producers profile
+  addBattery(producer, email) {
+    return this.http.put<JSON>(this.ledgerDomain+'/gridly.producer.Producer/'+ email, producer);
+  }
+
 }

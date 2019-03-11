@@ -42,7 +42,6 @@ import { MatDialogModule } from '@angular/material/dialog';
     SettingsComponent,
     BackgroundGraphicComponent,
     BatteryComponent,
-    BatteryDialogComponent,
   ],
   imports: [
     BrowserAnimationsModule,

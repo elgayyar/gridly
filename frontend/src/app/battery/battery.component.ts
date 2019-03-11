@@ -27,14 +27,43 @@ export class BatteryComponent implements OnInit {
 
   }
 
+  //Brings up modal that seaches for a battery
   searchForBattery() {
     this.findBattery = true;
     setTimeout( () => { 
       $('#batterySearch').modal('hide');
       $('#batteryFound').modal('show');
     }, 2000 );
+  }
 
-
+  //Adds the battery that was selected
+  addBattery() {
+    $('#batteryFound').modal('hide');
+    //Dummy data for a batery
+    const batteryData = {
+      "$class": "gridly.battery.Battery",
+      "batteryId": "1",
+      "serialNo": "89760593203",
+      "manufacturer": "Tesla",
+      "model": "Powerwall",
+      "maxCapacity": 13.5,
+      "currentCapacity": 10
+    }
+    //Add the battery to the users profile
+    this.userProfile.battery = batteryData;
+    console.log(this.userProfile);
+    /*
+    this.registerService.addBattery(this.userProfile.addBattery, this.userProfile.email).subscribe(
+      res => {
+        console.log(res);
+        //this.userProfile = res;
+        //localStorage.setItem("activeProfile", JSON.stringify(this.userProfile));
+        //this.disabled = true;
+      },
+      error => {
+        console.log("Error response from hyperledger");
+      });
+      */
   }
 
 
