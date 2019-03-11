@@ -9,6 +9,11 @@ html, body{
     color: #F1F1F1;
 }
 
+h3 {
+    color: #B00F3B;
+    font-family: 'Roboto';
+}
+
 .sidebar {
     background: #373B46;
     color: #F1F1F1;
