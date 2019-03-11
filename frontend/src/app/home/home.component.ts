@@ -10,6 +10,7 @@ import { Router } from "@angular/router";
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+  userProfile;
 
   constructor(private authService: AuthService,
     private router: Router,
@@ -17,7 +18,10 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     console.log("Token", localStorage.getItem("token"));
-    console.log(this.authService.getActiveProfile());
+    this.userProfile = JSON.parse(localStorage.getItem("activeProfile"));
+    console.log(this.userProfile);
   }
+
+
 
 }

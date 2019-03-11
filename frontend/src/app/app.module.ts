@@ -6,8 +6,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MainNavComponent } from './main-nav/main-nav.component';
 import { LayoutModule } from '@angular/cdk/layout';
-import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatDividerModule, MatCardModule, MatInputModule, MatFormFieldModule, MatTabsModule, MatSelectModule, MatStepperModule, MatSliderModule } from '@angular/material';
+import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatDividerModule, MatCardModule, MatInputModule, MatFormFieldModule, MatTabsModule, MatSelectModule, MatStepperModule, MatTooltipModule } from '@angular/material';
+import {MatSliderModule} from '@angular/material/slider';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
@@ -24,6 +25,8 @@ import { AuthGuard} from './guards/auth.guard';
 import { AuthService} from './services/auth.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BackgroundGraphicComponent } from './background-graphic/background-graphic.component';
+import { BatteryComponent } from './battery/battery.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 
 @NgModule({
@@ -38,6 +41,7 @@ import { BackgroundGraphicComponent } from './background-graphic/background-grap
     UseageModalComponent,
     SettingsComponent,
     BackgroundGraphicComponent,
+    BatteryComponent,
   ],
   imports: [
     BrowserAnimationsModule,
@@ -60,7 +64,8 @@ import { BackgroundGraphicComponent } from './background-graphic/background-grap
     MatStepperModule,
     FlexLayoutModule,
     NgxChartsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatDialogModule
   ],
   providers: [AuthGuard, AuthService,HttpClient],
   bootstrap: [AppComponent]

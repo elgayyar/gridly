@@ -1,140 +1,20 @@
-/* You can add global styles to this file, and also import other style files */
-@import "../node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css";
-
-
-html, body{
-    margin: 0;
-    font-family: 'Roboto';
-    height: 100%;
-    color: #F1F1F1;
+.battery-modal {
+    margin-left: 20%;
 }
 
-h3 {
-    color: #B00F3B;
-    font-family: 'Roboto';
-}
-
-.sidebar {
-    background: #373B46;
-    color: #F1F1F1;
-}
-
-.toolbar {
-    background: #B00F3B;
-    color: #F1F1F1;
-}
-
-.sidebar-icon {
-    padding-right: 7%;
-    color: #F1F1F1;
-}
-
-a:hover{
-    background: #B00F3B;
-}
-
-.fill-space {
-    flex: 1 1 auto;
-}
-
-.logout-button {
-    background: #F1F1F1;
-    color: #B00F3B;
-}
-
-.logout-button:hover {
-    background: #373B46;
-    color: #F1F1F1;
-}
-
-.title {
-    font-size: xx-large;
-    color: #F1F1F1;
-    cursor: pointer;
-}
-
-.mobile-title {
-    padding-left: 70%;
-}
-
-.home-card {
-    background: #F5F5F5;
-    color: #373B46;
-    margin: 3%;
-}
-
-.register-card {
-    background: #373B46;
-    color: #F1F1F1;
-    margin: 3%;
-}
-
-.card-title {
-    font-size: xx-large;
-    margin-left: 1%;
-}
-
-.form-container {
-    display: flex;
-    flex-direction: column;
-    margin-left: 2%;
-    margin-right: 2%;
-  }
-  
-  .form-container > * {
-    width: 100%;
-  }
-
-
-  .red-button {
-    background: #B00F3B;
-    color: #F1F1F1;
-  }
-
-  .red-button:hover{
-    background: #F1F1F1;
-    color: #B00F3B;
-  }
-
-  .red-button:disabled {
-    background: #F1F1F1;
-    color: #B00F3B;
-  }
-
-  .button-space {
-      margin-top: 5%;
-      margin-bottom: 5%;
-  }
-
-  .mat-step-header .mat-step-icon-selected {
-    background-color: #B00F3B; 
+.modal {
+    background-color: 176, 15, 59 !important;
  }
 
-.stepper {
-    background: #F5F5F5;
-    color: #373B46;
+.red {
+    --color: 176, 15, 59 !important;
+  }
+
+.scanning-title {
+    color: 176, 15, 59;
 }
 
-.button-container {
-    margin-top: 5%;
-}
-
-.paragraph-text {
-    font-size: large;
-    color: #373B46;
-}
-
-.back {
-    z-index: -10;
-}
-
-.login-card {
-        background: #F5F5F5;
-        color: #373B46;
-        margin: 15%;
-}
-
-/* Loading Spinner */
+/* Spinner */
 .spinner {
     /* changing --size & --circle-size will adjust size of the spinner */
     --size: 150px;
@@ -147,7 +27,6 @@ a:hover{
     min-height: var(--size);
     min-width: var(--size);
     position: relative;
-    z-index: 10;
   }
   
   @keyframes rotate {
@@ -160,6 +39,7 @@ a:hover{
   }
   
   .spinner::after {
+      color: black;
       display: block;
       content: '';
       border-radius: 50%;
@@ -186,4 +66,10 @@ a:hover{
         calc(-1 * var(--vertical-horizontal-offset)) 0 0 var(--circle-size) rgba(var(--color), 0.15),
          /* top-left circle */
         calc(-1 * var(--diagonal-offset)) calc(-1 * var(--diagonal-offset)) 0 var(--circle-size) rgba(var(--color), 0.4);
+  }
+
+  .battery-list:hover {
+    background: #373B46;
+    cursor: pointer;
+    color: #F1F1F1;
   }

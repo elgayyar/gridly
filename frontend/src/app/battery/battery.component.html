@@ -1,0 +1,60 @@
+<app-main-nav>
+    <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayout="2%" fxLayoutAlign="center">
+        <div fxFlex="70%" fxFlex.xs="100%">
+            <mat-card class="home-card animated fadeIn">
+                <mat-card-header class="card-title">
+                  <mat-card-title>My Batteries</mat-card-title>
+                  <span class="fill-space"></span>
+                        <span><i class="material-icons profile-icon" matTooltip="Add Battery" data-toggle="modal" data-target="#batterySearch" (click)="searchForBattery()">battery_charging_full</i></span>
+                </mat-card-header>
+                <mat-card-content >
+                </mat-card-content>
+                <mat-card-actions>
+                </mat-card-actions>
+              </mat-card>
+        </div>
+      </div>
+</app-main-nav>
+
+<!-- Scanning modal -->
+<div class="modal fade" id="batterySearch" tabindex="-1" role="dialog"
+aria-labelledby="visualizeTreatmentsModal" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-body">
+        <h3 class="red scanning-title">Scanning for batteries..</h3>
+        <div class="spinner red"></div>
+        </div>
+      </div>
+    </div>
+</div>
+
+<!-- Battery found modal -->
+<div class="modal fade" id="batteryFound" tabindex="-1" role="dialog"
+aria-labelledby="visualizeTreatmentsModal" aria-hidden="true">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+        <div class="modal-header">
+						<div class="modal-title">
+                <h3>Battery Found...</h3>
+						</div>
+						<button type="button" class="close" data-dismiss="modal">
+							<span aria-hidden="true">&times;</span>
+							<span class="sr-only">Close</span>
+						</button>
+					</div>
+      <div class="modal-body">
+        <mat-list>
+          <mat-list-item class="battery-list" (click)="addBattery()">Tesla Powerwall #89760593203</mat-list-item>
+            <p></p>
+        </mat-list>
+        
+      </div>
+      </div>
+    </div>
+</div>
+
+
+
+
+

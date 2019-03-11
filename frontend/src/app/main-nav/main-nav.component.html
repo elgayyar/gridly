@@ -23,6 +23,9 @@
       <a mat-list-item href="#"><i class="material-icons sidebar-icon">
           payment
         </i>Billing</a>
+      <a mat-list-item routerLink="/battery"><i class="material-icons sidebar-icon">
+          battery_charging_full
+        </i>Battery</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -42,7 +45,7 @@
               </i> 
       </div>
       <span class="fill-space"></span>
-      <button mat-stroked-button class="logout-button">Logout</button>
+      <button mat-stroked-button class="logout-button" (click)="logout()">Logout</button>
     </mat-toolbar>
     <!-- Add Content Here -->
     <ng-content></ng-content>

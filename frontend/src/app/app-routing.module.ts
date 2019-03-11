@@ -6,6 +6,7 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
 import { RegisterComponent } from './register/register.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { SettingsComponent } from './settings/settings.component';
+import { BatteryComponent } from './battery/battery.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent  },
@@ -14,6 +15,8 @@ const routes: Routes = [
   { path: 'profile', component: UserProfileComponent },
   { path: 'settings', component: SettingsComponent },
   { path: '', component: LandingPageComponent },
+  { path: 'battery', component: BatteryComponent },
+  
 
   //{ path: '**', redirectTo: '/home'}// The "Catch-All" Route
 
