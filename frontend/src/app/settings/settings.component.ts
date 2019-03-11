@@ -1,10 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 
+var onPeak = 13.2;
+var midPeak = 9.4;
+var offPeak = 6.5;
+
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.component.html',
   styleUrls: ['./settings.component.css']
 })
+  
 export class SettingsComponent implements OnInit {
 
   public multi = [
@@ -13,106 +18,122 @@ export class SettingsComponent implements OnInit {
       "series": [
         {
           "name": "12am",
-          "value": 10
+          "value": offPeak
         },
         {
           "name": "1am",
-          "value": 10
+          "value": offPeak
         },
         {
           "name": "2am",
-          "value": 10
+          "value": offPeak
         },
         {
           "name": "3am",
-          "value": 10
+          "value": offPeak
         },
         {
           "name": "4am",
-          "value": 10
+          "value": offPeak
         },
         {
           "name": "5am",
-          "value": 10
+          "value": offPeak
         },
         {
           "name": "6am",
-          "value": 18
+          "value": offPeak
         },
         {
           "name": "7am",
-          "value": 18
+          "value": offPeak
+        },
+        {
+          "name": "7am",
+          "value": onPeak
         },
         {
           "name": "8am",
-          "value": 18
+          "value": onPeak
         },
         {
           "name": "9am",
-          "value": 18
+          "value": onPeak
         },
         {
           "name": "10am",
-          "value": 18
+          "value": onPeak
         },
         {
           "name": "11am",
-          "value": 18
+          "value": onPeak
+        },
+        {
+          "name": "11am",
+          "value": midPeak
         },
       {
-        "name": "12am",
-        "value": 10
+        "name": "12pm",
+        "value": midPeak
       },
       {
         "name": "1pm",
-        "value": 12
+        "value": midPeak
       },
       {
         "name": "2pm",
-        "value": 12
+        "value": midPeak
       },
       {
         "name": "3pm",
-        "value": 12
+        "value": midPeak
       },
       {
         "name": "4pm",
-        "value": 12
+        "value": midPeak
       },
       {
         "name": "5pm",
-        "value": 25
+        "value": midPeak
+      },
+      {
+        "name": "5pm",
+        "value": onPeak
       },
       {
         "name": "6pm",
-        "value": 25
+        "value": onPeak
       },
       {
         "name": "7pm",
-        "value": 25
+        "value": onPeak
+      },
+      {
+        "name": "7pm",
+        "value": offPeak
       },
       {
         "name": "8pm",
-        "value": 8
+        "value": offPeak
       },
       {
         "name": "9pm",
-        "value": 8
+        "value": offPeak
       },
       {
         "name": "10pm",
-        "value": 8
+        "value": offPeak
       },
       {
         "name": "11pm",
-        "value": 8
+        "value": offPeak
       }
       ]
     },
   ];
   
   
-    view: any[] = [500, 300];
+    view: any[] = [800, 300];
   
     // options for the chart
     showXAxis = true;
@@ -120,9 +141,9 @@ export class SettingsComponent implements OnInit {
     gradient = false;
     showLegend = true;
     showXAxisLabel = true;
-    xAxisLabel = 'Hour';
+    xAxisLabel = 'Time of Day';
     showYAxisLabel = true;
-    yAxisLabel = 'Price/(kWh)';
+    yAxisLabel = 'cents/(kWh)';
     timeline = true;
   
     colorScheme = {
@@ -130,8 +151,8 @@ export class SettingsComponent implements OnInit {
     };
   
     // line, area
-    autoScale = true;
-    legend = false;
+    autoScale = false;
+    legend = true;
 
   constructor() { }
 
