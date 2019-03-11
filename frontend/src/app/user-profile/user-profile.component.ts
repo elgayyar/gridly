@@ -50,7 +50,7 @@ export class UserProfileComponent implements OnInit {
       res => {
         console.log(res);
         this.userProfile = res;
-        localStorage.setItem("activeProfile", this.userProfile);
+        localStorage.setItem("activeProfile", JSON.stringify(this.userProfile));
         this.disabled = true;
       },
       error => {
@@ -64,7 +64,7 @@ export class UserProfileComponent implements OnInit {
       res => {
         console.log(res);
         this.userProfile = res;
-        localStorage.setItem("activeProfile", this.userProfile);
+        localStorage.setItem("activeProfile", JSON.stringify(this.userProfile));
         this.disabled = true;
       },
       error => {

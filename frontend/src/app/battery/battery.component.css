@@ -1,0 +1,69 @@
+.battery-modal {
+    margin-left: 20%;
+}
+
+.modal {
+    background-color: 176, 15, 59 !important;
+ }
+
+.red {
+    --color: 176, 15, 59 !important;
+  }
+
+  .scanning-title {
+      color: 176, 15, 59;
+  }
+
+/* Spinner */
+.spinner {
+    /* changing --size & --circle-size will adjust size of the spinner */
+    --size: 150px;
+    --circle-size: 10px;
+    --vertical-horizontal-offset: calc(5 * var(--circle-size));
+    --diagonal-offset: calc(3.5 * var(--circle-size));
+    /* changing --color will adjust the color of the spinner */
+    --color: 255, 255, 255;
+    transition: transform 1s ease-in-out;
+    min-height: var(--size);
+    min-width: var(--size);
+    position: relative;
+  }
+  
+  @keyframes rotate {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
+  .spinner::after {
+      color: black;
+      display: block;
+      content: '';
+      border-radius: 50%;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      height: var(--circle-size);
+      width: var(--circle-size);
+      animation: rotate 1s steps(8) infinite;
+      box-shadow:
+        /* top circle */
+        0 calc(-1 * var(--vertical-horizontal-offset)) 0 var(--circle-size) rgba(var(--color), 1),
+        /* top-right circle */
+        var(--diagonal-offset) calc(-1 * var(--diagonal-offset)) 0 var(--circle-size) rgba(var(--color), 0.7),
+        /* right circle */
+        var(--vertical-horizontal-offset) 0 0 var(--circle-size) rgba(var(--color), 0.5),
+        /* bottom-right circle */
+        var(--diagonal-offset) var(--diagonal-offset) 0 var(--circle-size) rgba(var(--color), 0.3),
+        /* bottom circle */
+        0 var(--vertical-horizontal-offset) 0 var(--circle-size) rgba(var(--color), 0.2),
+        /* bottom-left circle */
+        calc(-1 * var(--diagonal-offset)) var(--diagonal-offset) 0 var(--circle-size) rgba(var(--color), 0.2),
+        /* left circle */
+        calc(-1 * var(--vertical-horizontal-offset)) 0 0 var(--circle-size) rgba(var(--color), 0.15),
+         /* top-left circle */
+        calc(-1 * var(--diagonal-offset)) calc(-1 * var(--diagonal-offset)) 0 var(--circle-size) rgba(var(--color), 0.4);
+  }
