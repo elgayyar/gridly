@@ -9,7 +9,18 @@
                 </mat-card-header>
                 <mat-card-content>
                     <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayout="10%" fxLayoutAlign="center" fxFlexFill>
-                        
+                        <mat-slider
+                        class="example-margin"
+                        [disabled]="disabled"
+                        [invert]="invert"
+                        [max]="max"
+                        [min]="min"
+                        [step]="step"
+                        [thumbLabel]="thumbLabel"
+                        [tickInterval]="tickInterval"
+                        [(ngModel)]="value"
+                        [vertical]="vertical">
+                        </mat-slider>
                       <div fxFlex="50%" fxFlex.xs="100%"> 
                             <span class="graph-title">London Hydro Pricing</span>
                             <ngx-charts-line-chart

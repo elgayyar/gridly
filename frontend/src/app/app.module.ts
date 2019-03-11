@@ -6,8 +6,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MainNavComponent } from './main-nav/main-nav.component';
 import { LayoutModule } from '@angular/cdk/layout';
-import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatDividerModule, MatCardModule, MatInputModule, MatFormFieldModule, MatTabsModule, MatSelectModule, MatStepperModule, MatTooltipModule } from '@angular/material';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatDividerModule, MatCardModule, MatInputModule, MatFormFieldModule, MatTabsModule, MatSelectModule, MatStepperModule, MatSliderModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
@@ -40,6 +40,7 @@ import { BackgroundGraphicComponent } from './background-graphic/background-grap
     BackgroundGraphicComponent,
   ],
   imports: [
+    BrowserAnimationsModule,
     BrowserModule,
     HttpClientModule,
     FormsModule,
@@ -55,9 +56,8 @@ import { BackgroundGraphicComponent } from './background-graphic/background-grap
     MatFormFieldModule,
     MatTabsModule,
     MatSelectModule,
+    MatSliderModule,
     MatStepperModule,
-    MatTooltipModule,
-    BrowserAnimationsModule,
     FlexLayoutModule,
     NgxChartsModule,
     ReactiveFormsModule,
