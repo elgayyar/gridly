@@ -32,7 +32,7 @@
                                 <!-- <b style="color:Tomato" *ngIf="statusMessage && triedLogin">{{statusMessage}}<br/></b>
                                 <b style="color:#196804"  *ngIf="!statusMessage && triedLogin">Success! Password verified! Redirecting to home page...<br /></b> -->
                                 <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayout="2%" fxLayoutAlign="center" class="form-container button-container ">
-                                    <button mat-raised-button class="login-button red-button" [disabled] = "processing"  (click)="submitLogin()">Login</button>
+                                    <button mat-raised-button class="login-button red-button" data-toggle="modal" data-target="#loading" [disabled] = "processing"  (click)="submitLogin()">Login</button>
                                 </div>
                                 <br/>
                                 <!-- <a *ngIf="!processing" (click) = "forgotPasswordClicked()">Forgot Password?</a> -->
@@ -44,4 +44,16 @@
     </div>
 </div>
 
+  <!-- Loading modal -->
+  <div class="modal fade" id="loading" tabindex="-1" role="dialog"
+  aria-labelledby="visualizeTreatmentsModal" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-body">
+          <h3 class="red scanning-title">Loading...</h3>
+          <div class="spinner red"></div>
+          </div>
+        </div>
+      </div>
+  </div>
 
