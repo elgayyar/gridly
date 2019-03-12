@@ -36,8 +36,10 @@ import { SellerSettingsComponent } from './seller-settings/seller-settings.compo
 import { BuyerSettingsComponent } from './buyer-settings/buyer-settings.component';
 import { AdminService } from './services/admin.service';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-
-
+//Fusion charts imports
+import { FusionChartsModule } from 'angular-fusioncharts';
+import FusionCharts from 'fusioncharts/core';
+import Column2D from 'fusioncharts/viz/column2d';
 
 @NgModule({
   declarations: [
@@ -85,7 +87,9 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatSnackBarModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyDzjuXUKgTu4BjnL66oUP0jiGz30zuSuaM'
-    })
+    }),
+    FusionChartsModule
+    
   ],
   providers: [AuthGuard, AuthService,HttpClient,AdminService],
   bootstrap: [AppComponent]

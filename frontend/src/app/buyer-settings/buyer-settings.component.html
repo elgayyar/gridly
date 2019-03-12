@@ -3,32 +3,48 @@
     <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayout="2%" fxLayoutAlign="center">
         <div fxFlex="100%" fxFlex.xs="100%">
             <!-- London Hyrdo Pricing Card -->
-            <mat-card class="settings-card" fxFlex="60%" fxFlex.xs="100%" fxLayoutDesign="left">
+            <mat-card class="settings-card" fxFlex="70%" fxFlex.xs="100%" fxLayoutDesign="left">
                 <mat-card-header class="card-title">
                   <mat-card-title>London Hydro Pricing</mat-card-title>
                 </mat-card-header>
                 <mat-card-content>
-                            <ngx-charts-line-chart
-                            [legend]="legend"
-                            [scheme]="colorScheme"
-                            [results]="multi"
-                            [gradient]="gradient"
-                            [xAxis]="showXAxis"
-                            [yAxis]="showYAxis"
-                            [legend]="showLegend"
-                            [showXAxisLabel]="showXAxisLabel"
-                            [showYAxisLabel]="showYAxisLabel"
-                            [xAxisLabel]="xAxisLabel"
-                            [yAxisLabel]="yAxisLabel"
-                            [autoScale]="autoScale"
-                            [timeline]="timeline"
-                            [view]="view"
-                            (select)="onSelect($event)">
-                          </ngx-charts-line-chart>
+                  <!-- Sldier -->
+                  <div fxFlex="20%" fxFlex.xs="100%" class="slider-space">
+                    <mat-slider 
+                      [vertical]="vertical"
+                      [min]="min"
+                      [max]="max"
+                      [step]="step"
+                      [value]="value"
+                      [thumbLabel]="thumbLabel"
+                      >   
+                    </mat-slider>
+                  </div>
+
+                  <!-- Graph -->
+                  <div fxFlex="90%" fxFlex.xs="100%">
+                      <ngx-charts-line-chart
+                      [legend]="legend"
+                      [scheme]="colorScheme"
+                      [results]="multi"
+                      [gradient]="gradient"
+                      [xAxis]="showXAxis"
+                      [yAxis]="showYAxis"
+                      [legend]="showLegend"
+                      [showXAxisLabel]="showXAxisLabel"
+                      [showYAxisLabel]="showYAxisLabel"
+                      [xAxisLabel]="xAxisLabel"
+                      [yAxisLabel]="yAxisLabel"
+                      [autoScale]="autoScale"
+                      [timeline]="timeline"
+                      [view]="view"
+                      (select)="onSelect($event)">
+                    </ngx-charts-line-chart>
+                  </div>
                 </mat-card-content>
               </mat-card>
           <!-- Buy Settings Card -->
-          <mat-card class="settings-card" fxFlex="40%" fxFlex.xs="100%" fxLayoutDesign="left">
+          <mat-card class="settings-card" fxFlex="30%" fxFlex.xs="100%" fxLayoutDesign="left">
             <mat-card-header class="card-title">
                 <mat-card-title>Buy Settings</mat-card-title>
                   <span class="fill-space"></span>

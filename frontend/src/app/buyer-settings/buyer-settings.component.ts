@@ -23,6 +23,17 @@ export class BuyerSettingsComponent implements OnInit {
   userProfile;
   disabled = true;
   loading = false;
+  //Slider varibles
+  autoTicks = true;
+  graphDisabled = false;
+  invert = false;
+  max = 50;
+  min = 0;
+  showTicks = false;
+  step = 0.1;
+  thumbLabel = true;
+  value = 10;
+  vertical = true;
 
   constructor(private registerService: RegisterService,
               private snackBar: MatSnackBar) { }
@@ -30,19 +41,11 @@ export class BuyerSettingsComponent implements OnInit {
   ngOnInit() {
     this.userProfile = JSON.parse(localStorage.getItem("activeProfile"));
     console.log(this.userProfile);
+    this.value = this.userProfile.maxPurchasePrice;
   }
 
    //********************************** London Hydro Pricing Card ********************************* */
-   autoTicks = true;
-   graphDisabled = false;
-   invert = false;
-   max = 20;
-   min = 0;
-   showTicks = false;
-   step = 0.1;
-   thumbLabel = true;
-   value = onPeak;
-   vertical = false;
+
    
    get tickInterval(): number | 'auto' {
      return this.showTicks ? (this.autoTicks ? 'auto' : this._tickInterval) : 0;
