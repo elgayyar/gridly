@@ -22,11 +22,7 @@ const routes: Routes = [
   { path: 'buyer-settings', component: BuyerSettingsComponent ,},
   { path: '', component: LandingPageComponent },
   { path: 'battery', component: BatteryComponent },
-<<<<<<< HEAD
   { path: 'admin', component: AdminHomeComponent },
-=======
-  { path: 'admin', component: AdminHomeComponent }
->>>>>>> 5ccdb0d481b783f8539371de5e8e9fe7367f751d
   { path: 'map', component: MapComponent }
   
 
