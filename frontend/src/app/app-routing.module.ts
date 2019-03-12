@@ -7,6 +7,7 @@ import { RegisterComponent } from './register/register.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { SettingsComponent } from './settings/settings.component';
 import { BatteryComponent } from './battery/battery.component';
+import {AdminHomeComponent } from './admin-home/admin-home.component';
 import { MapComponent } from './map/map.component';
 import { SellerSettingsComponent } from 'src/app/seller-settings/seller-settings.component';
 import { BuyerSettingsComponent } from 'src/app/buyer-settings/buyer-settings.component';
@@ -21,6 +22,7 @@ const routes: Routes = [
   { path: 'buyer-settings', component: BuyerSettingsComponent ,},
   { path: '', component: LandingPageComponent },
   { path: 'battery', component: BatteryComponent },
+  { path: 'admin', component: AdminHomeComponent }
   { path: 'map', component: MapComponent }
   
 
