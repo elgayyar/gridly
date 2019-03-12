@@ -30,7 +30,10 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { AdminHomeComponent } from './admin-home/admin-home.component';
 import { MatGridListModule } from '@angular/material/grid-list';
 import {MatTableModule} from '@angular/material/table';
-
+import { MapComponent } from './map/map.component';
+import { AgmCoreModule } from '@agm/core';
+import { SellerSettingsComponent } from './seller-settings/seller-settings.component';
+import { BuyerSettingsComponent } from './buyer-settings/buyer-settings.component';
 
 
 @NgModule({
@@ -47,6 +50,9 @@ import {MatTableModule} from '@angular/material/table';
     BackgroundGraphicComponent,
     BatteryComponent,
     AdminHomeComponent,
+    MapComponent,
+    SellerSettingsComponent,
+    BuyerSettingsComponent,
   ],
   imports: [
     BrowserAnimationsModule,
@@ -73,6 +79,9 @@ import {MatTableModule} from '@angular/material/table';
     ReactiveFormsModule,
     MatDialogModule,
     MatTableModule
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyDzjuXUKgTu4BjnL66oUP0jiGz30zuSuaM'
+    })
   ],
   providers: [AuthGuard, AuthService,HttpClient],
   bootstrap: [AppComponent]
