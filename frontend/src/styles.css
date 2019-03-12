@@ -47,6 +47,16 @@ a:hover{
     color: #F1F1F1;
 }
 
+.sell-button {
+    background: #B00F3B;
+    color: #F1F1F1;   
+}
+
+.sell-button:hover {
+    background: #F1F1F1;
+    color: #B00F3B;
+}
+
 .title {
     font-size: xx-large;
     color: #F1F1F1;
@@ -134,6 +144,12 @@ a:hover{
         margin: 15%;
 }
 
+.settings-card {
+    background: #F5F5F5;
+    color: #373B46;
+    margin: 2%;
+}
+
 /* Loading Spinner */
 .spinner {
     /* changing --size & --circle-size will adjust size of the spinner */
@@ -187,3 +203,4 @@ a:hover{
          /* top-left circle */
         calc(-1 * var(--diagonal-offset)) calc(-1 * var(--diagonal-offset)) 0 var(--circle-size) rgba(var(--color), 0.4);
   }
+

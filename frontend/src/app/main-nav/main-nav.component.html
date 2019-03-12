@@ -14,15 +14,20 @@
       <a mat-list-item routerLink="/profile"><i class="material-icons sidebar-icon">
         person
         </i>Profile</a>
-      <a mat-list-item routerLink="/settings"><i class="material-icons sidebar-icon">
+      <!-- Seller settings -->
+      <a mat-list-item *ngIf="!isConsumer" routerLink="/seller-settings"><i class="material-icons sidebar-icon">
         flash_on
+        </i>Settings</a>
+      <!-- Buyer Settings -->
+      <a mat-list-item *ngIf="isConsumer" routerLink="/buyer-settings"><i class="material-icons sidebar-icon">
+          flash_on
         </i>Settings</a>
       <a mat-list-item href="#"><i class="material-icons sidebar-icon">
         description
         </i>Transactions</a>
-      <a mat-list-item href="#"><i class="material-icons sidebar-icon">
-          payment
-        </i>Billing</a>
+      <a mat-list-item routerLink="/map"><i class="material-icons sidebar-icon">
+          map
+        </i>Map</a>
       <a mat-list-item routerLink="/battery"><i class="material-icons sidebar-icon">
           battery_charging_full
         </i>Battery</a>
