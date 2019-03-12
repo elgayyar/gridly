@@ -22,6 +22,13 @@ export class SellerSettingsComponent implements OnInit {
   loading = false;
   disabled = true;
   findBattery = false;
+  //Arry to hold the list of active buyers
+  activeBuyers = ["Andrew", "Mike", "Suzzy", "Billy", "Liz"];
+  serialNumber;
+  manufacturer;
+  model;
+  maxCapacity;
+  currentCapacity;
 
 constructor(private authService: AuthService,
     private registerService: RegisterService,) { }
@@ -324,6 +331,13 @@ console.log(this.userProfile);
   //Adds the battery that was selected
   addBattery() {
     $('#batteryFound').modal('hide');
+    //Dummy data for UI
+    this.serialNumber = "89760593203";
+    this.manufacturer = "Tesla";
+    this.model ="Powerwall";
+    this.maxCapacity = "13.5";
+    this.currentCapacity = "10";
+
     //Dummy data for a batery
     const batteryData = {
       "$class": "gridly.battery.Battery",
