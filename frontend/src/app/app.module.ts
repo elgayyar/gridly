@@ -34,6 +34,8 @@ import { MapComponent } from './map/map.component';
 import { AgmCoreModule } from '@agm/core';
 import { SellerSettingsComponent } from './seller-settings/seller-settings.component';
 import { BuyerSettingsComponent } from './buyer-settings/buyer-settings.component';
+import { AdminService } from './services/admin.service';
+
 
 
 @NgModule({
@@ -52,7 +54,7 @@ import { BuyerSettingsComponent } from './buyer-settings/buyer-settings.componen
     AdminHomeComponent,
     MapComponent,
     SellerSettingsComponent,
-    BuyerSettingsComponent,
+    BuyerSettingsComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -78,12 +80,12 @@ import { BuyerSettingsComponent } from './buyer-settings/buyer-settings.componen
     NgxChartsModule,
     ReactiveFormsModule,
     MatDialogModule,
-    MatTableModule
+    MatTableModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyDzjuXUKgTu4BjnL66oUP0jiGz30zuSuaM'
     })
   ],
-  providers: [AuthGuard, AuthService,HttpClient],
+  providers: [AuthGuard, AuthService,HttpClient,AdminService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
