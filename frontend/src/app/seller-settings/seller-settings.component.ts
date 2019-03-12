@@ -22,6 +22,7 @@ export class SellerSettingsComponent implements OnInit {
   loading = false;
   disabled = true;
   findBattery = false;
+  availableBuyers = ["Chuck Grace", "Dick Clark", "Bob Smith", "Mary Marks", "Alexander Eagle"];
 
 constructor(private authService: AuthService,
     private registerService: RegisterService,) { }

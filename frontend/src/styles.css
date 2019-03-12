@@ -49,7 +49,8 @@ a:hover{
 
 .sell-button {
     background: #B00F3B;
-    color: #F1F1F1;   
+    color: #F1F1F1;
+    width: 80%;   
 }
 
 .sell-button:hover {
@@ -148,6 +149,17 @@ a:hover{
     background: #F5F5F5;
     color: #373B46;
     margin: 2%;
+}
+
+.input-space {
+    margin-left: 1%;
+    margin-right: 1%;
+}
+
+.buyer-list:hover {
+    background: #373B46;
+    color: #F5F5F5;
+    cursor: pointer;
 }
 
 /* Loading Spinner */
