@@ -9,7 +9,7 @@ import { forkJoin, Observable,Subject,of, interval } from 'rxjs';
 })
 export class RegisterService {
   authDomain = environment.authAPI;
-  ledgerDomain = environment.ledgerAPI
+  ledgerDomain = environment.ledgerAPI;
 
   constructor(private http: HttpClient) { }
 

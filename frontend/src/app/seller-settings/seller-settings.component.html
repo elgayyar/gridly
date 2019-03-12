@@ -88,10 +88,10 @@
                       <div fxFlex="100%" fxFlex.xs="100%">
                         <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayout="2%" fxLayoutAlign="center" class="form-container">
                           <mat-form-field class="form-space" >
-                            <input matInput placeholder="Price">
+                            <input matInput [ngModel]="userProfile?.minSellingPrice" placeholder="Price">
                           </mat-form-field>
                           <mat-form-field class="form-space" >
-                              <input matInput placeholder="Quantity">
+                              <input matInput [(ngModel)]="quantity" placeholder="Quantity">
                             </mat-form-field>
                         </div>
                         <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayout="2%" fxLayoutAlign="center" class="form-container">
