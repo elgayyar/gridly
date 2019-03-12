@@ -18,17 +18,20 @@ export class AdminHomeComponent implements OnInit {
   constructor(private adminService: AdminService) { 
   }
   transactionsList: any[] = [];
-  tiles: Tile[] = [];
+  displayedColumns: string[] = ['Time', 'Quantity', 'Unit Price', 'Total Price'];
 
   ngOnInit() {
    this.adminService.getAllTransactions().subscribe(res => {
      console.log("admin service, getAllTransactions returned: ", res);
      this.transactionsList = JSON.parse(JSON.stringify(res));
      console.log(this.transactionsList);
+     console.log(this.transactionsList[0].timestamp);
    });
+
+
   };
 
-  
+
 
   
 
