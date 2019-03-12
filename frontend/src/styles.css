@@ -116,7 +116,7 @@ a:hover{
       margin-bottom: 5%;
   }
 
-  .mat-step-header .mat-step-icon-selected {
+.mat-step-header .mat-step-icon-selected {
     background-color: #B00F3B; 
  }
 
@@ -204,3 +204,44 @@ a:hover{
         calc(-1 * var(--diagonal-offset)) calc(-1 * var(--diagonal-offset)) 0 var(--circle-size) rgba(var(--color), 0.4);
   }
 
+  .list-item:hover {
+    background: #373B46;
+    color: #F5F5F5;
+    cursor: pointer;
+  }
+
+  .fill-title {
+      width: 300px;
+  }
+
+   .sell-energy-title {
+      min-width: 100%;
+  }
+
+  .list-size {
+      height: 150px;
+      overflow-y: scroll;
+  }
+
+  /* CUSTOM SCROLL BAR */
+  /* width */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px #373B46; 
+    border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #B00F3B; 
+    border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #B00F3B; 
+}
