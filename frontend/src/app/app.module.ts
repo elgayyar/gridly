@@ -27,17 +27,11 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { BackgroundGraphicComponent } from './background-graphic/background-graphic.component';
 import { BatteryComponent } from './battery/battery.component';
 import { MatDialogModule } from '@angular/material/dialog';
-<<<<<<< HEAD
 import { AdminHomeComponent } from './admin-home/admin-home.component';
 import { MatGridListModule } from '@angular/material/grid-list';
 import {MatTableModule} from '@angular/material/table';
+import { AdminService } from './services/admin.service';
 
-=======
-import { MapComponent } from './map/map.component';
-import { AgmCoreModule } from '@agm/core';
-import { SellerSettingsComponent } from './seller-settings/seller-settings.component';
-import { BuyerSettingsComponent } from './buyer-settings/buyer-settings.component';
->>>>>>> bb64519981cebf5fa4bd27e33dce531c21b29664
 
 
 @NgModule({
@@ -53,13 +47,7 @@ import { BuyerSettingsComponent } from './buyer-settings/buyer-settings.componen
     SettingsComponent,
     BackgroundGraphicComponent,
     BatteryComponent,
-<<<<<<< HEAD
     AdminHomeComponent,
-=======
-    MapComponent,
-    SellerSettingsComponent,
-    BuyerSettingsComponent,
->>>>>>> bb64519981cebf5fa4bd27e33dce531c21b29664
   ],
   imports: [
     BrowserAnimationsModule,
@@ -85,15 +73,9 @@ import { BuyerSettingsComponent } from './buyer-settings/buyer-settings.componen
     NgxChartsModule,
     ReactiveFormsModule,
     MatDialogModule,
-<<<<<<< HEAD
     MatTableModule
-=======
-    AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyDzjuXUKgTu4BjnL66oUP0jiGz30zuSuaM'
-    })
->>>>>>> bb64519981cebf5fa4bd27e33dce531c21b29664
   ],
-  providers: [AuthGuard, AuthService,HttpClient],
+  providers: [AuthGuard, AuthService,HttpClient,AdminService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
