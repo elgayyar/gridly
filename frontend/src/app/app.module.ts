@@ -27,6 +27,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { BackgroundGraphicComponent } from './background-graphic/background-graphic.component';
 import { BatteryComponent } from './battery/battery.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { AdminHomeComponent } from './admin-home/admin-home.component';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 
 @NgModule({
@@ -42,6 +44,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     SettingsComponent,
     BackgroundGraphicComponent,
     BatteryComponent,
+    AdminHomeComponent,
   ],
   imports: [
     BrowserAnimationsModule,
@@ -61,6 +64,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatTabsModule,
     MatSelectModule,
     MatSliderModule,
+    MatGridListModule,
     MatStepperModule,
     FlexLayoutModule,
     NgxChartsModule,

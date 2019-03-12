@@ -1,0 +1,19 @@
+<app-main-nav>
+  <!-- Row 1 -->
+  <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayout="2%" fxLayoutAlign="center" fxFill>
+    <div fxFlex="100%" fxFlex.xs="100%">
+        <mat-card class="home-card">
+            <mat-grid-list cols="4" rowHeight="50px">
+              <mat-grid-tile
+                  *ngFor="let tile of tiles"
+                  [colspan]="tile.cols"
+                  [rowspan]="tile.rows"
+                  [style.background]="tile.color">
+                {{tile.text}}
+              </mat-grid-tile>
+            </mat-grid-list>
+            <mat-divider></mat-divider>
+        </mat-card>
+    </div>
+  </div>
+</app-main-nav>
