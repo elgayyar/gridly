@@ -22,4 +22,9 @@ export class TradeService {
     return this.http.get<JSON>(this.ledgerDomain + '/gridly.consumer.Consumer');
   }
 
+  postTrade(txn) {
+    console.log("POST TRADE: ", txn);
+    return this.http.post<JSON>(this.ledgerDomain+'/gridly.trade.Trade', txn);
+  }
+
 }
