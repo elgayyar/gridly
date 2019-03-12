@@ -38,8 +38,8 @@ export class AuthService {
 
   getProfile(email) {
     this.adminReturn= this.http.get<JSON>(this.ledgerDomain +'gridly.admin.Admin'+'?filter[where][email]='+email);
-    this.consumerReturn = this.http.get<JSON>(this.ledgerDomain + '/gridly.consumer.Consumer'+'?filter[where][email]='+email);
-    this.producerReturn = this.http.get<JSON>(this.ledgerDomain + '/gridly.producer.Producer'+'?filter[where][email]='+email);
+    this.consumerReturn = this.http.get<JSON>(this.ledgerDomain + 'gridly.consumer.Consumer'+'?filter[where][email]='+email);
+    this.producerReturn = this.http.get<JSON>(this.ledgerDomain + 'gridly.producer.Producer'+'?filter[where][email]='+email);
     return forkJoin([this.adminReturn,this.consumerReturn,this.producerReturn]);
   }
 

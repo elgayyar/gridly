@@ -5,8 +5,10 @@ import { AuthGuard } from '../guards/auth.guard';
 import { RegisterService } from '../services/register.service';
 import { Router } from '@angular/router';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatTooltipModule}  from '@angular/material';
+import { TradeService } from '../services/trade.service';
 
 declare var $: any;
+
 
 var onPeak = 13.2;
 var midPeak = 9.4;
@@ -29,20 +31,42 @@ export class SellerSettingsComponent implements OnInit {
   model;
   maxCapacity;
   currentCapacity;
+  quantity = 0;
+  consumers;
+  availableConsumers =[];
+
 
 constructor(private authService: AuthService,
-    private registerService: RegisterService,) { }
+    private registerService: RegisterService,
+    private tradeService: TradeService) { }
 
 ngOnInit() {
 this.userProfile = JSON.parse(localStorage.getItem("activeProfile"));
 console.log(this.userProfile);
-
+this.tradeService.getAllConsumers().subscribe(
+  res => {
+    this.consumers = res;
+    console.log('CONSUMERS: ',this.consumers);
+    let context = this;
+    this.consumers.forEach(function(consumer){
+      if(consumer.maxPurchasePrice >= context.userProfile.minSellingPrice){
+        context.availableConsumers.push(consumer);
+      }
+    })
+    console.log('AVAILABLE CONSUMERS:', this.availableConsumers)
+    //this.userProfile = res;
+    //localStorage.setItem("activeProfile", JSON.stringify(this.userProfile));
+    //this.disabled = true;
+  },
+  error => {
+    console.log("Error response from hyperledger");
+  });
 }
 
 
   //********************************** London Hydro Pricing Card ********************************* */
   autoTicks = true;
-  disabled = false;
+  graphDisabled = false;
   invert = false;
   max = 20;
   min = 0;
