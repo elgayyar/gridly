@@ -10,6 +10,8 @@ import { Router } from "@angular/router";
   styleUrls: ['./main-nav.component.css']
 })
 export class MainNavComponent {
+  userProfile;
+  isConsumer;
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
@@ -17,7 +19,16 @@ export class MainNavComponent {
     );
 
   constructor(private breakpointObserver: BreakpointObserver,
-              private router: Router) {}
+              private router: Router) {
+                this.userProfile = JSON.parse(localStorage.getItem("activeProfile"));
+                //Check if the user is a producer or consumer
+                if(this.userProfile.accountStatus == "CONSUMER") {
+                  this.isConsumer = true;
+                } else {
+                  this.isConsumer = false;
+                }
+                console.log(this.userProfile.accountStatus);
+              }
 
     //Log the user out and redirect them to the landing page
     logout() {

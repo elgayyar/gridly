@@ -27,6 +27,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { BackgroundGraphicComponent } from './background-graphic/background-graphic.component';
 import { BatteryComponent } from './battery/battery.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MapComponent } from './map/map.component';
+import { AgmCoreModule } from '@agm/core';
+import { SellerSettingsComponent } from './seller-settings/seller-settings.component';
+import { BuyerSettingsComponent } from './buyer-settings/buyer-settings.component';
 
 
 @NgModule({
@@ -42,6 +46,9 @@ import { MatDialogModule } from '@angular/material/dialog';
     SettingsComponent,
     BackgroundGraphicComponent,
     BatteryComponent,
+    MapComponent,
+    SellerSettingsComponent,
+    BuyerSettingsComponent,
   ],
   imports: [
     BrowserAnimationsModule,
@@ -65,7 +72,10 @@ import { MatDialogModule } from '@angular/material/dialog';
     FlexLayoutModule,
     NgxChartsModule,
     ReactiveFormsModule,
-    MatDialogModule
+    MatDialogModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyDzjuXUKgTu4BjnL66oUP0jiGz30zuSuaM'
+    })
   ],
   providers: [AuthGuard, AuthService,HttpClient],
   bootstrap: [AppComponent]
