@@ -35,6 +35,7 @@ import { AgmCoreModule } from '@agm/core';
 import { SellerSettingsComponent } from './seller-settings/seller-settings.component';
 import { BuyerSettingsComponent } from './buyer-settings/buyer-settings.component';
 import { AdminService } from './services/admin.service';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 
 
@@ -81,6 +82,7 @@ import { AdminService } from './services/admin.service';
     ReactiveFormsModule,
     MatDialogModule,
     MatTableModule,
+    MatSnackBarModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyDzjuXUKgTu4BjnL66oUP0jiGz30zuSuaM'
     })

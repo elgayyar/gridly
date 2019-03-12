@@ -150,7 +150,16 @@ a:hover{
     margin: 2%;
 }
 
-/* Loading Spinner */
+.profile-icon {
+    cursor: pointer;
+    padding-right: 20%;
+}
+
+.save-button:disabled {
+    background: #F5F5F5 !important;
+}
+
+/**************************************************** Loading Spinner *****************************************************/
 .spinner {
     /* changing --size & --circle-size will adjust size of the spinner */
     --size: 150px;
@@ -244,4 +253,20 @@ a:hover{
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
     background: #B00F3B; 
+}
+
+.battery-modal {
+    margin-left: 20%;
+}
+
+.modal {
+    background-color: 176, 15, 59 !important;
+ }
+
+.red {
+    --color: 176, 15, 59 !important;
+  }
+
+.scanning-title {
+    color: 176, 15, 59;
 }
