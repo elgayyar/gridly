@@ -34,6 +34,7 @@ export class SellerSettingsComponent implements OnInit {
   quantity = 0;
   consumers;
   availableConsumers =[];
+  selectedConsumer;
 
 
 constructor(private authService: AuthService,
@@ -54,13 +55,31 @@ this.tradeService.getAllConsumers().subscribe(
       }
     })
     console.log('AVAILABLE CONSUMERS:', this.availableConsumers)
-    //this.userProfile = res;
-    //localStorage.setItem("activeProfile", JSON.stringify(this.userProfile));
-    //this.disabled = true;
   },
   error => {
     console.log("Error response from hyperledger");
   });
+}
+
+postTrade(){
+  const txn = {
+    unitElectricityPrice: this.userProfile.minSellingPrice,
+    electricityQuantity: this.quantity,
+    totalPrice: this.userProfile.minSellingPrice * this.quantity,
+    buyer: "resource:gridly.consumer.Consumer#" + this.selectedConsumer.email,
+    seller: "resource:gridly.producer.Producer#" + this.userProfile.email,
+    time: Date.now()
+  }
+
+  this.tradeService.postTrade(txn).subscribe(
+    res => {
+      console.log("Response from fabric:");
+      console.log(res);
+
+    },
+    error => {
+      console.log("Error response from hyperledger");
+    });
 }
 
 
