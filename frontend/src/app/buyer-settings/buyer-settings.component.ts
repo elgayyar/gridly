@@ -348,6 +348,14 @@ export class BuyerSettingsComponent implements OnInit {
       },
       error => {
         console.log("Error response from hyperledger");
+        //Display a success notification
+        $('#save').modal('hide');
+        this.snackBar.open("Error: Failed to update! Please try again!");
+        setTimeout( () => { 
+          this.snackBar.dismiss();
+        }, 2000 );
+        this.disabled = true;
+        this.loading = false;
       });
   }
 
