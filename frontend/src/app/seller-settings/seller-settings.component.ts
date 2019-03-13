@@ -455,5 +455,16 @@ selectBuyer(b){
     this.snackBar.open(message);
   }
 
+  //Update the battery power level
+  setBatteryCapacity()
+  {
+    $("#battery").css({
+      background: "#B00F3B"
+    })
+    $("#battery-height").height("50%").css({
+      background: "#F1F1F1"
+    });
+  }
+
 
 }
