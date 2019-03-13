@@ -23,6 +23,9 @@ export class BuyerSettingsComponent implements OnInit {
   userProfile;
   disabled = true;
   loading = false;
+  userOffPeakPrice = 0;
+  userMidPeakPrice = 0;
+  userPeakPrice = 0;
   //Slider varibles
   autoTicks = true;
   graphDisabled = false;
@@ -178,121 +181,121 @@ export class BuyerSettingsComponent implements OnInit {
        "series": [
          {
            "name": "12am",
-           "value": offPeak + this.value
+           "value": this.userOffPeakPrice
          },
          {
            "name": "1am",
-           "value": offPeak + this.value
+           "value": this.userOffPeakPrice
          },
          {
            "name": "2am",
-           "value": offPeak + this.value
+           "value": this.userOffPeakPrice
          },
          {
            "name": "3am",
-           "value": offPeak + this.value
+           "value": this.userOffPeakPrice
          },
          {
            "name": "4am",
-           "value": offPeak + this.value
+           "value": this.userOffPeakPrice
          },
          {
            "name": "5am",
-           "value": offPeak + this.value
+           "value": this.userOffPeakPrice
          },
          {
            "name": "6am",
-           "value": offPeak + this.value
+           "value": this.userOffPeakPrice
          },
          {
            "name": "7am",
-           "value": offPeak + this.value
+           "value": this.userOffPeakPrice
          },
          {
            "name": "7am",
-           "value": onPeak + this.value
+           "value": this.userPeakPrice
          },
          {
            "name": "8am",
-           "value": onPeak + this.value
+           "value": this.userPeakPrice
          },
          {
            "name": "9am",
-           "value": onPeak + this.value
+           "value": this.userPeakPrice
          },
          {
            "name": "10am",
-           "value": onPeak + this.value
+           "value": this.userPeakPrice
          },
          {
            "name": "11am",
-           "value": onPeak + this.value
+           "value": this.userPeakPrice
          },
          {
            "name": "11am",
-           "value": midPeak + this.value
+           "value": this.userMidPeakPrice
          },
        {
          "name": "12pm",
-         "value": midPeak + this.value
+         "value": this.userMidPeakPrice
        },
        {
          "name": "1pm",
-         "value": midPeak + this.value
+         "value": this.userMidPeakPrice
        },
        {
          "name": "2pm",
-         "value": midPeak + this.value
+         "value": this.userMidPeakPrice
        },
        {
          "name": "3pm",
-         "value": midPeak + this.value
+         "value": this.userMidPeakPrice
        },
        {
          "name": "4pm",
-         "value": midPeak + this.value
+         "value": this.userMidPeakPrice
        },
        {
          "name": "5pm",
-         "value": midPeak + this.value
+         "value": this.userMidPeakPrice
        },
        {
          "name": "5pm",
-         "value": onPeak + this.value
+         "value": this.userPeakPrice
        },
        {
          "name": "6pm",
-         "value": onPeak + this.value
+         "value": this.userPeakPrice
        },
        {
          "name": "7pm",
-         "value": onPeak + this.value
+         "value": this.userPeakPrice
        },
        {
          "name": "7pm",
-         "value": offPeak + this.value
+         "value": this.userPeakPrice
        },
        {
          "name": "8pm",
-         "value": offPeak + this.value
+         "value": this.userPeakPrice
        },
        {
          "name": "9pm",
-         "value": offPeak + this.value
+         "value": this.userPeakPrice
        },
        {
          "name": "10pm",
-         "value": offPeak + this.value
+         "value": this.userPeakPrice
        },
        {
          "name": "11pm",
-         "value": offPeak + this.value
+         "value": this.userPeakPrice
        }
        ]
      }
    ];
  
-     view: any[] = [600, 300];
+     view: any[] = [700, 350];
    
      // options for the chart
      showXAxis = true;
@@ -333,7 +336,8 @@ export class BuyerSettingsComponent implements OnInit {
   saveBuySettings() {
     console.log("Save buy settings pressed");
     this.disabled = true;
-    //this.value = this.userProfile.maxPurchasePrice;
+    //Set the max purchase price to the peak price for the demo
+    this.userProfile.maxPurchasePrice = this.userPeakPrice;
     console.log("Before", this.userProfile);
     //Update the users profile in HYPERLEDGER
     this.registerService.updateConsumer(this.userProfile, this.userProfile.email).subscribe(
@@ -344,6 +348,7 @@ export class BuyerSettingsComponent implements OnInit {
         localStorage.setItem("activeProfile", JSON.stringify(this.userProfile));
         //Display a success notification
         $('#save').modal('hide');
+        this.updateGraph();
         this.snackBar.open("Success: Settings updated!");
         setTimeout( () => { 
           this.snackBar.dismiss();
@@ -367,6 +372,246 @@ export class BuyerSettingsComponent implements OnInit {
   //Snackbar for notifications
   openSnackBar(message: string) {
     this.snackBar.open(message);
+  }
+
+  //Update the graph data
+  updateGraph() {
+    this.multi = [
+      {
+        "name": "London Hydro Prices",
+        "series": [
+          {
+            "name": "12am",
+            "value": offPeak
+          },
+          {
+            "name": "1am",
+            "value": offPeak
+          },
+          {
+            "name": "2am",
+            "value": offPeak
+          },
+          {
+            "name": "3am",
+            "value": offPeak
+          },
+          {
+            "name": "4am",
+            "value": offPeak
+          },
+          {
+            "name": "5am",
+            "value": offPeak
+          },
+          {
+            "name": "6am",
+            "value": offPeak
+          },
+          {
+            "name": "7am",
+            "value": offPeak
+          },
+          {
+            "name": "7am",
+            "value": onPeak
+          },
+          {
+            "name": "8am",
+            "value": onPeak
+          },
+          {
+            "name": "9am",
+            "value": onPeak
+          },
+          {
+            "name": "10am",
+            "value": onPeak
+          },
+          {
+            "name": "11am",
+            "value": onPeak
+          },
+          {
+            "name": "11am",
+            "value": midPeak
+          },
+        {
+          "name": "12pm",
+          "value": midPeak
+        },
+        {
+          "name": "1pm",
+          "value": midPeak
+        },
+        {
+          "name": "2pm",
+          "value": midPeak
+        },
+        {
+          "name": "3pm",
+          "value": midPeak
+        },
+        {
+          "name": "4pm",
+          "value": midPeak
+        },
+        {
+          "name": "5pm",
+          "value": midPeak
+        },
+        {
+          "name": "5pm",
+          "value": onPeak
+        },
+        {
+          "name": "6pm",
+          "value": onPeak
+        },
+        {
+          "name": "7pm",
+          "value": onPeak
+        },
+        {
+          "name": "7pm",
+          "value": offPeak
+        },
+        {
+          "name": "8pm",
+          "value": offPeak
+        },
+        {
+          "name": "9pm",
+          "value": offPeak
+        },
+        {
+          "name": "10pm",
+          "value": offPeak
+        },
+        {
+          "name": "11pm",
+          "value": offPeak
+        }
+        ]
+      },
+      {
+        "name": "Your Prices",
+        "series": [
+          {
+            "name": "12am",
+            "value": this.userOffPeakPrice
+          },
+          {
+            "name": "1am",
+            "value": this.userOffPeakPrice
+          },
+          {
+            "name": "2am",
+            "value": this.userOffPeakPrice
+          },
+          {
+            "name": "3am",
+            "value": this.userOffPeakPrice
+          },
+          {
+            "name": "4am",
+            "value": this.userOffPeakPrice
+          },
+          {
+            "name": "5am",
+            "value": this.userOffPeakPrice
+          },
+          {
+            "name": "6am",
+            "value": this.userOffPeakPrice
+          },
+          {
+            "name": "7am",
+            "value": this.userOffPeakPrice
+          },
+          {
+            "name": "7am",
+            "value": this.userPeakPrice
+          },
+          {
+            "name": "8am",
+            "value": this.userPeakPrice
+          },
+          {
+            "name": "9am",
+            "value": this.userPeakPrice
+          },
+          {
+            "name": "10am",
+            "value": this.userPeakPrice
+          },
+          {
+            "name": "11am",
+            "value": this.userPeakPrice
+          },
+          {
+            "name": "11am",
+            "value": this.userMidPeakPrice
+          },
+        {
+          "name": "12pm",
+          "value": this.userMidPeakPrice
+        },
+        {
+          "name": "1pm",
+          "value": this.userMidPeakPrice
+        },
+        {
+          "name": "2pm",
+          "value": this.userMidPeakPrice
+        },
+        {
+          "name": "3pm",
+          "value": this.userMidPeakPrice
+        },
+        {
+          "name": "4pm",
+          "value": this.userMidPeakPrice
+        },
+        {
+          "name": "5pm",
+          "value": this.userMidPeakPrice
+        },
+        {
+          "name": "5pm",
+          "value": this.userPeakPrice
+        },
+        {
+          "name": "6pm",
+          "value": this.userPeakPrice
+        },
+        {
+          "name": "7pm",
+          "value": this.userPeakPrice
+        },
+        {
+          "name": "7pm",
+          "value": this.userPeakPrice
+        },
+        {
+          "name": "8pm",
+          "value": this.userPeakPrice
+        },
+        {
+          "name": "9pm",
+          "value": this.userPeakPrice
+        },
+        {
+          "name": "10pm",
+          "value": this.userPeakPrice
+        },
+        {
+          "name": "11pm",
+          "value": this.userPeakPrice
+        }
+        ]
+      }
+    ];
   }
 
 }

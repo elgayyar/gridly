@@ -3,12 +3,13 @@
     <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayout="2%" fxLayoutAlign="center">
         <div fxFlex="100%" fxFlex.xs="100%">
             <!-- London Hyrdo Pricing Card -->
-            <mat-card class="settings-card" fxFlex="70%" fxFlex.xs="100%" fxLayoutDesign="left">
+            <mat-card class="settings-card" fxFlex="60%" fxFlex.xs="100%" fxLayoutDesign="left">
                 <mat-card-header class="card-title">
                   <mat-card-title>London Hydro Pricing</mat-card-title>
                 </mat-card-header>
                 <mat-card-content>
                   <!-- Sldier -->
+                  <!--
                   <div fxFlex="20%" fxFlex.xs="100%" class="slider-space">
                     <mat-slider 
                       [vertical]="vertical"
@@ -20,7 +21,7 @@
                       >   
                     </mat-slider>
                   </div>
-
+                  -->
                   <!-- Graph -->
                   <div fxFlex="90%" fxFlex.xs="100%">
                       <ngx-charts-line-chart
@@ -46,27 +47,50 @@
                 </mat-card-content>
               </mat-card>
           <!-- Buy Settings Card -->
-          <mat-card class="settings-card" fxFlex="30%" fxFlex.xs="100%" fxLayoutDesign="left">
+          <mat-card class="settings-card" fxFlex="40%" fxFlex.xs="100%" fxLayoutDesign="left">
             <mat-card-header class="card-title">
                 <mat-card-title>Buy Settings</mat-card-title>
                   <span class="fill-space"></span>
-                  <div *ngIf="disabled; else edit">
-                      <span><i class="material-icons profile-icon" (click)="editBuySettings()" matTooltip="Edit profile">edit</i></span>
-                  </div>
+                      <button mat-stroked-button class="sell-button" (click)="editBuySettings()" *ngIf="disabled; else edit">
+                          <i class="material-icons" >edit</i>
+                          Edit Prices
+                      </button>
                   <ng-template #edit>
-                      <span><i class="material-icons profile-icon" (click)="cancel()" matTooltip="Cancel changes">close</i></span>
+                      <button mat-stroked-button class="sell-button" (click)="cancel()">
+                          <i class="material-icons" >close</i>
+                          Cancel
+                      </button>
                   </ng-template>
             </mat-card-header>
             <mat-card-content>
               <div fxFlex="100%" fxFlex.xs="100%">
                   <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayout="2%" fxLayoutAlign="center" class="form-container">
+                    <p>Off peak hours: 12am-7am</p>
+                  </div>
+                  <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayout="2%" fxLayoutAlign="center" class="form-container">
                       <mat-form-field class="form-space" >
-                        <input matInput placeholder="Price" [(ngModel)]="userProfile.maxPurchasePrice" [disabled]="disabled">
+                        <input matInput placeholder="Off Peak Price" [(ngModel)]="userOffPeakPrice" [disabled]="disabled">
                       </mat-form-field>
-                    </div>
-                    <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayout="2%" fxLayoutAlign="center" class="form-container">
-                        <button mat-stroked-button class="sell-button save-button" data-toggle="modal" data-target="#save" (click)="saveBuySettings()" *ngIf="!disabled">Save</button>
-                    </div>
+                  </div>
+                  <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayout="2%" fxLayoutAlign="center" class="form-container">
+                      <p>Mid peak hours: 11am-5pm</p>
+                  </div>
+                  <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayout="2%" fxLayoutAlign="center" class="form-container">
+                      <mat-form-field class="form-space" >
+                        <input matInput placeholder="Mid Peak Price" [(ngModel)]="userMidPeakPrice" [disabled]="disabled">
+                      </mat-form-field>
+                  </div>
+                  <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayout="2%" fxLayoutAlign="center" class="form-container">
+                      <p>On peak hours: 7am-11am and 5pm-12am</p>
+                  </div>
+                  <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayout="2%" fxLayoutAlign="center" class="form-container">
+                      <mat-form-field class="form-space" >
+                        <input matInput placeholder="Peak Price" [(ngModel)]="userPeakPrice" [disabled]="disabled">
+                      </mat-form-field>
+                  </div>
+                  <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayout="2%" fxLayoutAlign="center" class="form-container">
+                      <button mat-stroked-button class="sell-button save-button" data-toggle="modal" data-target="#save" (click)="saveBuySettings()" *ngIf="!disabled">Save</button>
+                  </div>
               </div>
             </mat-card-content>
           </mat-card>
