@@ -23,9 +23,14 @@ export class TransactionsComponent implements OnInit {
     
     this.transactionService.getAllTransactions(this.email).subscribe(res => {
       console.log("transaction service, getAllTransactions returned: ", res);
-        this.transactionsList = JSON.parse(JSON.stringify(res));
-        console.log(this.transactionsList);
-        console.log(this.transactionsList[0].timestamp);
-      });
+      for (let result of res){
+        if (result[0]){
+          this.transactionsList = result[0];
+          break;
+        }
+      }
+      console.log(this.transactionsList);
+      console.log(this.transactionsList[0].timestamp);
+    });
   }
 }
