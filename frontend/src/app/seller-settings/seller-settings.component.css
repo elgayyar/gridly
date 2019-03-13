@@ -1,3 +1,7 @@
+body {
+  color: #B00F3B !important;
+}
+
 .slider {
     margin: 10px;
 }
@@ -72,10 +76,14 @@
         calc(-1 * var(--diagonal-offset)) calc(-1 * var(--diagonal-offset)) 0 var(--circle-size) rgba(var(--color), 0.4);
   }
 
+  .battery-list {
+    color: #373B46 !important;
+  }
+
   .battery-list:hover {
     background: #373B46;
     cursor: pointer;
-    color: #F1F1F1;
+    color: #F1F1F1 !important;
   }
 
   .selected { 
@@ -169,3 +177,20 @@
     padding-top: 20%;
     margin-left: 20%;
   }
+
+  .mat-form-field {
+    color: #373B46 !important;
+    }
+  
+  .mat-form-field:disabled {
+    color: #B00F3B !important;
+  }
+
+  .sell-container {
+    margin-top: 10%;
+  }
+
+  ::-webkit-scrollbar {
+    display: none;
+    }
+    

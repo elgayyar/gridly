@@ -318,4 +318,11 @@ a:hover{
       widows: 100%;
   }
 
-  /************************** Battery Animations ****************************/
+ .mat-list-item {
+     color: #F1F1F1 !important;
+ }
+
+ .mat-list-item:hover {
+    background: #B00F3B!important;
+    cursor: pointer;
+}
