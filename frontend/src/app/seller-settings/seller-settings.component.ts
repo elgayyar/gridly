@@ -263,7 +263,7 @@ selectBuyer(b){
         "value": offPeak
       }
       ]
-    },
+    } /*,
     {
       "name": "Your Prices",
       "series": [
@@ -380,7 +380,7 @@ selectBuyer(b){
         "value": offPeak + this.value
       }
       ]
-    }
+    } */
   ];
 
     view: any[] = [600, 300];
@@ -402,7 +402,7 @@ selectBuyer(b){
   
     // line, area
     autoScale = false;
-    legend = true;
+    legend = false;
 
 /****************************************************** Battery Card *******************************************************/
   //Brings up modal that seaches for a battery
@@ -435,8 +435,7 @@ selectBuyer(b){
     }
     //Add the battery to the users profile
     this.userProfile.battery = batteryData;
-    console.log(this.userProfile);
-    
+    console.log(this.userProfile);    
     this.registerService.addBattery(this.userProfile, this.userProfile.email).subscribe(
       res => {
         console.log(res);
@@ -447,7 +446,16 @@ selectBuyer(b){
       error => {
         console.log("Error response from hyperledger", error);
       });
-      
+
+    //Update the battery animation
+    this.setBatteryCapacity();
+    
+    }
+
+    //Removes a battery from the users profile
+    removeBattery() {
+      this.userProfile.battery = null;
+      console.log("After remove battery", this.userProfile);
     }
 
   //Snackbar for notifications
@@ -458,13 +466,18 @@ selectBuyer(b){
   //Update the battery power level
   setBatteryCapacity()
   {
+    console.log("Setting the capacity height");
+    //Calculate the battery height
+    var capacity = (this.userProfile.battery.currentCapacity / this.userProfile.battery.maxCapacity) * 100;
+    console.log(capacity);
+    var h = 100 - capacity;
+    var height = h.toString();
+    console.log(height);
     $("#battery").css({
       background: "#B00F3B"
     })
-    $("#battery-height").height("50%").css({
+    $("#battery-height").height(height + "%").css({
       background: "#F1F1F1"
     });
   }
-
-
 }
