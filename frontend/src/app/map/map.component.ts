@@ -16,6 +16,8 @@ interface marker {
 })
 export class MapComponent implements OnInit {
   userProfile;
+  friends = ["Andrew", "Susan", "Mike", "Lisa"];
+  users = ["Brian", "Alina", "Bobby"];
   usersGeocode;
   zoom = 12;
   latitude = 42.9487956;

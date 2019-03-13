@@ -1,34 +1,65 @@
 <app-main-nav>
     <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayout="2%" fxLayoutAlign="center">
-      <div fxFlex="70%" fxFlex.xs="100%">
-          <mat-card class="home-card animated fadeIn">
-              <mat-card-header class="card-title">
-                  <mat-card-title>My Neighbourhood</mat-card-title>
-              </mat-card-header>
-              <mat-card-content>
+        <div fxFlex="100%" fxFlex.xs="100%">
+                <!-- My friends card --> 
+                <mat-card class="left-card animated fadeIn" fxFlex="20%" fxFlex.xs="100%" fxLayoutDesign="left">
+                        <mat-card-header class="card-title">
+                            <mat-card-title>My friends</mat-card-title>
+                        </mat-card-header>
+                        <mat-card-content>
+                            <mat-list>
+                                <ng-container *ngFor="let friend of friends">
+                                    <mat-list-item class="friends-list"> 
+                                        <mat-divider></mat-divider>
+                                          {{ friend }}
+                                    </mat-list-item>
+                                </ng-container>
+                            </mat-list> 
+                        </mat-card-content>
+                    </mat-card>
                 <!-- Map -->
-                <agm-map 
-                  [latitude]="usersGeocode.lat" 
-                  [longitude]="usersGeocode.lng" 
-                  [zoom]="zoom">
-                  
-                  <!-- Markers -->
-                  <agm-marker 
-                    *ngFor="let m of markers; let i = index"
-                    (markerClick)="clickedMarker(m.label, i)"
-                    [latitude]="m.lat"
-                    [longitude]="m.lng">
-                  <!-- Info Window -->
-                  <agm-info-window>
-                      <strong>{{ m.label }}</strong>
-                  </agm-info-window>
-                  </agm-marker>
+                <mat-card class="center-card animated fadeIn"  fxFlex="60%" fxFlex.xs="100%" fxLayoutDesign="left">
+                    <mat-card-header class="card-title">
+                        <mat-card-title>My Neighbourhood</mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <!-- Map -->
+                        <agm-map 
+                        [latitude]="usersGeocode.lat" 
+                        [longitude]="usersGeocode.lng" 
+                        [zoom]="zoom">
+                        
+                        <!-- Markers -->
+                        <agm-marker 
+                            *ngFor="let m of markers; let i = index"
+                            (markerClick)="clickedMarker(m.label, i)"
+                            [latitude]="m.lat"
+                            [longitude]="m.lng">
+                        <!-- Info Window -->
+                        <agm-info-window>
+                            <strong>{{ m.label }}</strong>
+                        </agm-info-window>
+                        </agm-marker>
+                        </agm-map>
+                    </mat-card-content>      
+                </mat-card>
 
-
-                </agm-map>
-
-              </mat-card-content>      
-          </mat-card>
-      </div>
+                <!--  Users --> 
+                <mat-card class="right-card animated fadeIn" fxFlex="20%" fxFlex.xs="100%" fxLayoutDesign="left">
+                    <mat-card-header class="card-title">
+                        <mat-card-title>Gridly Users</mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <mat-list>
+                            <ng-container *ngFor="let user of users">
+                                <mat-list-item class="friends-list"> 
+                                    <mat-divider></mat-divider>
+                                      {{ user }}
+                                </mat-list-item>
+                            </ng-container>
+                        </mat-list> 
+                    </mat-card-content>
+                </mat-card>
+        </div>  
     </div>
-</app-main-nav>>
+</app-main-nav>
