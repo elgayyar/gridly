@@ -1,7 +1,34 @@
 <app-main-nav>
     <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayout="2%" fxLayoutAlign="center">
       <div fxFlex="70%" fxFlex.xs="100%">
-          <agm-map [latitude]="latitude" [longitude]="longitude"></agm-map>
+          <mat-card class="home-card animated fadeIn">
+              <mat-card-header class="card-title">
+                  <mat-card-title>My Neighbourhood</mat-card-title>
+              </mat-card-header>
+              <mat-card-content>
+                <!-- Map -->
+                <agm-map 
+                  [latitude]="usersGeocode.lat" 
+                  [longitude]="usersGeocode.lng" 
+                  [zoom]="zoom">
+                  
+                  <!-- Markers -->
+                  <agm-marker 
+                    *ngFor="let m of markers; let i = index"
+                    (markerClick)="clickedMarker(m.label, i)"
+                    [latitude]="m.lat"
+                    [longitude]="m.lng">
+                  <!-- Info Window -->
+                  <agm-info-window>
+                      <strong>{{ m.label }}</strong>
+                  </agm-info-window>
+                  </agm-marker>
+
+
+                </agm-map>
+
+              </mat-card-content>      
+          </mat-card>
       </div>
     </div>
 </app-main-nav>>

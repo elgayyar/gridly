@@ -5,7 +5,7 @@ import { Router } from "@angular/router";
 import { Observable} from 'rxjs'
 import {Subject} from "rxjs/Subject";
 
-
+declare var $: any;
 
 @Component({
   selector: 'app-login',
@@ -70,8 +70,10 @@ export class LoginComponent implements OnInit {
           //redirect to home page 
           setTimeout(() => {
             if(this.previousUrl){
+              $('#loading').modal('hide');
               this.router.navigate([this.previousUrl]);
             } else {
+              $('#loading').modal('hide');
               this.router.navigate(['/home']);
             }
           }, 1000);

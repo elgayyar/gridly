@@ -35,6 +35,11 @@ import { AgmCoreModule } from '@agm/core';
 import { SellerSettingsComponent } from './seller-settings/seller-settings.component';
 import { BuyerSettingsComponent } from './buyer-settings/buyer-settings.component';
 import { AdminService } from './services/admin.service';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+//Fusion charts imports
+import { FusionChartsModule } from 'angular-fusioncharts';
+import FusionCharts from 'fusioncharts/core';
+import Column2D from 'fusioncharts/viz/column2d';
 import { TransactionsComponent } from './transactions/transactions.component';
 
 
@@ -83,9 +88,12 @@ import { TransactionsComponent } from './transactions/transactions.component';
     ReactiveFormsModule,
     MatDialogModule,
     MatTableModule,
+    MatSnackBarModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyDzjuXUKgTu4BjnL66oUP0jiGz30zuSuaM'
-    })
+    }),
+    FusionChartsModule
+    
   ],
   providers: [AuthGuard, AuthService,HttpClient,AdminService],
   bootstrap: [AppComponent]
