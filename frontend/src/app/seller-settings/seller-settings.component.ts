@@ -9,7 +9,6 @@ import { TradeService } from '../services/trade.service';
 
 declare var $: any;
 
-
 var onPeak = 13.2;
 var midPeak = 9.4;
 var offPeak = 6.5;
