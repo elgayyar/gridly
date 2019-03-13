@@ -6,6 +6,10 @@
             <mat-card class="settings-card" fxFlex="60%" fxLayoutDesign="left">
                 <mat-card-header class="card-title">
                   <mat-card-title>London Hydro Pricing</mat-card-title>
+                  <span class="fill-space"></span>
+                  <button mat-stroked-button class="sell-button" data-toggle="modal" data-target="#sellElectricity">
+                    <i class="material-icons">flash_on</i>
+                    Sell Electricity</button>
                 </mat-card-header>
                 <mat-card-content>
                             <ngx-charts-line-chart
@@ -33,9 +37,14 @@
                               <mat-card-header class="card-title">
                                 <mat-card-title>Battery Settings</mat-card-title>
                                 <span class="fill-space"></span>
-                                <span><i class="material-icons profile-icon" matTooltip="Add Battery" data-toggle="modal" data-target="#batterySearch" (click)="searchForBattery()">battery_charging_full</i></span>
+                                <button mat-stroked-button class="sell-button" data-toggle="modal" data-target="#batterySearch" (click)="searchForBattery()">
+                                    <i class="material-icons" >battery_charging_full</i>
+                                    Add Battery
+                                </button>
+                                
                               </mat-card-header>
                               <mat-card-content>
+                                  <!-- Battery Information -->
                                   <div fxFlex="100%" fxFlex.xs="100%">
                                       <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayout="2%" fxLayoutAlign="center" class="form-container">
                                           <mat-form-field class="form-space" >
@@ -63,38 +72,20 @@
                                         </mat-form-field>
                                       </div>
                                   </div>
-                              </mat-card-content>
-                              <mat-card-actions>
-                              </mat-card-actions>  
-                            </mat-card>
-
-            
-             
-
+                  <!-- Battery Animation -->
+                  <div fxFlex="50%" fxFlex.xs="100%">
+                  </div>
+                </mat-card-content>
+              <mat-card-actions>
+            </mat-card-actions>  
+          </mat-card>
         </div>
       </div>
       <!-- Row 2 --> 
+      <!--
       <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayout="2%" fxLayoutAlign="center">
-          <div fxFlex="100%" fxFlex.xs="100%">
-                          <!-- Available Buyers Card -->
-                          <!--
-                          <mat-card class="settings-card" fxFlex="40%" fxLayoutDesign="left">
-                              <mat-card-header class="card-title">
-                                <mat-card-title>Available Buyers</mat-card-title>
-                              </mat-card-header>
-                              <mat-card-content>
-                 
-                              </mat-card-content>
-                            </mat-card> 
-                          -->
-                            
-                          <!-- Sell Energy Card -->
+          <div fxFlex="100%" fxFlex.xs="100%">                          
                           <mat-card class="settings-card" fxFlex="100%" fxLayoutDesign="left">
-                            <!--  
-                            <mat-card-header class="card-title sell-energy-title">
-                                <mat-card-title class="">Sell Energy<span class="fill-title"></span>Available Buyers</mat-card-title>
-                              </mat-card-header>
-                            -->
                               <mat-card-content>
                                   <div fxFlex="50%" fxFlex.xs="100%">
                                     <mat-card-title>Sell Energy</mat-card-title>
@@ -132,6 +123,7 @@
  
           </div>
         </div>
+      -->
 </app-main-nav>
 
 <!-- Scanning modal -->
@@ -167,6 +159,61 @@ aria-labelledby="visualizeTreatmentsModal" aria-hidden="true">
             <p></p>
         </mat-list>
       </div>
+      </div>
+    </div>
+</div>
+
+<!-- Sell electricity modal -->
+<div class="modal fade" id="sellElectricity" tabindex="-1" role="dialog"
+aria-labelledby="visualizeTreatmentsModal" aria-hidden="true">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+        <div class="modal-header">
+						<div class="modal-title">
+                <h3>Sell Electricity</h3>
+						</div>
+						<button type="button" class="close" data-dismiss="modal">
+							<span aria-hidden="true">&times;</span>
+							<span class="sr-only">Close</span>
+						</button>
+					</div>
+      <div class="modal-body form-container">
+        <!-- Price -->
+        <p class="modal-text">1. Enter selling price</p>
+        <mat-form-field class="form-space">
+            <input matInput (change)="sortAvailableConsumers()" [(ngModel)]="userProfile.minSellingPrice">
+        </mat-form-field>
+        <!-- Quantity -->
+        <p class="modal-text">2. Enter quantity</p>
+        <mat-form-field class="form-space" >
+            <input [(ngModel)]="quantity" matInput>
+        </mat-form-field>
+        <!-- Available buyers -->
+        <p class="modal-text">3. Select a buyer</p>
+        <mat-list class="list-size">
+            <ng-container *ngFor="let buyer of availableConsumers">
+            <mat-list-item (click)="selectBuyer(buyer)" [class.selected]="buyer === selectedConsumer" class="battery-list"> 
+              <mat-divider></mat-divider>
+              {{ buyer.fname + " " + buyer.lname }}
+            </mat-list-item>
+          </ng-container>
+          </mat-list>
+        <!-- Sell Button -->
+        <button [disabled]="!this.selectedConsumer" (click)="postTrade()" mat-stroked-button class="sell-button sell-space">Sell</button>
+      </div>
+      </div>
+    </div>
+</div> 
+
+<!-- Validating Sale Modal -->
+<div class="modal fade" id="trading" tabindex="-1" role="dialog"
+aria-labelledby="visualizeTreatmentsModal" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-body">
+        <h3 class="red scanning-title">Validating Sale...</h3>
+        <div class="spinner red"></div>
+        </div>
       </div>
     </div>
 </div>
