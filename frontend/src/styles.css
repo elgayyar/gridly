@@ -306,3 +306,16 @@ a:hover{
     cursor: pointer;
     color: #F1F1F1;
   }
+
+  .modal-text {
+      color: #B00F3B;
+      font-size: large;
+  }
+
+  .sell-space {
+      margin-top: 2%;
+      margin-bottom: 2%;
+      widows: 100%;
+  }
+
+  /************************** Battery Animations ****************************/

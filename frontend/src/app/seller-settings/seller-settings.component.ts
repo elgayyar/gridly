@@ -4,7 +4,7 @@ import { AuthService } from '../services/auth.service';
 import { AuthGuard } from '../guards/auth.guard';
 import { RegisterService } from '../services/register.service';
 import { Router } from '@angular/router';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatTooltipModule}  from '@angular/material';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatTooltipModule, MatSnackBar}  from '@angular/material';
 import { TradeService } from '../services/trade.service';
 
 declare var $: any;
@@ -33,10 +33,10 @@ export class SellerSettingsComponent implements OnInit {
   availableConsumers =[];
   selectedConsumer;
 
-
 constructor(private authService: AuthService,
     private registerService: RegisterService,
-    private tradeService: TradeService) { }
+    private tradeService: TradeService,
+    private snackBar: MatSnackBar) { }
 
 ngOnInit() {
 this.userProfile = JSON.parse(localStorage.getItem("activeProfile"));
@@ -65,6 +65,9 @@ sortAvailableConsumers(){
 }
 
 postTrade(){
+  //Hide the trade form modal and show the validating trade modal
+  $('#sellElectricity').modal('hide');
+  //$('#trading').modal('show');
   let date = new Date(Date.now());
   let dateString = date.toISOString();
   if(this.quantity<=0){
@@ -85,9 +88,30 @@ postTrade(){
       res => {
         console.log("Response from fabric:");
         console.log(res);
+        //Show the spinner for 1.5 seconds
+        /*
+        setTimeout( () => { 
+          $('#trading').modal('hide');
+        }, 1500 );
+        */  
+        //Show a notifcation
+        this.snackBar.open("Success: Sell order complete!");    
+        setTimeout( () => { 
+          this.snackBar.dismiss();
+        }, 1500 );
       },
       error => {
         console.log("Error response from hyperledger: ", error);
+        /*
+        setTimeout( () => { 
+          $('#trading').modal('hide');
+        }, 1500 );  
+        */
+        //Show a notifcation
+        this.snackBar.open("Failure: Unable to process! Please try again.");   
+        setTimeout( () => { 
+          this.snackBar.dismiss();
+        }, 1500);   
       });
   }
 }
@@ -425,6 +449,22 @@ selectBuyer(b){
       });
       
     }
+
+  //Snackbar for notifications
+  openSnackBar(message: string) {
+    this.snackBar.open(message);
+  }
+
+  //Update the battery power level
+  setBatteryCapacity()
+  {
+    $("#battery").css({
+      background: "#B00F3B"
+    })
+    $("#battery-height").height("50%").css({
+      background: "#F1F1F1"
+    });
+  }
 
 
 }
