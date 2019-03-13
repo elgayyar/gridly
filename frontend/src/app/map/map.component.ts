@@ -17,7 +17,7 @@ interface marker {
 })
 export class MapComponent implements OnInit {
   userProfile;
-  friends;
+  friends = [];
   users;
   usersGeocode;
   zoom = 12;
@@ -57,18 +57,23 @@ export class MapComponent implements OnInit {
         this.sortFriends();
       },
       error => {
-        console.log("Error response from hyperledger");
+        console.log("Error response from hyperledger: ", error);
       });
   }
 
   sortFriends(){
     let context = this;
     this.users.forEach(element => {
-      if(context.userProfile.friends.includes(element)){
-        context.friends.push(element);
-        context.users = context.arrayRemove(context.users, element);
+      if(context.userProfile.friends){
+        if(context.userProfile.friends.includes(element)){
+          context.friends.push(element);
+          context.users = context.arrayRemove(context.users, element);
+        }
       }
     });
+    if(!context.userProfile.friends){
+      context.userProfile.friends = [];
+    }
   }
 
   arrayRemove(arr, value) {
@@ -80,7 +85,16 @@ export class MapComponent implements OnInit {
  add(user){
   this.users = this.arrayRemove(this.users, user);
   this.friends.push(user);
-  console.log(this.friends);
+  this.userProfile.friends.push("resource:gridly.user.User#"+ user.email);
+  let msg = this.tradeService.updateProducer(this.userProfile);
+  console.log(msg);
+ }
+ remove(friend){
+  this.friends = this.arrayRemove(this.friends, friend);
+  this.users.push(friend);
+  this.userProfile.friends = this.arrayRemove(this.userProfile.friends, "resource:gridly.user.User#" + friend.email);
+  let msg = this.tradeService.updateProducer(this.userProfile);
+  console.log(msg);
  }
  
   //Gets the lat and long of the users address
