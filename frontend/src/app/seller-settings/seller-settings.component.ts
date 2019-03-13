@@ -73,12 +73,13 @@ postTrade(){
   }
   else{
     const txn = {
-      unitElectricityPrice: Number(this.userProfile.minSellingPrice),
-      electricityQuantity: Number(this.quantity),
-      totalPrice: this.userProfile.minSellingPrice * this.quantity,
-      buyer: "resource:gridly.consumer.Consumer#" + this.selectedConsumer.email,
-      seller: "resource:gridly.producer.Producer#" + this.userProfile.email,
-      timeStamp: dateString
+      "$class": "gridly.trade.Trade",
+      "unitElectricityPrice": Number(this.userProfile.minSellingPrice),
+      "electricityQuantity": Number(this.quantity),
+      "totalPrice": Number(this.userProfile.minSellingPrice * this.quantity),
+      "buyer": "resource:gridly.consumer.Consumer#" + this.selectedConsumer.email,
+      "seller": "resource:gridly.producer.Producer#" + this.userProfile.email,
+      "timeStamp": dateString
     }
   
     this.tradeService.postTrade(txn).subscribe(
@@ -89,14 +90,6 @@ postTrade(){
       error => {
         console.log("Error response from hyperledger: ", error);
       });
-    this.tradeService.updateProducer(this.userProfile).subscribe(
-      res => {
-        console.log("Response from fabric: ", res);
-      },
-      error => {
-        console.log("Error response from hyperledger:", error);
-      }
-    );
   }
 }
 
@@ -410,19 +403,18 @@ selectBuyer(b){
 
     //Dummy data for a batery
     const batteryData = {
-      "$class": "gridly.battery.Battery",
-      "batteryId": "1",
+      "$class": "gridly.producer.Battery",
       "serialNo": "89760593203",
       "manufacturer": "Tesla",
       "model": "Powerwall",
-      "maxCapacity": 13.5,
+      "maxCapacity": 14,
       "currentCapacity": 10
     }
     //Add the battery to the users profile
     this.userProfile.battery = batteryData;
     console.log(this.userProfile);
     
-    this.registerService.addBattery(this.userProfile.addBattery, this.userProfile.email).subscribe(
+    this.registerService.addBattery(this.userProfile, this.userProfile.email).subscribe(
       res => {
         console.log(res);
         //this.userProfile = res;
