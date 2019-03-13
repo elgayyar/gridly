@@ -304,6 +304,8 @@ export class BuyerSettingsComponent implements OnInit {
      showYAxisLabel = true;
      yAxisLabel = 'cents/(kWh)';
      timeline = true;
+     activeEntries = [{"name": "7pm"}];
+     showRefLines = false;
    
      colorScheme = {
        domain: ['#B00F3B', '#373B46', '#003366']
