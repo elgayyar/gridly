@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MapService } from '../services/map.service';
 import { MarkerManager } from '@agm/core';
 import { MouseEvent } from '@agm/core';
+import { TradeService } from '../services/trade.service';
 
 interface marker {
   lat: number;
@@ -16,8 +17,8 @@ interface marker {
 })
 export class MapComponent implements OnInit {
   userProfile;
-  friends = ["Andrew", "Susan", "Mike", "Lisa"];
-  users = ["Brian", "Alina", "Bobby"];
+  friends;
+  users;
   usersGeocode;
   zoom = 12;
   latitude = 42.9487956;
@@ -41,15 +42,47 @@ export class MapComponent implements OnInit {
 	  }
   ]
 
-  constructor(private mapService: MapService) { }
+  constructor(private mapService: MapService,
+    private tradeService: TradeService) { }
 
   ngOnInit() {
     this.userProfile = JSON.parse(localStorage.getItem("activeProfile"));
     console.log(this.userProfile);
     //Get the users geocode
     this.getUserGeocode();
+    this.tradeService.getAllConsumers().subscribe(
+      res => {
+        this.users = res;
+        console.log('CONSUMERS: ',this.users);
+        this.sortFriends();
+      },
+      error => {
+        console.log("Error response from hyperledger");
+      });
   }
 
+  sortFriends(){
+    let context = this;
+    this.users.forEach(element => {
+      if(context.userProfile.friends.includes(element)){
+        context.friends.push(element);
+        context.users = context.arrayRemove(context.users, element);
+      }
+    });
+  }
+
+  arrayRemove(arr, value) {
+    return arr.filter(function(ele){
+        return ele != value;
+    });
+ }
+ 
+ add(user){
+  this.users = this.arrayRemove(this.users, user);
+  this.friends.push(user);
+  console.log(this.friends);
+ }
+ 
   //Gets the lat and long of the users address
   getUserGeocode() {
     //Format the users address
@@ -61,11 +94,13 @@ export class MapComponent implements OnInit {
     //Use the map service to get the response from google
     this.mapService.getGeocode(addressFormat).subscribe(
       res => {
-        console.log("Success from google", res.results[0].geometry.location);
-        this.usersGeocode = res.results[0].geometry.location;
+        //ERROR!?!?!?!?!?
+        let x = Object(res);
+        console.log("Success from google", x.results[0].geometry.location);
+        this.usersGeocode = x.results[0].geometry.location;
         console.log(this.usersGeocode);
         //const userMarker = marker("lat": this.getUserGeocode.lat, "lng": this.getUserGeocode.lng, "label": this.userProfile.fname );
-        this.markers.push({"lat": res.results[0].geometry.location.lat, "lng": res.results[0].geometry.location.lng, "label": this.userProfile.fname});
+        this.markers.push({"lat": x.results[0].geometry.location.lat, "lng": x.results[0].geometry.location.lng, "label": this.userProfile.fname});
         //Update lat and lng
         //this.latitude = this.usersGeocode.lat;
         //this.longitude = this.usersGeocode.lng;
