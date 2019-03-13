@@ -11,7 +11,7 @@
                                 <ng-container *ngFor="let friend of friends">
                                     <mat-list-item class="friends-list"> 
                                         <mat-divider></mat-divider>
-                                          {{ friend }}
+                                          {{ friend.fname + " " + friend.lname }} <button (click)="remove(friend)">Remove Friend</button>
                                     </mat-list-item>
                                 </ng-container>
                             </mat-list> 
@@ -54,7 +54,7 @@
                             <ng-container *ngFor="let user of users">
                                 <mat-list-item class="friends-list"> 
                                     <mat-divider></mat-divider>
-                                      {{ user }}
+                                      {{ user.fname + " " + user.lname }} <button (click)="add(user)">Add Friend</button>
                                 </mat-list-item>
                             </ng-container>
                         </mat-list> 
