@@ -24,7 +24,12 @@ export class TradeService {
 
   postTrade(txn) {
     console.log("POST TRADE: ", txn);
-    return this.http.post<JSON>(this.ledgerDomain+'/gridly.trade.Trade', txn);
+    return this.http.post<JSON>(this.ledgerDomain+'gridly.trade.Trade', txn);
+  }
+
+  updateProducer(producer){
+    console.log("UPDATE PRODUCER: ", producer);
+    return this.http.put<JSON>(this.ledgerDomain+'/gridly.producer.Producer/'+ producer.email, producer);
   }
 
 }

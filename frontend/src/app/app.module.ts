@@ -40,6 +40,9 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { FusionChartsModule } from 'angular-fusioncharts';
 import FusionCharts from 'fusioncharts/core';
 import Column2D from 'fusioncharts/viz/column2d';
+import { TransactionsComponent } from './transactions/transactions.component';
+
+
 
 @NgModule({
   declarations: [
@@ -57,7 +60,8 @@ import Column2D from 'fusioncharts/viz/column2d';
     AdminHomeComponent,
     MapComponent,
     SellerSettingsComponent,
-    BuyerSettingsComponent
+    BuyerSettingsComponent,
+    TransactionsComponent
   ],
   imports: [
     BrowserAnimationsModule,

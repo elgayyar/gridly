@@ -100,26 +100,28 @@
                                     <mat-card-title>Sell Energy</mat-card-title>
                                     <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayout="2%" fxLayoutAlign="center" class="form-container">
                                       <mat-form-field class="form-space" >
-                                        <input matInput placeholder="Price">
+                                        <input matInput (change)="sortAvailableConsumers()" [(ngModel)]="userProfile.minSellingPrice" placeholder="Price">
                                       </mat-form-field>
                                     </div>
                                     <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayout="2%" fxLayoutAlign="center" class="form-container">
                                       <mat-form-field class="form-space" >
-                                          <input matInput placeholder="Quantity">
+                                          <input [(ngModel)]="quantity" matInput placeholder="Quantity">
                                       </mat-form-field>
                                     </div>
                                     <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayout="2%" fxLayoutAlign="center" class="form-container">
-                                        <button mat-stroked-button class="sell-button">Sell</button>
+                                        <button [disabled]="!this.selectedConsumer" (click)="postTrade()" mat-stroked-button class="sell-button">Sell</button>
                                     </div>
                                   </div>
                                   <div fxFlex="50%" fxFlex.xs="100%">
                                       <mat-card-title>Available Buyers</mat-card-title>
                                       <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayout="2%" fxLayoutAlign="center" class="form-container">
                                         <mat-list class="list-size">
-                                          <mat-list-item *ngFor="let buyer of activeBuyers"class="battery-list">
+                                          <ng-container *ngFor="let buyer of availableConsumers">
+                                          <mat-list-item (click)="selectBuyer(buyer)" [class.selected]="buyer === selectedConsumer" class="battery-list"> 
                                             <mat-divider></mat-divider>
-                                            {{ buyer }}
+                                            {{ buyer.fname + " " + buyer.lname }}
                                           </mat-list-item>
+                                        </ng-container>
                                         </mat-list> 
                                     </div>
                                   </div>
