@@ -11,6 +11,7 @@ import {AdminHomeComponent } from './admin-home/admin-home.component';
 import { MapComponent } from './map/map.component';
 import { SellerSettingsComponent } from 'src/app/seller-settings/seller-settings.component';
 import { BuyerSettingsComponent } from 'src/app/buyer-settings/buyer-settings.component';
+import {TransactionsComponent} from './transactions/transactions.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent  },
@@ -23,7 +24,8 @@ const routes: Routes = [
   { path: '', component: LandingPageComponent },
   { path: 'battery', component: BatteryComponent },
   { path: 'admin', component: AdminHomeComponent },
-  { path: 'map', component: MapComponent }
+  { path: 'map', component: MapComponent },
+  { path: 'transactions', component: TransactionsComponent}
   
 
   //{ path: '**', redirectTo: '/home'}// The "Catch-All" Route

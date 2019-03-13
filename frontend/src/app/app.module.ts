@@ -35,6 +35,7 @@ import { AgmCoreModule } from '@agm/core';
 import { SellerSettingsComponent } from './seller-settings/seller-settings.component';
 import { BuyerSettingsComponent } from './buyer-settings/buyer-settings.component';
 import { AdminService } from './services/admin.service';
+import { TransactionsComponent } from './transactions/transactions.component';
 
 
 
@@ -54,7 +55,8 @@ import { AdminService } from './services/admin.service';
     AdminHomeComponent,
     MapComponent,
     SellerSettingsComponent,
-    BuyerSettingsComponent
+    BuyerSettingsComponent,
+    TransactionsComponent
   ],
   imports: [
     BrowserAnimationsModule,
