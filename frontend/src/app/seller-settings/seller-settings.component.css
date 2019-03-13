@@ -77,3 +77,8 @@
     cursor: pointer;
     color: #F1F1F1;
   }
+
+  .selected { 
+    background: #373B46;
+    color: #F1F1F1;
+  }

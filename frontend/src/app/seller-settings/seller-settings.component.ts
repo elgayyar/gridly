@@ -24,8 +24,6 @@ export class SellerSettingsComponent implements OnInit {
   loading = false;
   disabled = true;
   findBattery = false;
-  //Arry to hold the list of active buyers
-  activeBuyers = ["Andrew", "Mike", "Suzzy", "Billy", "Liz"];
   serialNumber;
   manufacturer;
   model;
@@ -48,39 +46,61 @@ this.tradeService.getAllConsumers().subscribe(
   res => {
     this.consumers = res;
     console.log('CONSUMERS: ',this.consumers);
-    let context = this;
-    this.consumers.forEach(function(consumer){
-      if(consumer.maxPurchasePrice >= context.userProfile.minSellingPrice){
-        context.availableConsumers.push(consumer);
-      }
-    })
-    console.log('AVAILABLE CONSUMERS:', this.availableConsumers)
+    this.sortAvailableConsumers();
   },
   error => {
     console.log("Error response from hyperledger");
   });
 }
 
-postTrade(){
-  const txn = {
-    unitElectricityPrice: this.userProfile.minSellingPrice,
-    electricityQuantity: this.quantity,
-    totalPrice: this.userProfile.minSellingPrice * this.quantity,
-    buyer: "resource:gridly.consumer.Consumer#" + this.selectedConsumer.email,
-    seller: "resource:gridly.producer.Producer#" + this.userProfile.email,
-    time: Date.now()
-  }
-
-  this.tradeService.postTrade(txn).subscribe(
-    res => {
-      console.log("Response from fabric:");
-      console.log(res);
-
-    },
-    error => {
-      console.log("Error response from hyperledger");
-    });
+sortAvailableConsumers(){
+  let context = this;
+  this.consumers.forEach(function(consumer){
+    console.log(context.userProfile.minSellingPrice);
+    console.log(consumer.maxPurchasePrice);
+    if(consumer.maxPurchasePrice >= context.userProfile.minSellingPrice){
+      context.availableConsumers.push(consumer);
+    }
+  })
+  console.log('AVAILABLE CONSUMERS:', this.availableConsumers)
 }
+
+postTrade(){
+  let date = new Date(Date.now());
+  let dateString = date.toISOString();
+  if(this.quantity<=0){
+    console.log("You cannot have a negative value!");
+  }
+  else{
+    const txn = {
+      "$class": "gridly.trade.Trade",
+      "unitElectricityPrice": Number(this.userProfile.minSellingPrice),
+      "electricityQuantity": Number(this.quantity),
+      "totalPrice": Number(this.userProfile.minSellingPrice * this.quantity),
+      "buyer": "resource:gridly.consumer.Consumer#" + this.selectedConsumer.email,
+      "seller": "resource:gridly.producer.Producer#" + this.userProfile.email,
+      "timeStamp": dateString
+    }
+  
+    this.tradeService.postTrade(txn).subscribe(
+      res => {
+        console.log("Response from fabric:");
+        console.log(res);
+      },
+      error => {
+        console.log("Error response from hyperledger: ", error);
+      });
+  }
+}
+
+selectBuyer(b){
+  console.log("clicked", b)
+  this.selectedConsumer = b;
+}
+
+
+
+
 
 
   //********************************** London Hydro Pricing Card ********************************* */
@@ -383,19 +403,18 @@ postTrade(){
 
     //Dummy data for a batery
     const batteryData = {
-      "$class": "gridly.battery.Battery",
-      "batteryId": "1",
+      "$class": "gridly.producer.Battery",
       "serialNo": "89760593203",
       "manufacturer": "Tesla",
       "model": "Powerwall",
-      "maxCapacity": 13.5,
+      "maxCapacity": 14,
       "currentCapacity": 10
     }
     //Add the battery to the users profile
     this.userProfile.battery = batteryData;
     console.log(this.userProfile);
-    /*
-    this.registerService.addBattery(this.userProfile.addBattery, this.userProfile.email).subscribe(
+    
+    this.registerService.addBattery(this.userProfile, this.userProfile.email).subscribe(
       res => {
         console.log(res);
         //this.userProfile = res;
@@ -403,9 +422,9 @@ postTrade(){
         //this.disabled = true;
       },
       error => {
-        console.log("Error response from hyperledger");
+        console.log("Error response from hyperledger", error);
       });
-      */
+      
     }
 
 
