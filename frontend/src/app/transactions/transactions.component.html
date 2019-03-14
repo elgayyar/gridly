@@ -2,7 +2,8 @@
   <!-- Row 1 -->
   <div  fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayout="1%" fxLayoutAlign="center" fxFill>
     <div fxFlex="100%" fxFlex.xs="100%">
-      <mat-card class="home-card" fxFlex="50%" fxLayoutDesign="left" *ngIf="transactionsList.length != 0; else noTransactions">
+     
+      <mat-card class="home-card" fxFlex="50%" fxLayoutDesign="left" >
       <table mat-table #table [dataSource]="dataSource" matSort matSortActive="timeStamp" matSortDirection="asc" class="mat-elevation-z8">
         
         <ng-container matColumnDef="timeStamp">
@@ -42,8 +43,9 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
       </table>
-      <mat-paginator [pageSizeOptions]="[7]" showFirstLastButtons></mat-paginator>
-      </mat-card>
+      <mat-paginator [pageSizeOptions]="[5]" showFirstLastButtons></mat-paginator>
+    </mat-card>
+    
       <mat-card class="home-card" fxFlex="50%" fxLayoutDesign="left" *ngIf="transactionsList.length != 0">
       <span fxLayoutDesign="left" class="graph-title">Transaction Behaviour</span>
         <ngx-charts-line-chart
