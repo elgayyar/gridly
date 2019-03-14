@@ -14,9 +14,24 @@ export class TransactionsService {
   sellerReturn
 
   constructor(private http: HttpClient) { }
-  getAllTransactions(email){
-    this.buyerReturn = this.http.get<JSON>(this.ledgerDomain+'gridly.trade.Trade'+'?filter[where][buyer]='+email);
-    this.sellerReturn = this.http.get<JSON>(this.ledgerDomain+'gridly.trade.Trade'+'?filter[where][seller]='+email);
-    return forkJoin([this.buyerReturn,this.sellerReturn]);
+  
+  getBuyerTransactions(email){
+    let at = /@/gi;
+    let newEmail = email.replace(at, "%40");
+    console.log(newEmail);
+    return this.http.get<JSON>(this.ledgerDomain+'gridly.trade.Trade'+'?filter[where][buyer]=resource%3Agridly.consumer.Consumer%23'+newEmail);
   }
+  getSellerTransactions(email){
+    let at = /@/gi;
+    let newEmail = email.replace(at, "%40");
+    console.log(newEmail);
+    return this.http.get<JSON>(this.ledgerDomain+'gridly.trade.Trade'+'?filter[where][seller]=resource%3Agridly.producer.Producer%23'+newEmail);
+  }
+  getBuyerProfile(buyerEmail){
+    return this.http.get<JSON>(this.ledgerDomain + 'gridly.consumer.Consumer'+'?filter[where][email]='+buyerEmail);
+  }
+  getSellerProfile(sellerEmail){
+    return this.http.get<JSON>(this.ledgerDomain + 'gridly.producer.Producer'+'?filter[where][email]='+sellerEmail);
+  }
+
 }
