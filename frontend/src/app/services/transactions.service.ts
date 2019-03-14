@@ -34,4 +34,5 @@ export class TransactionsService {
     return this.http.get<JSON>(this.ledgerDomain + 'gridly.producer.Producer'+'?filter[where][email]='+sellerEmail);
   }
 
+  //wait
 }
