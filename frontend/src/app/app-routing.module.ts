@@ -12,10 +12,12 @@ import { MapComponent } from './map/map.component';
 import { SellerSettingsComponent } from 'src/app/seller-settings/seller-settings.component';
 import { BuyerSettingsComponent } from 'src/app/buyer-settings/buyer-settings.component';
 import {TransactionsComponent} from './transactions/transactions.component';
+import {AdminMapComponent} from './admin-map/admin-map.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent  },
   { path: 'register', component: RegisterComponent  },
+  { path: 'admin/map', component: AdminMapComponent},
   { path: 'admin', component: AdminHomeComponent },
 
   { path: 'home', component: HomeComponent },
