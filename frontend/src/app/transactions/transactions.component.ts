@@ -20,7 +20,7 @@ export class TransactionsComponent implements OnInit {
   constructor(private transactionService: TransactionsService, private authService: AuthService) { }
   isLoading = true;
   transactionsList: any[] = [];
-  displayedColumns: string[] = ['timestamp','buyer','electricityQuantity', 'unitElectricityPrice', 'totalPrice'];
+  displayedColumns: string[] = ['timeStamp','buyer','electricityQuantity', 'unitElectricityPrice', 'totalPrice'];
   userProfile;
   role
   email
@@ -43,7 +43,7 @@ export class TransactionsComponent implements OnInit {
   showXAxisLabel = true;
   xAxisLabel = 'Time';
   showYAxisLabel = true;
-  yAxisLabel = 'Quantity';
+  yAxisLabel = 'Quantity (kWh)';
   timeline = true;
   view: any[] = [500, 500];
   colorScheme = {domain: ['#B00F3B', '#373B46', '#003366']};
@@ -51,7 +51,7 @@ export class TransactionsComponent implements OnInit {
   legend = false;
   public multi = [
     {
-      "name": "Transaction Record",
+      "name": "Quantity (kWh)",
       "series": [
       ]
     }
@@ -70,14 +70,24 @@ export class TransactionsComponent implements OnInit {
       console.log("transaction service, getBuyerTransactions returned: ", res);
       this.transactionsList = JSON.parse(JSON.stringify(res));
       this.reformatTimeStamp();
+      console.log("list with formatted time: ", this.transactionsList);
+      
+      //sort it by time 
+      this.transactionsList.sort(function(a, b) {
+        // convert date object into number to resolve issue in typescript
+        return  +new Date(a.timeStamp) - +new Date(b.timeStamp);
+      });
 
-      console.log(this.transactionsList);
+      console.log("sorted: ",this.transactionsList);
+
       this.dataSource=new MatTableDataSource(this.transactionsList);
       this.dataSource.sort = this.sort;
+
       this.makeGraph();
+
       this.isConsumer = true;
       this.getSellerNames();
-      this. displayedColumns = ['timestamp', 'seller', 'electricityQuantity', 'unitElectricityPrice', 'totalPrice'];
+      this. displayedColumns = ['timeStamp', 'seller', 'electricityQuantity', 'unitElectricityPrice', 'totalPrice'];
     });
     } else {
       this.transactionService.getSellerTransactions(this.email,).subscribe(res => {
@@ -85,21 +95,31 @@ export class TransactionsComponent implements OnInit {
         this.transactionsList = JSON.parse(JSON.stringify(res));
         this.reformatTimeStamp();
   
-        console.log(this.transactionsList);
+        console.log("list with formatted time: ", this.transactionsList);
+
+        //sort it by time 
+        this.transactionsList.sort(function(a, b) {
+          // convert date object into number to resolve issue in typescript
+          return  +new Date(a.timeStamp) - +new Date(b.timeStamp);
+        });
+
         this.dataSource=new MatTableDataSource(this.transactionsList);
         this.dataSource.sort = this.sort;
-        this.makeGraph()
+
+        this.makeGraph();
+
         this.isConsumer = false;
         this.getBuyerNames();
-        this. displayedColumns = ['timestamp', 'buyer', 'electricityQuantity', 'unitElectricityPrice', 'totalPrice'];
+        this. displayedColumns = ['timeStamp', 'buyer', 'electricityQuantity', 'unitElectricityPrice', 'totalPrice'];
       })
       };
   }
+
   makeGraph(){
     console.log("in makeGraph");
     this.transactionsList.forEach(e => {
       let graphData = {
-        "name": e.timestamp,
+        "name": e.timeStamp,
         "value": e.electricityQuantity
       }
       this.multi[0].series.push(graphData);
@@ -111,12 +131,15 @@ export class TransactionsComponent implements OnInit {
   reformatTimeStamp(){
     this.transactionsList.forEach(e => {
       let T = /T/gi;
-      this.replacedTime = e.timestamp.replace(T, " ");
+      this.replacedTime = e.timeStamp.replace(T, " ");
       console.log ("replaced Time: ", this.replacedTime);
       let splicedTime = this.replacedTime.slice(0, -8) 
       console.log ("spliced Time: ", splicedTime);
-      e.timestamp = splicedTime;
+      e.timeStamp = splicedTime;
     })
+    this.transactionsList = [...this.transactionsList];
+    console.log("done reformatting time: ", this.transactionsList);
+    
   }
 
   getBuyerNames(){
@@ -154,6 +177,7 @@ export class TransactionsComponent implements OnInit {
       //this.updateDataSource();
     });
     this.isLoading=false;
+    console.log("isloading is now: ", this.isLoading);
   }
 
   updateDataSource(){
