@@ -1,9 +1,8 @@
 .home-card {
-    max-height: 500px;
     background: #F5F5F5;
-    margin: 5%;
+    margin: 3%;
 }
 
 .card-title {
-    font-size: x-large;
+    font-size: xx-large;
 }

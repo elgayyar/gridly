@@ -2,3 +2,10 @@
     font-size: large;
     margin-bottom: 2.5%;
 }
+
+.useage-card {
+    height: 250px;
+    background: #F5F5F5;
+    color: #373B46;
+    margin: 3%;
+}
