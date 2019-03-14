@@ -7,8 +7,8 @@ import { TransactionsService } from '../services/transactions.service';
   styleUrls: ['./useage-modal.component.css']
 })
 export class UseageModalComponent implements OnInit {
-  co2Savings = 23;
-  dollarSavings = 14.32;
+  co2Savings = "23 kg";
+  dollarSavings = "$14.32";
 
   userProfile;
   rawData;
@@ -187,14 +187,14 @@ grey = {
 
 public co2Data = [
   {
-    "name": "CO2 Savings",
+    "name": "in CO2 emissions reduction",
     "value": this.co2Savings
   },
 ];
 
 public dollarData = [
   {
-    "name": "Dollar Savings",
+    "name": "in savings",
     "value": this.dollarSavings
   },
 ];
