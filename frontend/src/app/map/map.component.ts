@@ -25,7 +25,9 @@ export class MapComponent implements OnInit {
   zoom = 12;
   latitude = 42.9487956;
   longitude = -81.3887036;
+  markers: marker[] = [];
   //Hard coded markers
+  /*
   markers: marker[] = [
 	  {
 		  lat: 42.9869863,
@@ -43,6 +45,7 @@ export class MapComponent implements OnInit {
 		  label: 'Susan',
 	  }
   ]
+  */
 
   constructor(private mapService: MapService,
     private tradeService: TradeService) { }
@@ -51,7 +54,7 @@ export class MapComponent implements OnInit {
     this.userProfile = JSON.parse(localStorage.getItem("activeProfile"));
     console.log(this.userProfile);
     //Get the users geocode
-    this.getUserGeocode();
+    this.getUserGeocode(this.userProfile);
     if(this.userProfile.accountStatus === "PRODUCER"){
       this.tradeService.getAllConsumers().subscribe(
         res => {
@@ -109,6 +112,8 @@ export class MapComponent implements OnInit {
  add(user){
   this.nonFriends = this.arrayRemove(this.nonFriends, user);
   this.friends.push(user);
+  //Plot the friend on the map
+  this.mapFriend(user);
   this.userProfile.friends.push("resource:gridly.user.User#"+ user.email);
   console.log(this.userProfile.friends);
   if(this.userProfile.accountStatus == "PRODUCER"){
@@ -165,12 +170,12 @@ export class MapComponent implements OnInit {
  }
  
   //Gets the lat and long of the users address
-  getUserGeocode() {
+  getUserGeocode(user) {
     //Format the users address
-    var addressFormat = this.userProfile.address.streetNo + "+" + 
-                        this.userProfile.address.streetName.split(' ').join('+') + ",+" +
-                        this.userProfile.address.city + ",+" +
-                        this.userProfile.address.province
+    var addressFormat = user.address.streetNo + "+" + 
+                        user.address.streetName.split(' ').join('+') + ",+" +
+                        user.address.city + ",+" +
+                        user.address.province
     console.log("Formatted address", addressFormat);
     //Use the map service to get the response from google
     this.mapService.getGeocode(addressFormat).subscribe(
@@ -181,7 +186,7 @@ export class MapComponent implements OnInit {
         this.usersGeocode = x.results[0].geometry.location;
         console.log(this.usersGeocode);
         //const userMarker = marker("lat": this.getUserGeocode.lat, "lng": this.getUserGeocode.lng, "label": this.userProfile.fname );
-        this.markers.push({"lat": x.results[0].geometry.location.lat, "lng": x.results[0].geometry.location.lng, "label": this.userProfile.fname});
+        this.markers.push({"lat": x.results[0].geometry.location.lat, "lng": x.results[0].geometry.location.lng, "label": user.fname});
         //Update lat and lng
         //this.latitude = this.usersGeocode.lat;
         //this.longitude = this.usersGeocode.lng;
@@ -196,6 +201,11 @@ export class MapComponent implements OnInit {
   //When a marker is clicked
   clickedMarker(label: string, index: number) {
     console.log(`clicked the marker: ${label || index}`)
+  }
+
+  //Plot the user on the map
+  mapFriend(user) {
+    this.getUserGeocode(user);
   }
 
 }
