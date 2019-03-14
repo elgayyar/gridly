@@ -326,3 +326,23 @@ a:hover{
     background: #B00F3B!important;
     cursor: pointer;
 }
+
+.dashboard-title {
+    font-size: xx-large;
+    font-weight: bold;
+}
+
+.mat-card-title {
+    font-size: xx-large;
+    font-weight: bold;
+}
+
+.error-container {
+    margin-top: 25%; 
+    margin-left: 25%;
+}
+
+.error-text {
+    font-size: large;
+    color: #B00F3B!important
+}

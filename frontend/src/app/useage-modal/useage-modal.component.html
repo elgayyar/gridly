@@ -75,15 +75,22 @@
               <mat-card-header>
                   <span class="dashboard-title">Top Sellers by Quantity</span>
               </mat-card-header>
-              <mat-card-content class="home-card useage-card">
+              <mat-card-content class="home-card useage-card" >
                   <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayout="2%" fxLayoutAlign="center" fxFlexFill>
                       <div fxFlex="100%" fxFlex.xs="100%">
                         <!-- Pie chart for top sellers -->
-                        <ngx-charts-pie-grid
+                        <ngx-charts-pie-grid *ngIf="topSellersData.length != 0; else topSellerWarning"
                         [view]="topSellersView"
                         [scheme]="colorScheme"
                         [results]="topSellers">
                         </ngx-charts-pie-grid>
+                        <!--
+                        <ng-template #topSellerWarning>
+                          <div class="error-conatiner">
+                              <p class="error-warning">No data to display</p>
+                          </div>
+                        </ng-template>
+                      -->
                       </div>          
                     </div>
               </mat-card-content>

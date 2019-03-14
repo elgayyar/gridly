@@ -1,0 +1,27 @@
+.graph-title {
+    font-size: x-large;
+    margin-bottom: 2.5%;
+    font-weight: bold;
+}
+
+.useage-card {
+    height: 250px;
+    background: #F5F5F5;
+    color: #373B46;
+    margin: 3%;
+}
+
+.big-icon {
+    width: 48px;
+    height: 48px;
+}
+
+.mat-list-item {
+    color: #B00F3B !important;
+}
+
+.mat-list-item:hover {
+    color: #F1F1F1 !important;
+    background: #B00F3B !important;
+    cursor: pointer;
+}
