@@ -8,12 +8,10 @@
                         </mat-card-header>
                         <mat-card-content>
                             <mat-list>
-                                <ng-container *ngFor="let friend of friends">
-                                    <mat-list-item class="friends-list" (click)="remove(friend)"> 
+                                    <mat-list-item class="friends-list" *ngFor="let friend of friends; let i = index" (click)="remove(friend, i)"> 
                                         <mat-divider></mat-divider>
                                           {{ friend.fname + " " + friend.lname }} 
                                     </mat-list-item>
-                                </ng-container>
                             </mat-list> 
                         </mat-card-content>
                     </mat-card>
@@ -55,10 +53,6 @@
                                 <mat-list-item class="friends-list" matToolTip="Add friend" (click)="add(nonFriend)"> 
                                     <mat-divider></mat-divider>
                                       {{ nonFriend.fname + " " + nonFriend.lname }}
-                                      <!--
-                                      <span class="fill-space"></span>  
-                                      <i class="material-icons">check</i>
-                                      -->
                                 </mat-list-item>
                             </ng-container>
                         </mat-list> 
@@ -67,3 +61,5 @@
         </div>  
     </div>
 </app-main-nav>
+
+
