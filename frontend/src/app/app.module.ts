@@ -45,8 +45,6 @@ import { TransactionsComponent } from './transactions/transactions.component';
 import {MatSortModule} from '@angular/material/sort'
 import { MatChipsModule } from '@angular/material/chips';
 import { ProductionModalComponent } from './production-modal/production-modal.component';
-import { AdminMapComponent } from './admin-map/admin-map.component';
-
 
 
 @NgModule({
@@ -68,7 +66,6 @@ import { AdminMapComponent } from './admin-map/admin-map.component';
     BuyerSettingsComponent,
     TransactionsComponent,
     ProductionModalComponent,
-    AdminMapComponent
   ],
   imports: [
     BrowserAnimationsModule,
