@@ -43,7 +43,7 @@ export class TransactionsComponent implements OnInit {
   showXAxisLabel = true;
   xAxisLabel = 'Time';
   showYAxisLabel = true;
-  yAxisLabel = 'Quantity';
+  yAxisLabel = 'Quantity (kWh)';
   timeline = true;
   view: any[] = [500, 500];
   colorScheme = {domain: ['#B00F3B', '#373B46', '#003366']};
@@ -72,9 +72,20 @@ export class TransactionsComponent implements OnInit {
       this.reformatTimeStamp();
 
       console.log(this.transactionsList);
+      
+      //sort it by time 
+      this.transactionsList.sort(function(a, b) {
+        // convert date object into number to resolve issue in typescript
+        return  +new Date(a.timestamp) - +new Date(b.timestamp);
+      });
+
+      console.log("sorted: ",this.transactionsList);
+
       this.dataSource=new MatTableDataSource(this.transactionsList);
       this.dataSource.sort = this.sort;
+
       this.makeGraph();
+
       this.isConsumer = true;
       this.getSellerNames();
       this. displayedColumns = ['timestamp', 'seller', 'electricityQuantity', 'unitElectricityPrice', 'totalPrice'];
@@ -86,15 +97,25 @@ export class TransactionsComponent implements OnInit {
         this.reformatTimeStamp();
   
         console.log(this.transactionsList);
+
+        //sort it by time 
+        this.transactionsList.sort(function(a, b) {
+          // convert date object into number to resolve issue in typescript
+          return  +new Date(a.timestamp) - +new Date(b.timestamp);
+        });
+
         this.dataSource=new MatTableDataSource(this.transactionsList);
         this.dataSource.sort = this.sort;
-        this.makeGraph()
+
+        this.makeGraph();
+
         this.isConsumer = false;
         this.getBuyerNames();
         this. displayedColumns = ['timestamp', 'buyer', 'electricityQuantity', 'unitElectricityPrice', 'totalPrice'];
       })
       };
   }
+
   makeGraph(){
     console.log("in makeGraph");
     this.transactionsList.forEach(e => {
@@ -154,6 +175,7 @@ export class TransactionsComponent implements OnInit {
       //this.updateDataSource();
     });
     this.isLoading=false;
+    console.log("isloading is now: ", this.isLoading);
   }
 
   updateDataSource(){
