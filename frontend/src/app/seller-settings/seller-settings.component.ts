@@ -39,7 +39,15 @@ constructor(private authService: AuthService,
     private snackBar: MatSnackBar) { }
 
 ngOnInit() {
+this.consumers = [];
 this.userProfile = JSON.parse(localStorage.getItem("activeProfile"));
+if(this.userProfile.battery){
+  this.serialNumber = this.userProfile.battery.serialNo;
+  this.manufacturer = this.userProfile.battery.manufacturer;
+  this.model = this.userProfile.battery.model;
+  this.maxCapacity = this.userProfile.battery.maxCapacity;
+  this.currentCapacity = this.userProfile.battery.currentCapacity;
+}
 console.log(this.userProfile);
 this.tradeService.getAllConsumers().subscribe(
   res => {
@@ -53,15 +61,27 @@ this.tradeService.getAllConsumers().subscribe(
 }
 
 sortAvailableConsumers(){
-  let context = this;
-  this.consumers.forEach(function(consumer){
-    console.log(context.userProfile.minSellingPrice);
-    console.log(consumer.maxPurchasePrice);
-    if(consumer.maxPurchasePrice >= context.userProfile.minSellingPrice){
-      context.availableConsumers.push(consumer);
+  this.availableConsumers = [];
+  for(let i = 0; i < this.consumers.length; i++){
+    console.log(this.userProfile.minSellingPrice);
+    console.log(this.consumers[i].maxPurchasePrice);
+    if(this.consumers[i].maxPurchasePrice >= this.userProfile.minSellingPrice){
+      console.log('FOUND ONE')
+      if(this.userProfile.friends.includes("resource:gridly.user.User#"+this.consumers[i].email)){
+        // This could mess stuff up!!!!
+        this.consumers[i].isFriend = true;
+      }
+      this.availableConsumers.push(this.consumers[i]);
     }
-  })
+  }
+  this.availableConsumers.sort(function(x,y){ return x.isFriend == true ? -1 : y.isFriend && !x.isFriend == true ? 1 : 0; });
   console.log('AVAILABLE CONSUMERS:', this.availableConsumers)
+}
+
+arrayRemove(arr, value) {
+  return arr.filter(function(ele){
+      return ele != value;
+  });
 }
 
 postTrade(){
@@ -442,6 +462,7 @@ selectBuyer(b){
         //this.userProfile = res;
         //localStorage.setItem("activeProfile", JSON.stringify(this.userProfile));
         //this.disabled = true;
+        localStorage.setItem("activeProfile", JSON.stringify(this.userProfile));
       },
       error => {
         console.log("Error response from hyperledger", error);
