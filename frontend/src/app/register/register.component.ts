@@ -142,7 +142,8 @@ export class RegisterComponent implements OnInit {
       },
       homePhoneNo: this.user.homePhoneNo,
       mobilePhoneNo: this.user.mobilePhoneNo,
-      accountStatus: "CONSUMER"
+      accountStatus: "CONSUMER",
+      balance: 500
     }
     console.log("This is the data being sent to the backend", consumerData);
     //Send data to register service

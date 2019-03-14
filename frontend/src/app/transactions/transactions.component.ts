@@ -108,6 +108,8 @@ export class TransactionsComponent implements OnInit {
 
         this.dataSource=new MatTableDataSource(this.transactionsList);
         this.dataSource.sort = this.sort;
+        this.dataSource.paginator = this.paginator;
+
 
         this.makeGraph();
 
