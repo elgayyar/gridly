@@ -3,17 +3,22 @@ import {TransactionsService} from '../services/transactions.service';
 import {MatSort, MatTableDataSource} from '@angular/material';
 import { AuthService } from '../services/auth.service';
 import { CommonModule } from '@angular/common';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+
 
 
 
 @Component({
   selector: 'app-transactions',
   templateUrl: './transactions.component.html',
-  styleUrls: ['./transactions.component.css']
+  styleUrls: ['./transactions.component.css'],
+  providers: [NgxChartsModule]
+
 })
 export class TransactionsComponent implements OnInit {
 
   constructor(private transactionService: TransactionsService, private authService: AuthService) { }
+  isLoading = true;
   transactionsList: any[] = [];
   displayedColumns: string[] = ['timestamp','buyer','electricityQuantity', 'unitElectricityPrice', 'totalPrice'];
   userProfile;
@@ -27,13 +32,31 @@ export class TransactionsComponent implements OnInit {
   buyerName;
   sellerName;
   isConsumer = true;
-
   replacedTime: string;
 
-  
-  
-
   @ViewChild(MatSort) sort: MatSort;
+  
+  showXAxis = true;
+  showYAxis = true;
+  gradient = false;
+  showLegend = true;
+  showXAxisLabel = true;
+  xAxisLabel = 'Time';
+  showYAxisLabel = true;
+  yAxisLabel = 'Quantity';
+  timeline = true;
+  view: any[] = [500, 500];
+  colorScheme = {domain: ['#B00F3B', '#373B46', '#003366']};
+  autoScale = true;
+  legend = false;
+  public multi = [
+    {
+      "name": "Transaction Record",
+      "series": [
+      ]
+    }
+  ]
+ 
 
   ngOnInit() {
     this.userProfile = JSON.parse(localStorage.getItem("activeProfile"));
@@ -51,6 +74,7 @@ export class TransactionsComponent implements OnInit {
       console.log(this.transactionsList);
       this.dataSource=new MatTableDataSource(this.transactionsList);
       this.dataSource.sort = this.sort;
+      this.makeGraph();
       this.isConsumer = true;
       this.getSellerNames();
       this. displayedColumns = ['timestamp', 'seller', 'electricityQuantity', 'unitElectricityPrice', 'totalPrice'];
@@ -64,13 +88,25 @@ export class TransactionsComponent implements OnInit {
         console.log(this.transactionsList);
         this.dataSource=new MatTableDataSource(this.transactionsList);
         this.dataSource.sort = this.sort;
+        this.makeGraph()
         this.isConsumer = false;
         this.getBuyerNames();
         this. displayedColumns = ['timestamp', 'buyer', 'electricityQuantity', 'unitElectricityPrice', 'totalPrice'];
-        })
+      })
       };
-    }
-  
+  }
+  makeGraph(){
+    console.log("in makeGraph");
+    this.transactionsList.forEach(e => {
+      let graphData = {
+        "name": e.timestamp,
+        "value": e.electricityQuantity
+      }
+      this.multi[0].series.push(graphData);
+    });
+    console.log(this.multi);
+    this.multi = [...this.multi];
+  }
 
   reformatTimeStamp(){
     this.transactionsList.forEach(e => {
@@ -99,6 +135,7 @@ export class TransactionsComponent implements OnInit {
         })
         //this.updateDataSource();
       });
+      this.isLoading=false;
   }
   
   getSellerNames(){
@@ -116,6 +153,7 @@ export class TransactionsComponent implements OnInit {
       })
       //this.updateDataSource();
     });
+    this.isLoading=false;
   }
 
   updateDataSource(){
