@@ -103,14 +103,38 @@
                 <mat-card-content class="home-card useage-card">
                     <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayout="2%" fxLayoutAlign="center" fxFlexFill>
                         <div fxFlex="100%" fxFlex.xs="100%">
-                          <!--  
-                          <mat-list>
-                              <mat-list-item class="friends-list"> 
-                                <mat-divider></mat-divider>
-                                  {{  }}
-                            </mat-list-item>
-                            </mat-list>
-                          -->        
+                            <table mat-table #table [dataSource]="dataSource" matSort matSortActive="timeStamp" matSortDirection="desc" class="mat-elevation-z8">
+        
+                                <ng-container matColumnDef="timeStamp">
+                                  <th class= "header" mat-header-cell *matHeaderCellDef mat-sort-header>Time</th>
+                                  <td class= "cell" mat-cell *matCellDef="let element"> {{element.timeStamp}} </td>
+                                </ng-container>
+                        
+                                <ng-container matColumnDef="seller">
+                                    <th class= "header" mat-header-cell *matHeaderCellDef mat-sort-header>Seller</th>
+                                    <td class= "cell" mat-cell *matCellDef="let element"> {{element.seller}} </td>
+                                </ng-container>
+                                
+                
+                         
+                                <ng-container matColumnDef="totalPrice">
+                                  <th class= "header" mat-header-cell *matHeaderCellDef mat-sort-header>Total Price ($)</th>
+                                  <td class= "cell" mat-cell *matCellDef="let element"> {{element.totalPrice}} </td>
+                                </ng-container>
+                           
+                                <!-- <ng-container matColumnDef="unitElectricityPrice">
+                                  <th class= "header" mat-header-cell *matHeaderCellDef mat-sort-header>Unit Price ($/kWh)</th>
+                                  <td class= "cell" mat-cell *matCellDef="let element">{{element.unitElectricityPrice}} </td>
+                                </ng-container>
+                        
+                                <ng-container matColumnDef="totalPrice">
+                                  <th class= "header" mat-header-cell *matHeaderCellDef mat-sort-header>Total Price ($)</th>
+                                  <td class= "cell" mat-cell *matCellDef="let element">{{element.totalPrice}} </td>
+                                </ng-container> -->
+                              
+                                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                              </table>       
                         </div>          
                     </div>
                 </mat-card-content>

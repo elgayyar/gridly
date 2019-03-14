@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild} from '@angular/core';
 import { TransactionsService } from '../services/transactions.service';
+import {MatSort, MatTableDataSource, MatPaginator} from '@angular/material';
 
 @Component({
   selector: 'app-useage-modal',
@@ -19,12 +20,63 @@ export class UseageModalComponent implements OnInit {
   public topSellers = [  ];
   public consumption = [  ];
 
+  //for recent transactions
+  transactionsList: any[] = [];
+  displayedColumns: string[] = ['timeStamp','seller','totalPrice'];
+  replacedTime;
+  sellerFirstName;
+  sellerLastName;
+  sellerName;
+  @ViewChild(MatSort) sort: MatSort;
+  dataSource
+
+
+
 
   constructor(private transactionService: TransactionsService) { }
 
   ngOnInit() {
     this.userProfile = JSON.parse(localStorage.getItem("activeProfile"));
+    
+    //for top 3 buyers
     this.getTransactionData();
+    
+    //for recent 5 transactions
+    this.transactionService.getBuyerTransactions(this.userProfile.email,).subscribe(res => {
+      console.log("transaction service, getBuyerTransactions returned: ", res);
+      this.transactionsList = JSON.parse(JSON.stringify(res));
+      this.reformatTimeStamp();
+
+      this.transactionsList.sort(function(a, b) {
+        // convert date object into number to resolve issue in typescript
+        return  +new Date(b.timeStamp) - +new Date(a.timeStamp);
+      });
+      console.log("sorted by time : ", this.transactionsList);
+
+      this.transactionsList=this.transactionsList.slice(0,5);
+      console.log("most recent 5 transactions ", this.transactionsList);
+
+      this.dataSource=new MatTableDataSource(this.transactionsList);
+      this.dataSource.sort = this.sort;
+      this.getSellerNamesLeo();
+      this.displayedColumns = ['timeStamp','seller','totalPrice'];
+
+    });
+    
+  }
+  
+  reformatTimeStamp(){
+    this.transactionsList.forEach(e => {
+      let T = /T/gi;
+      this.replacedTime = e.timeStamp.replace(T, " ");
+      console.log ("replaced Time: ", this.replacedTime);
+      let splicedTime = this.replacedTime.slice(0, -8) 
+      console.log ("spliced Time: ", splicedTime);
+      e.timeStamp = splicedTime;
+    })
+    this.transactionsList = [...this.transactionsList];
+    console.log("done reformatting time: ", this.transactionsList);
+    
   }
 
 getTransactionData(){
@@ -42,6 +94,23 @@ getSellerNames(){
     console.log("sellerEmail: ", sellerEmail);
   });
   this.getTopSellers();
+}
+
+getSellerNamesLeo(){
+  this.transactionsList.forEach(e => {
+    let sellerEmail = e.seller.slice(34);
+    console.log("sellerEmail: ", sellerEmail);
+    
+    this.transactionService.getSellerProfile(sellerEmail).subscribe(res =>{
+      let seller = JSON.parse(JSON.stringify(res));
+      this.sellerFirstName = seller[0].fname;
+      this.sellerLastName = seller[0].lname;
+      this.sellerName = this.sellerFirstName + " " + this.sellerLastName;
+      console.log("sellername: ", this.sellerName);
+      e.seller = this.sellerName;
+    })
+    //this.updateDataSource();
+  });
 }
 
 getTopSellers(){
@@ -132,6 +201,8 @@ for(var k=0; k<this.rawData.length;k++){
     }
 }
 
+
+
 this.consumption = [
   {
     "name": "Consumption",
@@ -174,7 +245,8 @@ this.consumption = [
 
 }
 
-//========================UI and Graph Stuff==================================
+
+  //========================UI and Graph Stuff==================================
 // data goes here
 /*********************************************** Cards  ***************************************************/
 cardview: any[] = [100, 50];
