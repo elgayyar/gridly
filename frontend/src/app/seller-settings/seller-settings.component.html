@@ -278,7 +278,7 @@ aria-labelledby="visualizeTreatmentsModal" aria-hidden="true">
             <ng-container *ngFor="let buyer of availableConsumers">
             <mat-list-item (click)="selectBuyer(buyer)" [class.selected]="buyer === selectedConsumer" class="battery-list"> 
               <mat-divider></mat-divider>
-              {{ buyer.fname + " " + buyer.lname }}
+              <ng-container *ngIf="buyer.isFriend">:) </ng-container>{{ buyer.fname + " " + buyer.lname }}
             </mat-list-item>
           </ng-container>
           </mat-list>

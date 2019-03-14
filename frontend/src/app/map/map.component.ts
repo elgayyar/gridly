@@ -52,7 +52,7 @@ export class MapComponent implements OnInit {
     console.log(this.userProfile);
     //Get the users geocode
     this.getUserGeocode();
-    if(this.userProfile.accountStatus == "PRODUCER"){
+    if(this.userProfile.accountStatus === "PRODUCER"){
       this.tradeService.getAllConsumers().subscribe(
         res => {
           this.users = res;
@@ -78,15 +78,15 @@ export class MapComponent implements OnInit {
   sortFriends(){
     // let context = this;
     let arrayLength = this.users.length;
+    console.log("Array", this.users.length);
     for(var i = 0; i < arrayLength; i++){
-      if(this.userProfile.friends){
-        if(this.userProfile.friends.includes("resource:gridly.user.User#"+this.users[i].email)){
-          this.friends.push(this.users[i]);
-        }else{
+      if(this.userProfile.friends && this.userProfile.friends.includes("resource:gridly.user.User#"+this.users[i].email)){
+        this.friends.push(this.users[i]);
+      }else{
           this.nonFriends.push(this.users[i]);
         }
-      }
     }
+    
     // this.users.forEach(element => {
     //   if(context.userProfile.friends){
     //     if(context.userProfile.friends.includes("resource:gridly.consumer.Consumer#"+element.email)){

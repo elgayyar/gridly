@@ -10,9 +10,9 @@ import { TradeService } from '../services/trade.service';
 declare var $: any;
 
 
-var onPeak = 13.2;
-var midPeak = 9.4;
-var offPeak = 6.5;
+var onPeak = .132;
+var midPeak = .094;
+var offPeak = .065;
 
 @Component({
   selector: 'app-buyer-settings',
@@ -273,23 +273,23 @@ export class BuyerSettingsComponent implements OnInit {
        },
        {
          "name": "7pm",
-         "value": this.userPeakPrice
+         "value": this.userOffPeakPrice
        },
        {
          "name": "8pm",
-         "value": this.userPeakPrice
+         "value": this.userOffPeakPrice
        },
        {
          "name": "9pm",
-         "value": this.userPeakPrice
+         "value": this.userOffPeakPrice
        },
        {
          "name": "10pm",
-         "value": this.userPeakPrice
+         "value": this.userOffPeakPrice
        },
        {
          "name": "11pm",
-         "value": this.userPeakPrice
+         "value": this.userOffPeakPrice
        }
        ]
      }
@@ -305,7 +305,7 @@ export class BuyerSettingsComponent implements OnInit {
      showXAxisLabel = true;
      xAxisLabel = 'Time of Day';
      showYAxisLabel = true;
-     yAxisLabel = 'cents/(kWh)';
+     yAxisLabel = '$ / (kWh)';
      timeline = true;
      activeEntries = [{"name": "7pm"}];
      showRefLines = false;
@@ -591,23 +591,23 @@ export class BuyerSettingsComponent implements OnInit {
         },
         {
           "name": "7pm",
-          "value": this.userPeakPrice
+          "value": this.userOffPeakPrice
         },
         {
           "name": "8pm",
-          "value": this.userPeakPrice
+          "value": this.userOffPeakPrice
         },
         {
           "name": "9pm",
-          "value": this.userPeakPrice
+          "value": this.userOffPeakPrice
         },
         {
           "name": "10pm",
-          "value": this.userPeakPrice
+          "value": this.userOffPeakPrice
         },
         {
           "name": "11pm",
-          "value": this.userPeakPrice
+          "value": this.userOffPeakPrice
         }
         ]
       }
