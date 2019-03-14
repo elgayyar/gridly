@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule }   from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -29,7 +30,7 @@ import { BatteryComponent } from './battery/battery.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { AdminHomeComponent } from './admin-home/admin-home.component';
 import { MatGridListModule } from '@angular/material/grid-list';
-import {MatTableModule} from '@angular/material/table';
+import {MatTableModule, MatTableDataSource} from '@angular/material/table';
 import { MapComponent } from './map/map.component';
 import { AgmCoreModule } from '@agm/core';
 import { SellerSettingsComponent } from './seller-settings/seller-settings.component';
@@ -41,6 +42,7 @@ import { FusionChartsModule } from 'angular-fusioncharts';
 import FusionCharts from 'fusioncharts/core';
 import Column2D from 'fusioncharts/viz/column2d';
 import { TransactionsComponent } from './transactions/transactions.component';
+import {MatSortModule} from '@angular/material/sort'
 import { MatChipsModule } from '@angular/material/chips';
 
 
@@ -69,6 +71,7 @@ import { MatChipsModule } from '@angular/material/chips';
     BrowserModule,
     HttpClientModule,
     FormsModule,
+    CommonModule,
     AppRoutingModule,
     LayoutModule,
     MatToolbarModule,
@@ -94,7 +97,8 @@ import { MatChipsModule } from '@angular/material/chips';
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyDzjuXUKgTu4BjnL66oUP0jiGz30zuSuaM'
     }),
-    FusionChartsModule
+    FusionChartsModule,
+    MatSortModule
     
   ],
   providers: [AuthGuard, AuthService,HttpClient,AdminService],
