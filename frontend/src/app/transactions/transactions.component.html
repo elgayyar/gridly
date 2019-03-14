@@ -5,9 +5,9 @@
       <mat-card class="home-card" fxFlex="50%" fxLayoutDesign="left">
       <table mat-table #table [dataSource]="dataSource" matSort matSortActive="timestamp" matSortDirection="asc" class="mat-elevation-z8">
         
-        <ng-container matColumnDef="timestamp">
+        <ng-container matColumnDef="timeStamp">
           <th class= "header" mat-header-cell *matHeaderCellDef mat-sort-header>Time</th>
-          <td class= "cell" mat-cell *matCellDef="let element"> {{element.timestamp}} </td>
+          <td class= "cell" mat-cell *matCellDef="let element"> {{element.timeStamp}} </td>
         </ng-container>
 
         <div *ngIf="isConsumer">
@@ -31,12 +31,12 @@
    
         <ng-container matColumnDef="unitElectricityPrice">
           <th class= "header" mat-header-cell *matHeaderCellDef mat-sort-header>Unit Price ($/kWh)</th>
-          <td class= "cell" mat-cell *matCellDef="let element"> {{element.unitElectricityPrice}} </td>
+          <td class= "cell" mat-cell *matCellDef="let element">{{element.unitElectricityPrice}} </td>
         </ng-container>
 
         <ng-container matColumnDef="totalPrice">
           <th class= "header" mat-header-cell *matHeaderCellDef mat-sort-header>Total Price ($)</th>
-          <td class= "cell" mat-cell *matCellDef="let element"> {{element.totalPrice}} </td>
+          <td class= "cell" mat-cell *matCellDef="let element">{{element.totalPrice}} </td>
         </ng-container>
       
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

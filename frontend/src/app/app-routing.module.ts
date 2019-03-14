@@ -16,6 +16,8 @@ import {TransactionsComponent} from './transactions/transactions.component';
 const routes: Routes = [
   { path: 'login', component: LoginComponent  },
   { path: 'register', component: RegisterComponent  },
+  { path: 'admin', component: AdminHomeComponent },
+
   { path: 'home', component: HomeComponent },
   { path: 'profile', component: UserProfileComponent },
   { path: 'settings', component: SettingsComponent },
@@ -23,7 +25,6 @@ const routes: Routes = [
   { path: 'buyer-settings', component: BuyerSettingsComponent ,},
   { path: '', component: LandingPageComponent },
   { path: 'battery', component: BatteryComponent },
-  { path: 'admin', component: AdminHomeComponent },
   { path: 'map', component: MapComponent },
   { path: 'transactions', component: TransactionsComponent}
   
