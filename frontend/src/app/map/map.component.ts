@@ -52,15 +52,27 @@ export class MapComponent implements OnInit {
     console.log(this.userProfile);
     //Get the users geocode
     this.getUserGeocode();
-    this.tradeService.getAllConsumers().subscribe(
-      res => {
-        this.users = res;
-        console.log('CONSUMERS: ',this.users);
-        this.sortFriends();
-      },
-      error => {
-        console.log("Error response from hyperledger: ", error);
-      });
+    if(this.userProfile.accountStatus == "PRODUCER"){
+      this.tradeService.getAllConsumers().subscribe(
+        res => {
+          this.users = res;
+          console.log('CONSUMERS: ',this.users);
+          this.sortFriends();
+        },
+        error => {
+          console.log("Error response from hyperledger: ", error);
+        });
+    } else {
+      this.tradeService.getAllProducers().subscribe(
+        res => {
+          this.users = res;
+          console.log('PRODUCERS: ',this.users);
+          this.sortFriends();
+        },
+        error => {
+          console.log("Error response from hyperledger: ", error);
+        });
+    }
   }
 
   sortFriends(){
@@ -99,15 +111,28 @@ export class MapComponent implements OnInit {
   this.friends.push(user);
   this.userProfile.friends.push("resource:gridly.user.User#"+ user.email);
   console.log(this.userProfile.friends);
-  this.tradeService.updateProducer(this.userProfile, this.userProfile.email).subscribe(
-    res => {
-      console.log(res);
-      this.userProfile = res;
-      localStorage.setItem("activeProfile", JSON.stringify(this.userProfile));
-    },
-    error => {
-      console.log("Error response from hyperledger");
-    });
+  if(this.userProfile.accountStatus == "PRODUCER"){
+    this.tradeService.updateProducer(this.userProfile, this.userProfile.email).subscribe(
+      res => {
+        console.log(res);
+        this.userProfile = res;
+        localStorage.setItem("activeProfile", JSON.stringify(this.userProfile));
+      },
+      error => {
+        console.log("Error response from hyperledger");
+      });
+  } else {
+    this.tradeService.updateConsumer(this.userProfile, this.userProfile.email).subscribe(
+      res => {
+        console.log(res);
+        this.userProfile = res;
+        localStorage.setItem("activeProfile", JSON.stringify(this.userProfile));
+      },
+      error => {
+        console.log("Error response from hyperledger");
+      });
+  }
+  
 }
  
 
@@ -115,15 +140,28 @@ export class MapComponent implements OnInit {
   this.friends = this.arrayRemove(this.friends, friend);
   this.nonFriends.push(friend);
   this.userProfile.friends = this.arrayRemove(this.userProfile.friends, "resource:gridly.user.User#" + friend.email);
-  this.tradeService.updateProducer(this.userProfile, this.userProfile.email).subscribe(
-    res => {
-      console.log(res);
-      this.userProfile = res;
-      localStorage.setItem("activeProfile", JSON.stringify(this.userProfile));
-    },
-    error => {
-      console.log("Error response from hyperledger");
-    });
+  if(this.userProfile.accountStatus == "PRODUCER"){
+    this.tradeService.updateProducer(this.userProfile, this.userProfile.email).subscribe(
+      res => {
+        console.log(res);
+        this.userProfile = res;
+        localStorage.setItem("activeProfile", JSON.stringify(this.userProfile));
+      },
+      error => {
+        console.log("Error response from hyperledger");
+      });
+  } else {
+    this.tradeService.updateConsumer(this.userProfile, this.userProfile.email).subscribe(
+      res => {
+        console.log(res);
+        this.userProfile = res;
+        localStorage.setItem("activeProfile", JSON.stringify(this.userProfile));
+      },
+      error => {
+        console.log("Error response from hyperledger");
+      });
+  }
+  
  }
  
   //Gets the lat and long of the users address
