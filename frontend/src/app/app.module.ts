@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule }   from '@angular/forms';
 import { CommonModule } from '@angular/common';
-
+import { MatPaginatorModule } from '@angular/material';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MainNavComponent } from './main-nav/main-nav.component';
@@ -47,7 +47,6 @@ import { MatChipsModule } from '@angular/material/chips';
 import { ProductionModalComponent } from './production-modal/production-modal.component';
 
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -66,7 +65,7 @@ import { ProductionModalComponent } from './production-modal/production-modal.co
     SellerSettingsComponent,
     BuyerSettingsComponent,
     TransactionsComponent,
-    ProductionModalComponent
+    ProductionModalComponent,
   ],
   imports: [
     BrowserAnimationsModule,
@@ -96,6 +95,7 @@ import { ProductionModalComponent } from './production-modal/production-modal.co
     MatTableModule,
     MatSnackBarModule,
     MatChipsModule,
+    MatPaginatorModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyDzjuXUKgTu4BjnL66oUP0jiGz30zuSuaM'
     }),

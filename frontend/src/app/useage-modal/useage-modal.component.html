@@ -1,12 +1,13 @@
   <!-- Row 1 -->
   <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayout="2%" fxLayoutAlign="center" fxFill>
       <div fxFlex="55%" fxFlex.xs="100%">
-          <mat-card class="home-card">
+          <mat-card class="home-card animated fadeIn">
               <mat-card-header>
-                  <mat-card-title>Monthly Statistics</mat-card-title>
+                  <span class="dashboard-title">Monthly Statistics</span>
               </mat-card-header>
               <mat-card-content class="home-card">
                 <!-- Stats at the top -->
+                <span class="graph-title">Impact</span>
                 <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayout="2%" fxLayoutAlign="center" fxFlexFill>
                     <div fxFlex="100%" fxFlex.xs="100%">
                         <div fxFlex="50%" fxFlex.xs="50%">     
@@ -44,11 +45,10 @@
                           (select)="onSelect($event)">
                         </ngx-charts-line-chart>
                       </div>          
-                    </div>
-                  
+                    </div>             
                     <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayout="2%" fxLayoutAlign="center" fxFlexFill>
                       <div fxFlex="100%" fxFlex.xs="100%">
-                          <span class="graph-title">Usage Breakdown</span>
+                          <span class="graph-title">Consumption by Producer</span>
                             <ngx-charts-pie-chart
                             [legend]="legend"
                             [view]="view"
@@ -71,32 +71,70 @@
       <!-- Top Sellers and Recent Transactions-->
       <div fxFlex="45%" fxFlex.xs="100%">
           <!-- Top Sellers Card -->
-          <mat-card class="home-card">
+          <mat-card class="home-card animated fadeIn">
               <mat-card-header>
-                  <mat-card-title>Top Sellers</mat-card-title>
+                  <span class="dashboard-title">Top Sellers by Quantity</span>
               </mat-card-header>
-              <mat-card-content class="home-card useage-card">
+              <mat-card-content class="home-card useage-card" >
                   <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayout="2%" fxLayoutAlign="center" fxFlexFill>
                       <div fxFlex="100%" fxFlex.xs="100%">
                         <!-- Pie chart for top sellers -->
-                        <ngx-charts-pie-grid
+                        <ngx-charts-pie-grid *ngIf="topSellersData.length != 0; else topSellerWarning"
                         [view]="topSellersView"
                         [scheme]="colorScheme"
-                        [results]="topSellers"
-                        >
-
+                        [results]="topSellers">
                         </ngx-charts-pie-grid>
+                        <!--
+                        <ng-template #topSellerWarning>
+                          <div class="error-conatiner">
+                              <p class="error-warning">No data to display</p>
+                          </div>
+                        </ng-template>
+                      -->
                       </div>          
                     </div>
               </mat-card-content>
             </mat-card>
-            <mat-card class="home-card">
+
+            <mat-card class="home-card animated fadeIn">
                 <mat-card-header>
-                    <mat-card-title>Recent Transactions</mat-card-title>
+                    <span class="dashboard-title">Recent Transactions</span>
                 </mat-card-header>
                 <mat-card-content class="home-card useage-card">
                     <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayout="2%" fxLayoutAlign="center" fxFlexFill>
-                        <div fxFlex="100%" fxFlex.xs="100%">       
+                        <div fxFlex="100%" fxFlex.xs="100%">
+                            <table mat-table #table [dataSource]="dataSource" matSort matSortActive="timeStamp" matSortDirection="desc" class="mat-elevation-z8">
+        
+                                <ng-container matColumnDef="timeStamp">
+                                  <th class= "header" mat-header-cell *matHeaderCellDef mat-sort-header>Time</th>
+                                  <td class= "cell" mat-cell *matCellDef="let element"> {{element.timeStamp}} </td>
+                                </ng-container>
+                        
+                                <ng-container matColumnDef="seller">
+                                    <th class= "header" mat-header-cell *matHeaderCellDef mat-sort-header>Seller</th>
+                                    <td class= "cell" mat-cell *matCellDef="let element"> {{element.seller}} </td>
+                                </ng-container>
+                                
+                
+                         
+                                <ng-container matColumnDef="totalPrice">
+                                  <th class= "header" mat-header-cell *matHeaderCellDef mat-sort-header>Total Price ($)</th>
+                                  <td class= "cell" mat-cell *matCellDef="let element"> {{element.totalPrice}} </td>
+                                </ng-container>
+                           
+                                <!-- <ng-container matColumnDef="unitElectricityPrice">
+                                  <th class= "header" mat-header-cell *matHeaderCellDef mat-sort-header>Unit Price ($/kWh)</th>
+                                  <td class= "cell" mat-cell *matCellDef="let element">{{element.unitElectricityPrice}} </td>
+                                </ng-container>
+                        
+                                <ng-container matColumnDef="totalPrice">
+                                  <th class= "header" mat-header-cell *matHeaderCellDef mat-sort-header>Total Price ($)</th>
+                                  <td class= "cell" mat-cell *matCellDef="let element">{{element.totalPrice}} </td>
+                                </ng-container> -->
+                              
+                                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                              </table>       
                         </div>          
                     </div>
                 </mat-card-content>

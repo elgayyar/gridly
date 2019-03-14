@@ -1,3 +1,14 @@
 agm-map {
     height: 500px;
 }
+
+.mat-list-item {
+    color: #B00F3B !important;
+}
+
+.mat-list-item:hover {
+    color: #F1F1F1 !important;
+    background: #B00F3B !important;
+    cursor: pointer;
+}
+
