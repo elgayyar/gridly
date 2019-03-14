@@ -11,11 +11,14 @@ export class ProductionModalComponent implements OnInit {
   co2Savings = "28 kg";
   dollarSavings = "$15.12";
   userProfile;  
-  topBuyers = [];
   rawData
   totalQuantity
   monthHistory = []
   topBuyersData;
+  
+  public production =[];
+  public topBuyers = [];
+
 
   //for recent transactions
   transactionsList = []
@@ -193,6 +196,134 @@ export class ProductionModalComponent implements OnInit {
           }
       }
   }
+
+  this.production = [
+    {
+      "name": "Production",
+      "series": [
+        {
+          "name": this.monthHistory[0].date,
+          "value": this.monthHistory[0].quantity
+        },
+        {
+          "name": this.monthHistory[1].date,
+          "value": this.monthHistory[1].quantity
+        },
+        {
+          "name": this.monthHistory[2].date,
+          "value": this.monthHistory[2].quantity
+        },
+        {
+          "name": this.monthHistory[3].date,
+          "value": this.monthHistory[3].quantity
+        },
+        {
+          "name": this.monthHistory[4].date,
+          "value": this.monthHistory[4].quantity
+        },
+        {
+          "name": this.monthHistory[5].date,
+          "value": this.monthHistory[5].quantity
+        },
+        {
+          "name": this.monthHistory[6].date,
+          "value": this.monthHistory[6].quantity
+        },
+        {
+          "name": this.monthHistory[7].date,
+          "value": this.monthHistory[7].quantity
+        },
+        {
+          "name": this.monthHistory[8].date,
+          "value": this.monthHistory[8].quantity
+        },
+        {
+          "name": this.monthHistory[9].date,
+          "value": this.monthHistory[9].quantity
+        },
+        {
+          "name": this.monthHistory[10].date,
+          "value": this.monthHistory[10].quantity
+        },
+        {
+          "name": this.monthHistory[11].date,
+          "value": this.monthHistory[11].quantity
+        },
+        {
+          "name": this.monthHistory[12].date,
+          "value": this.monthHistory[12].quantity
+        },
+        {
+          "name": this.monthHistory[13].date,
+          "value": this.monthHistory[13].quantity
+        },
+        {
+          "name": this.monthHistory[14].date,
+          "value": this.monthHistory[14].quantity
+        },
+        {
+          "name": this.monthHistory[15].date,
+          "value": this.monthHistory[15].quantity
+        },
+        {
+          "name": this.monthHistory[16].date,
+          "value": this.monthHistory[16].quantity
+        },
+        {
+          "name": this.monthHistory[17].date,
+          "value": this.monthHistory[17].quantity
+        },
+        {
+          "name": this.monthHistory[18].date,
+          "value": this.monthHistory[18].quantity
+        },
+        {
+          "name": this.monthHistory[19].date,
+          "value": this.monthHistory[19].quantity
+        },
+        {
+          "name": this.monthHistory[20].date,
+          "value": this.monthHistory[20].quantity
+        },
+        {
+          "name": this.monthHistory[21].date,
+          "value": this.monthHistory[21].quantity
+        },
+        {
+          "name": this.monthHistory[22].date,
+          "value": this.monthHistory[22].quantity
+        },
+        {
+          "name": this.monthHistory[23].date,
+          "value": this.monthHistory[23].quantity
+        },
+        {
+          "name": this.monthHistory[24].date,
+          "value": this.monthHistory[24].quantity
+        },
+        {
+          "name": this.monthHistory[25].date,
+          "value": this.monthHistory[25].quantity
+        },
+        {
+          "name": this.monthHistory[26].date,
+          "value": this.monthHistory[26].quantity
+        },
+        {
+          "name": this.monthHistory[27].date,
+          "value": this.monthHistory[27].quantity
+        },
+        {
+          "name": this.monthHistory[28].date,
+          "value": this.monthHistory[28].quantity
+        },
+        {
+          "name": this.monthHistory[29].date,
+          "value": this.monthHistory[29].quantity
+        }
+      ]
+    }
+  ]
 }
 //========================UI and Graph Stuff==================================
 // data goes here
@@ -252,5 +383,7 @@ view: any[] = [500, 300];
   explodeSlices = false;
   doughnut = true;
   title = "Electricity Provider Breakdown";
+
+
 
 }
