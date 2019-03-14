@@ -4,6 +4,7 @@ import { AuthGuard } from '../guards/auth.guard'
 import { Router } from "@angular/router";
 import { Observable} from 'rxjs'
 import {Subject} from "rxjs/Subject";
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatTooltipModule, MatSnackBar}  from '@angular/material';
 
 declare var $: any;
 
@@ -19,12 +20,14 @@ export class LoginComponent implements OnInit {
   statusMessage;
   processing;
   retrievedProfile;
-  previousUrl
+  previousUrl;
+  loginFailed = false;
   
 
   constructor(private authService: AuthService,
               private router: Router,
-              private authGuard: AuthGuard){ }
+              private authGuard: AuthGuard,
+              private snackBar: MatSnackBar){ }
   ngOnInit() {
   }
 
@@ -38,6 +41,7 @@ export class LoginComponent implements OnInit {
 
     this.authService.login(user).subscribe(
       res => {
+        
         console.log(res)
         let data = JSON.parse(JSON.stringify(res));
         if(!data.success){
@@ -45,6 +49,14 @@ export class LoginComponent implements OnInit {
           console.log(data.success);
           this.triedLogin=true;
           this.statusMessage = "error, please try again";
+          setTimeout(() => {
+            $('#loading').modal('hide');
+            this.snackBar.open("Login Failed! Please try again.");
+          }, 500)
+          setTimeout(() => {
+            this.snackBar.dismiss();
+          }, 2000)
+          
         } else {
           this.triedLogin=true;
           this.statusMessage= "success!";
@@ -111,7 +123,14 @@ export class LoginComponent implements OnInit {
       },
       error => {
         console.log(error);
+        
+
       });
+  }
+
+  //Snackbar for notifications
+  openSnackBar(message: string) {
+    this.snackBar.open(message);
   }
 
   
