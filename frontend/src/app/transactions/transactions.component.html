@@ -42,8 +42,8 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
       </table>
-      <mat-paginator [pageSizeOptions]="[7]" showFirstLastButtons></mat-paginator>
-      </mat-card>
+      <mat-paginator [pageSizeOptions]="[5]" showFirstLastButtons></mat-paginator>
+    </mat-card>
       <mat-card class="home-card" fxFlex="50%" fxLayoutDesign="left" *ngIf="transactionsList.length != 0">
       <span fxLayoutDesign="left" class="graph-title">Transaction Behaviour</span>
         <ngx-charts-line-chart
