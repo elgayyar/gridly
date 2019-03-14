@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import {TransactionsService} from '../services/transactions.service';
-import {MatSort, MatTableDataSource} from '@angular/material';
+import {MatSort, MatTableDataSource, MatPaginator} from '@angular/material';
 import { AuthService } from '../services/auth.service';
 import { CommonModule } from '@angular/common';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
@@ -35,7 +35,8 @@ export class TransactionsComponent implements OnInit {
   replacedTime: string;
 
   @ViewChild(MatSort) sort: MatSort;
-  
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+
   showXAxis = true;
   showYAxis = true;
   gradient = false;
@@ -82,6 +83,8 @@ export class TransactionsComponent implements OnInit {
 
       this.dataSource=new MatTableDataSource(this.transactionsList);
       this.dataSource.sort = this.sort;
+      this.dataSource.paginator = this.paginator;
+
 
       this.makeGraph();
 
