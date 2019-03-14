@@ -12,6 +12,7 @@ import { Router } from "@angular/router";
 export class MainNavComponent {
   userProfile;
   isConsumer;
+  isAdmin;
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
@@ -21,8 +22,11 @@ export class MainNavComponent {
   constructor(private breakpointObserver: BreakpointObserver,
               private router: Router) {
                 this.userProfile = JSON.parse(localStorage.getItem("activeProfile"));
+                console.log(this.userProfile);
                 //Check if the user is a producer or consumer
-                if(this.userProfile.accountStatus == "CONSUMER") {
+                if (this.userProfile.$class=="gridly.admin.Admin"){
+                  this.isAdmin = true;
+                } else if(this.userProfile.accountStatus == "CONSUMER") {
                   this.isConsumer = true;
                 } else {
                   this.isConsumer = false;
