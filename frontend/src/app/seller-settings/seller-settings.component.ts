@@ -450,8 +450,8 @@ selectBuyer(b){
       "serialNo": "89760593203",
       "manufacturer": "Tesla",
       "model": "Powerwall",
-      "maxCapacity": 14,
-      "currentCapacity": 10
+      "maxCapacity": 150,
+      "currentCapacity": 130
     }
     //Add the battery to the users profile
     this.userProfile.battery = batteryData;

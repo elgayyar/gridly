@@ -78,20 +78,21 @@ export class LoginComponent implements OnInit {
             }
            console.log('log in component, retrieved profile! ',this.retrievedProfile);
 
-            
+          let role = this.retrievedProfile.$class;
+          console.log ("role is: ", role);
+
+
           //redirect to home page 
           setTimeout(() => {
-            if(this.previousUrl){
+            if (role === "gridly.admin.Admin") {
+              console.log ("redirecting to admin");
               $('#loading').modal('hide');
-              this.router.navigate([this.previousUrl]);
+              this.router.navigate(['/admin']);
             } else {
               $('#loading').modal('hide');
               this.router.navigate(['/home']);
-            }
-          }, 1000);
+          }}, 1000);
           
-          let role = this.retrievedProfile.$class
-          console.log ("role is: ", role);
           if (role ==="gridly.admin.Admin"){
                 this.authService.setActiveProfile(this.retrievedProfile);
                 this.authService.setActiveProfileType("admin"); //admin = 1
@@ -107,15 +108,6 @@ export class LoginComponent implements OnInit {
              this.authService.setActiveProfileType("producer"); //producer = 3
              localStorage.setItem("activeProfile", JSON.stringify(this.retrievedProfile));
              localStorage.setItem("activeProfileType", this.authService.activeProfileType);
-
-             //redirect to admin home page
-             setTimeout(() => {
-               if(this.previousUrl){
-                 this.router.navigate([this.previousUrl]);
-               } else {
-                 this.router.navigate(['/home']);
-               }
-             }, 1000);
            }
           
       })

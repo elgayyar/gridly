@@ -2,13 +2,18 @@
     max-height: 500px;
     background: #F5F5F5;
     margin: 1%;
-}
+};
+
+
+th.mat-sort-header-sorted {
+    color: black;
+  }
 
 table {
     width: 100%;
   }
-
-  th, td {
-    text-align: center !important;
-  }
-
+.graph-title {
+    align-self: center;
+    font-size: large;
+    margin-bottom: 2.5%;
+}
