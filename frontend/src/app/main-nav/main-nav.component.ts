@@ -37,4 +37,15 @@ export class MainNavComponent {
       this.router.navigate(["/login"]);
     }
 
+    //Navigate to the correct page
+    /*
+    navigate() {
+      console.log(this.router.url);
+      if(this.router.url == "/login" || '/register' || '') {
+        this.router.navigate([""]);
+      } else {
+        this.router.navigate(["/home"]);
+      }
+    }
+    */
 }
