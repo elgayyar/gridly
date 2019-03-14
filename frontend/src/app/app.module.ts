@@ -41,6 +41,7 @@ import { FusionChartsModule } from 'angular-fusioncharts';
 import FusionCharts from 'fusioncharts/core';
 import Column2D from 'fusioncharts/viz/column2d';
 import { TransactionsComponent } from './transactions/transactions.component';
+import { MatChipsModule } from '@angular/material/chips';
 
 
 
@@ -89,6 +90,7 @@ import { TransactionsComponent } from './transactions/transactions.component';
     MatDialogModule,
     MatTableModule,
     MatSnackBarModule,
+    MatChipsModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyDzjuXUKgTu4BjnL66oUP0jiGz30zuSuaM'
     }),
