@@ -51,10 +51,10 @@
                     </mat-card-header>
                     <mat-card-content>
                         <mat-list>
-                            <ng-container *ngFor="let user of users">
+                            <ng-container *ngFor="let nonFriend of nonFriends">
                                 <mat-list-item class="friends-list"> 
                                     <mat-divider></mat-divider>
-                                      {{ user.fname + " " + user.lname }} <button (click)="add(user)">Add Friend</button>
+                                      {{ nonFriend.fname + " " + nonFriend.lname }} <button (click)="add(nonFriend)">Add Friend</button>
                                 </mat-list-item>
                             </ng-container>
                         </mat-list> 
