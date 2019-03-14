@@ -34,57 +34,37 @@ public card = [
   },
 ];
 
-public multi = [
+public consumption = [
   {
     "name": "Consumption",
     "series": [
       {
-        "name": "January",
-        "value": 730
+        "name": "Monday",
+        "value": 12.
       },
       {
-        "name": "February",
-        "value": 894
+        "name": "Tuesday",
+        "value": 11.7
       },
       {
-        "name": "March",
-        "value": 450
+        "name": "Wednesday",
+        "value": 9.8
       },
       {
-        "name": "April",
-        "value": 694
+        "name": "Thursday",
+        "value": 10.3
       },
       {
-        "name": "May",
-        "value": 567
+        "name": "Friday",
+        "value": 14.5
       },
       {
-        "name": "June",
-        "value": 776
+        "name": "Saturday",
+        "value": 10.6
       },
       {
-        "name": "July",
-        "value": 890
-      },
-      {
-        "name": "August",
-        "value": 657
-      },
-      {
-        "name": "September",
-        "value": 476
-      },
-      {
-        "name": "October",
-        "value": 324
-      },
-      {
-        "name": "November",
-        "value": 675
-      },
-      {
-        "name": "December",
-        "value": 812
+        "name": "Sunday",
+        "value": 6.7
       }
     ]
   },

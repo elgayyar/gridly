@@ -44,6 +44,7 @@ import Column2D from 'fusioncharts/viz/column2d';
 import { TransactionsComponent } from './transactions/transactions.component';
 import {MatSortModule} from '@angular/material/sort'
 import { MatChipsModule } from '@angular/material/chips';
+import { ProductionModalComponent } from './production-modal/production-modal.component';
 
 
 
@@ -64,7 +65,8 @@ import { MatChipsModule } from '@angular/material/chips';
     MapComponent,
     SellerSettingsComponent,
     BuyerSettingsComponent,
-    TransactionsComponent
+    TransactionsComponent,
+    ProductionModalComponent
   ],
   imports: [
     BrowserAnimationsModule,
