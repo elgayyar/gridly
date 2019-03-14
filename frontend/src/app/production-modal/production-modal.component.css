@@ -5,11 +5,17 @@
 }
 
 .useage-card {
-    height: 250px;
+    height: 350px;
     background: #F5F5F5;
     color: #373B46;
     margin: 3%;
 }
+th, td {
+    overflow: hidden;
+    width: 200px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    }
 
 .big-icon {
     width: 48px;

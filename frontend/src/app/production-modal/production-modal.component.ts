@@ -43,7 +43,6 @@ export class ProductionModalComponent implements OnInit {
 
     //for recent 5 transactions
     this.transactionService.getSellerTransactions(this.userProfile.email,).subscribe(res => {
-      console.log("transaction service, getBuyerTransactions returned: ", res);
       this.transactionsList = JSON.parse(JSON.stringify(res));
       this.reformatTimeStamp();
 
@@ -51,10 +50,8 @@ export class ProductionModalComponent implements OnInit {
         // convert date object into number to resolve issue in typescript
         return  +new Date(b.timeStamp) - +new Date(a.timeStamp);
       });
-      console.log("sorted by time : ", this.transactionsList);
 
       this.transactionsList=this.transactionsList.slice(0,5);
-      console.log("most recent 5 transactions ", this.transactionsList);
 
       this.dataSource=new MatTableDataSource(this.transactionsList);
       this.dataSource.sort = this.sort;
@@ -68,26 +65,21 @@ export class ProductionModalComponent implements OnInit {
     this.transactionsList.forEach(e => {
       let T = /T/gi;
       this.replacedTime = e.timeStamp.replace(T, " ");
-      console.log ("replaced Time: ", this.replacedTime);
       let splicedTime = this.replacedTime.slice(0, -8) 
-      console.log ("spliced Time: ", splicedTime);
       e.timeStamp = splicedTime;
     })
     this.transactionsList = [...this.transactionsList];
-    console.log("done reformatting time: ", this.transactionsList);
   }
   
   getBuyerNamesLeo(){
     this.transactionsList.forEach(e => {
       let buyerEmail = e.buyer.slice(34);
-      console.log("buyerEmail: ", buyerEmail);
       
       this.transactionService.getBuyerProfile(buyerEmail).subscribe(res =>{
         let buyer = JSON.parse(JSON.stringify(res));
         this.buyerFirstName = buyer[0].fname;
         this.buyerLastName = buyer[0].lname;
         this.buyerName = this.buyerFirstName + " " + this.buyerLastName;
-        console.log("buyername: ", this.buyerName);
         e.buyer = this.buyerName;
       })
       //this.updateDataSource();
@@ -95,7 +87,7 @@ export class ProductionModalComponent implements OnInit {
   }
 
   getTransactionData(){
-    this.transactionService.getBuyerTransactions(this.userProfile.email).subscribe(res => {
+    this.transactionService.getSellerTransactions(this.userProfile.email).subscribe(res => {
       console.log("transaction service, getBuyerTransactions returned: ", res);
       this.rawData = res;
       this.getProductionHistoryByDay();
@@ -166,7 +158,7 @@ export class ProductionModalComponent implements OnInit {
           "value": context.totalQuantity
         }
       ];
-    }, 1000);
+    }, 1500);
   }
 
   getProductionHistoryByDay(){
@@ -357,7 +349,7 @@ public dollarData = [
 /*********************************************** Top Friends Pie Chart  ************************************/
 topBuyersView: any[] = [500, 300];
 
-view: any[] = [500, 300];
+view: any[] = [600, 400];
 
   // options for the chart
   showXAxis = true;
