@@ -6,8 +6,51 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./useage-modal.component.css']
 })
 export class UseageModalComponent implements OnInit {
+  co2Savings = 23;
+  dollarSavings = 14.32;
 
-// data goes here
+/*********************************************** Cards  ***************************************************/
+cardview: any[] = [100, 50];
+red = {
+  domain: ['#B00F3B']
+};
+grey = {
+  domain: ['#373B46']
+};
+
+public co2Data = [
+  {
+    "name": "CO2 Savings",
+    "value": this.co2Savings
+  },
+];
+
+public dollarData = [
+  {
+    "name": "Dollar Savings",
+    "value": this.dollarSavings
+  },
+];
+
+/*********************************************** Top Friends Pie Chart  ************************************/
+topSellersView: any[] = [500, 300];
+
+public topSellers = [
+  {
+    "name": "Friend 1",
+    "value": 10
+  },
+  {
+    "name": "Friend 2",
+    "value": 8
+  },
+  {
+    "name": "Friend 3",
+    "value": "6"
+  }, 
+];
+
+/*********************************************** Breakdown Pie Chart  ************************************/
 public pie = [
   {
     "name": "London Hydro",
