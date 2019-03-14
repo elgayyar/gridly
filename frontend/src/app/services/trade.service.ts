@@ -22,14 +22,23 @@ export class TradeService {
     return this.http.get<JSON>(this.ledgerDomain + '/gridly.consumer.Consumer');
   }
 
+  getAllProducers() {
+    return this.http.get<JSON>(this.ledgerDomain + '/gridly.producer.Producer');
+  }
+
   postTrade(txn) {
     console.log("POST TRADE: ", txn);
     return this.http.post<JSON>(this.ledgerDomain+'gridly.trade.Trade', txn);
   }
 
-  updateProducer(producer){
+  updateProducer(producer, email){
     console.log("UPDATE PRODUCER: ", producer);
-    return this.http.put<JSON>(this.ledgerDomain+'/gridly.producer.Producer/'+ producer.email, producer);
+    return this.http.put<JSON>(this.ledgerDomain+'/gridly.producer.Producer/'+ email, producer);
+  }
+
+  updateConsumer(consumer, email){
+    console.log("UPDATE CONSUMER: ", consumer);
+    return this.http.put<JSON>(this.ledgerDomain+'/gridly.consumer.Consumer/'+ email, consumer);
   }
 
 }

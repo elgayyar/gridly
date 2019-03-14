@@ -43,6 +43,7 @@ import FusionCharts from 'fusioncharts/core';
 import Column2D from 'fusioncharts/viz/column2d';
 import { TransactionsComponent } from './transactions/transactions.component';
 import {MatSortModule} from '@angular/material/sort'
+import { MatChipsModule } from '@angular/material/chips';
 
 
 
@@ -92,6 +93,7 @@ import {MatSortModule} from '@angular/material/sort'
     MatDialogModule,
     MatTableModule,
     MatSnackBarModule,
+    MatChipsModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyDzjuXUKgTu4BjnL66oUP0jiGz30zuSuaM'
     }),

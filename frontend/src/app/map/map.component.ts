@@ -3,6 +3,7 @@ import { MapService } from '../services/map.service';
 import { MarkerManager } from '@agm/core';
 import { MouseEvent } from '@agm/core';
 import { TradeService } from '../services/trade.service';
+import { variable } from '@angular/compiler/src/output/output_ast';
 
 interface marker {
   lat: number;
@@ -18,6 +19,7 @@ interface marker {
 export class MapComponent implements OnInit {
   userProfile;
   friends = [];
+  nonFriends = [];
   users;
   usersGeocode;
   zoom = 12;
@@ -50,29 +52,51 @@ export class MapComponent implements OnInit {
     console.log(this.userProfile);
     //Get the users geocode
     this.getUserGeocode();
-    this.tradeService.getAllConsumers().subscribe(
-      res => {
-        this.users = res;
-        console.log('CONSUMERS: ',this.users);
-        this.sortFriends();
-      },
-      error => {
-        console.log("Error response from hyperledger: ", error);
-      });
+    if(this.userProfile.accountStatus == "PRODUCER"){
+      this.tradeService.getAllConsumers().subscribe(
+        res => {
+          this.users = res;
+          console.log('CONSUMERS: ',this.users);
+          this.sortFriends();
+        },
+        error => {
+          console.log("Error response from hyperledger: ", error);
+        });
+    } else {
+      this.tradeService.getAllProducers().subscribe(
+        res => {
+          this.users = res;
+          console.log('PRODUCERS: ',this.users);
+          this.sortFriends();
+        },
+        error => {
+          console.log("Error response from hyperledger: ", error);
+        });
+    }
   }
 
   sortFriends(){
-    let context = this;
-    this.users.forEach(element => {
-      if(context.userProfile.friends){
-        if(context.userProfile.friends.includes(element)){
-          context.friends.push(element);
-          context.users = context.arrayRemove(context.users, element);
+    // let context = this;
+    let arrayLength = this.users.length;
+    for(var i = 0; i < arrayLength; i++){
+      if(this.userProfile.friends){
+        if(this.userProfile.friends.includes("resource:gridly.user.User#"+this.users[i].email)){
+          this.friends.push(this.users[i]);
+        }else{
+          this.nonFriends.push(this.users[i]);
         }
       }
-    });
-    if(!context.userProfile.friends){
-      context.userProfile.friends = [];
+    }
+    // this.users.forEach(element => {
+    //   if(context.userProfile.friends){
+    //     if(context.userProfile.friends.includes("resource:gridly.consumer.Consumer#"+element.email)){
+    //       context.friends.push(element);
+    //       context.users = context.arrayRemove(context.users, element);
+    //     }
+    //   }
+    // });
+    if(!this.userProfile.friends){
+      this.userProfile.friends = [];
     }
   }
 
@@ -83,18 +107,61 @@ export class MapComponent implements OnInit {
  }
  
  add(user){
-  this.users = this.arrayRemove(this.users, user);
+  this.nonFriends = this.arrayRemove(this.nonFriends, user);
   this.friends.push(user);
   this.userProfile.friends.push("resource:gridly.user.User#"+ user.email);
-  let msg = this.tradeService.updateProducer(this.userProfile);
-  console.log(msg);
- }
+  console.log(this.userProfile.friends);
+  if(this.userProfile.accountStatus == "PRODUCER"){
+    this.tradeService.updateProducer(this.userProfile, this.userProfile.email).subscribe(
+      res => {
+        console.log(res);
+        this.userProfile = res;
+        localStorage.setItem("activeProfile", JSON.stringify(this.userProfile));
+      },
+      error => {
+        console.log("Error response from hyperledger");
+      });
+  } else {
+    this.tradeService.updateConsumer(this.userProfile, this.userProfile.email).subscribe(
+      res => {
+        console.log(res);
+        this.userProfile = res;
+        localStorage.setItem("activeProfile", JSON.stringify(this.userProfile));
+      },
+      error => {
+        console.log("Error response from hyperledger");
+      });
+  }
+  
+}
+ 
+
  remove(friend){
   this.friends = this.arrayRemove(this.friends, friend);
-  this.users.push(friend);
+  this.nonFriends.push(friend);
   this.userProfile.friends = this.arrayRemove(this.userProfile.friends, "resource:gridly.user.User#" + friend.email);
-  let msg = this.tradeService.updateProducer(this.userProfile);
-  console.log(msg);
+  if(this.userProfile.accountStatus == "PRODUCER"){
+    this.tradeService.updateProducer(this.userProfile, this.userProfile.email).subscribe(
+      res => {
+        console.log(res);
+        this.userProfile = res;
+        localStorage.setItem("activeProfile", JSON.stringify(this.userProfile));
+      },
+      error => {
+        console.log("Error response from hyperledger");
+      });
+  } else {
+    this.tradeService.updateConsumer(this.userProfile, this.userProfile.email).subscribe(
+      res => {
+        console.log(res);
+        this.userProfile = res;
+        localStorage.setItem("activeProfile", JSON.stringify(this.userProfile));
+      },
+      error => {
+        console.log("Error response from hyperledger");
+      });
+  }
+  
  }
  
   //Gets the lat and long of the users address
