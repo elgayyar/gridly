@@ -4,9 +4,18 @@ th, td {
   text-overflow: ellipsis;
   white-space: nowrap;
   }
+.graph-card {
+  height: 600px;
+  background: #F5F5F5;
+  margin: 1%;
+};
 
-.home-card {
-  max-height: 400px;
+table{
+  width: 100%;
+};
+
+.transaction-card {
+  height: 400px;
   background: #F5F5F5;
   margin: 1%;
 };

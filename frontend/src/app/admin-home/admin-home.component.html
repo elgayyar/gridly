@@ -1,8 +1,52 @@
 <app-main-nav>
+  <div  fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayout="1%" fxLayoutAlign="center" fxFill>
+    <div fxFlex="100%" fxFlex.xs="100%">
+      <mat-card class="graph-card" fxFlex="50%" fxLayoutDesign="left">  
+          <span fxLayoutDesign="left" class="graph-title"> Quantity (kWh) vs Time</span>
+          <ngx-charts-line-chart
+          [legend]="llegend"
+          [scheme]="lcolorScheme"
+          [results]="QVT"
+          [gradient]="lgradient"
+          [xAxis]="lshowXAxis"
+          [yAxis]="lshowYAxis"
+          [legend]="lshowLegend"
+          [showXAxisLabel]="lshowXAxisLabel"
+          [showYAxisLabel]="lshowYAxisLabel"
+          [xAxisLabel]="lxAxisLabel"
+          [yAxisLabel]="lyAxisLabel"
+          [autoScale]="lautoScale"
+          [timeline]="ltimeline"
+          [view]="lview"
+          (select)="onSelect($event)">
+        </ngx-charts-line-chart>
+      </mat-card>
+      <mat-card class="graph-card" fxFlex="50%" fxLayoutDesign="left">  
+          <span fxLayoutDesign="left" class="graph-title"> Unit Price ($) vs Time</span>
+          <ngx-charts-line-chart
+          [legend]="rlegend"
+          [scheme]="rcolorScheme"
+          [results]="PVT"
+          [gradient]="rgradient"
+          [xAxis]="rshowXAxis"
+          [yAxis]="rshowYAxis"
+          [legend]="rshowLegend"
+          [showXAxisLabel]="rshowXAxisLabel"
+          [showYAxisLabel]="rshowYAxisLabel"
+          [xAxisLabel]="rxAxisLabel"
+          [yAxisLabel]="ryAxisLabel"
+          [autoScale]="rautoScale"
+          [timeline]="rtimeline"
+          [view]="rview"
+          (select)="onSelect($event)">
+        </ngx-charts-line-chart>
+      </mat-card>
+    </div>
+  </div>
   <!-- Row 1 -->
   <div  fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayout="1%" fxLayoutAlign="center" fxFill>
       <div fxFlex="100%" fxFlex.xs="100%">
-        <mat-card class="home-card" fxFlex="100%" fxFlex.xs = 100% fxLayoutDesign="left">
+        <mat-card class="transaction-card" fxFlex="100%" fxFlex.xs = 100% fxLayoutDesign="left">
         <table mat-table #table [dataSource]="dataSource" matSort matSortActive="timeStamp" matSortDirection="asc" class="mat-elevation-z8">
           
           <ng-container matColumnDef="timeStamp">
@@ -42,13 +86,7 @@
         </mat-card>
       </div>
     </div>
-   <!-- Row 1 -->
-  <div  fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayout="1%" fxLayoutAlign="center" fxFill>
-      <div fxFlex="100%" fxFlex.xs="100%">
-        <mat-card class="home-card" fxFlex="100%" fxFlex.xs = 50% fxLayoutDesign="left">  
-          
-        </mat-card>
-      </div>
-    </div>
+   <!-- Row 2 -->
+  
 
 </app-main-nav>

@@ -17,7 +17,8 @@ export interface Tile {
 @Component({
   selector: 'app-admin-home',
   templateUrl: './admin-home.component.html',
-  styleUrls: ['./admin-home.component.css']
+  styleUrls: ['./admin-home.component.css'],
+  providers: [NgxChartsModule]
 })
 export class AdminHomeComponent implements OnInit {
   constructor(private adminService: AdminService, private transactionService: TransactionsService) { }
@@ -40,27 +41,50 @@ export class AdminHomeComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  
-  /* showXAxis = true;
-  showYAxis = true;
-  gradient = false;
-  showLegend = true;
-  showXAxisLabel = true;
-  xAxisLabel = 'Time';
-  showYAxisLabel = true;
-  yAxisLabel = 'Quantity (kWh)';
-  timeline = true;
-  view: any[] = [500, 500];
-  colorScheme = {domain: ['#B00F3B', '#373B46', '#003366']};
-  autoScale = true;
-  legend = false;
-  public multi = [
+  //quantity vs time graph
+  lshowXAxis = true;
+  lshowYAxis = true;
+  lgradient = false;
+  lshowLegend = true;
+  lshowXAxisLabel = true;
+  lxAxisLabel = 'Time';
+  lshowYAxisLabel = true;
+  lyAxisLabel = 'Quantity (kWh)';
+  ltimeline = true;
+  lview: any[] = [500, 500];
+  lcolorScheme = {domain: ['#B00F3B', '#373B46', '#003366']};
+  lautoScale = true;
+  llegend = false;
+  public QVT = [
     {
       "name": "Quantity (kWh)",
       "series": [
       ]
     }
-  ] */
+  ]
+
+  //unit price vs time graph
+  rshowXAxis = true;
+  rshowYAxis = true;
+  rgradient = false;
+  rshowLegend = true;
+  rshowXAxisLabel = true;
+  rxAxisLabel = 'Time';
+  rshowYAxisLabel = true;
+  ryAxisLabel = 'Unit Price ($)';
+  rtimeline = true;
+  rview: any[] = [500, 500];
+  rcolorScheme = {domain: ['#B00F3B', '#373B46', '#003366']};
+  rautoScale = true;
+  rlegend = false;
+  public PVT = [
+    {
+      "name": "Unit Price ($)",
+      "series": [
+      ]
+    }
+  ]
+
  
 
   ngOnInit() {
@@ -93,7 +117,8 @@ export class AdminHomeComponent implements OnInit {
 
       this. displayedColumns = ['timeStamp', 'buyer', 'seller', 'electricityQuantity', 'unitElectricityPrice', 'totalPrice'];
 
-
+      this.makePVTGraph();
+      this.makeQVTGraph();
 
      
    });
@@ -148,6 +173,32 @@ getSellerNames(){
   });
   this.isLoading=false;
   console.log("isloading is now: ", this.isLoading);
+}
+
+makeQVTGraph(){
+  console.log("in makeGraph");
+  this.transactionsList.forEach(e => {
+    let graphData = {
+      "name": e.timeStamp,
+      "value": e.electricityQuantity
+    }
+    this.QVT[0].series.push(graphData);
+  });
+  console.log(this.QVT);
+  this.QVT = [...this.QVT];
+}
+
+makePVTGraph(){
+  console.log("in makeGraph");
+  this.transactionsList.forEach(e => {
+    let graphData = {
+      "name": e.timeStamp,
+      "value": e.unitElectricityPrice
+    }
+    this.PVT[0].series.push(graphData);
+  });
+  console.log(this.PVT);
+  this.PVT = [...this.PVT];
 }
 
 
