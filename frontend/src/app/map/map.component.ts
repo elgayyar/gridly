@@ -141,7 +141,9 @@ export class MapComponent implements OnInit {
 }
  
 
- remove(friend){
+ remove(friend, i){
+  this.markers.splice(i + 1, 1);
+  console.log(this.markers);
   this.friends = this.arrayRemove(this.friends, friend);
   this.nonFriends.push(friend);
   this.userProfile.friends = this.arrayRemove(this.userProfile.friends, "resource:gridly.user.User#" + friend.email);
@@ -206,6 +208,11 @@ export class MapComponent implements OnInit {
   //Plot the user on the map
   mapFriend(user) {
     this.getUserGeocode(user);
+  }
+
+  //Remove marker from map
+  removeMarker(i) {
+    this.markers.splice(i, 1);
   }
 
 }
