@@ -91,7 +91,7 @@
                       Add Battery
                   </button>
               <ng-template #removeBattery>
-                  <button mat-stroked-button class="sell-button" data-toggle="modal" data-target="#batteryRemove" (click)="deleteBattery()">
+                  <button mat-stroked-button class="sell-button" data-toggle="modal" data-target="#batteryRemove" (click)="deleteBattery()" matTooltip="Current capacity: ">
                       <i class="material-icons" >battery_charging_full</i>
                       Remove Battery
                   </button>
@@ -131,8 +131,8 @@
                   <!-- Battery Animation -->
                   <div fxFlex="50%" fxFlex.xs="100%" class="battery-container">
                       <div class="pole"></div>  
-                      <div id="battery" class="outer">
-                        <div id="battery-height" class="inner"></div>
+                      <div id="battery" matTooltip="Current capacity: " class="outer" >
+                        <div id="battery-height" matTooltip="Current capacity: " class="inner"></div>
                       </div>                       
                   </div>
                 </div>

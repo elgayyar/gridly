@@ -4,8 +4,9 @@ import { AuthService } from '../services/auth.service';
 import { AuthGuard } from '../guards/auth.guard';
 import { RegisterService } from '../services/register.service';
 import { Router } from '@angular/router';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatTooltipModule, MatSnackBar}  from '@angular/material';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSnackBar}  from '@angular/material';
 import { TradeService } from '../services/trade.service';
+
 
 declare var $: any;
 
@@ -462,13 +463,12 @@ selectBuyer(b){
         //this.userProfile = res;
         //localStorage.setItem("activeProfile", JSON.stringify(this.userProfile));
         //this.disabled = true;
-        localStorage.setItem("activeProfile", JSON.stringify(this.userProfile));
-        //Update the battery animation
-        
+        localStorage.setItem("activeProfile", JSON.stringify(this.userProfile));        
         //Add a notification
         this.snackBar.open("Success: Battery added!");    
         setTimeout( () => { 
           this.snackBar.dismiss();
+          //Update the battery animation
           this.setBatteryCapacity();
         }, 1500 );     
       },
