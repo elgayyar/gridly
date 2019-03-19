@@ -484,9 +484,9 @@ selectBuyer(b){
 
     //Removes a battery from the users profile
     deleteBattery() {
-      setTimeout( () => { 
-        $('#batteryRemove').modal('hide');
-      }, 1000 );
+      //setTimeout( () => { 
+        //$('#batteryRemove').modal('hide');
+      //}, 1000 );
       console.log("Remove battery clicked");
       delete this.userProfile.battery;
       //this.userProfile.battery = null;
@@ -498,6 +498,7 @@ selectBuyer(b){
           //console.log("Profile returned from HYPERLEDGER", this.userProfile)
           localStorage.setItem("activeProfile", JSON.stringify(this.userProfile));
         //Show a notifcation
+        $('#batteryRemove').modal('hide');
         this.snackBar.open("Success: Battery removed!");    
         setTimeout( () => { 
           this.snackBar.dismiss();
@@ -505,6 +506,7 @@ selectBuyer(b){
         },
         error => {
           console.log("Error response from hyperledger", error);
+          $('#batteryRemove').modal('hide');
           this.snackBar.open("Error: Please try again!");    
           setTimeout( () => { 
             this.snackBar.dismiss();
