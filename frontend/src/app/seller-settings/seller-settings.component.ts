@@ -485,8 +485,8 @@ selectBuyer(b){
       this.registerService.removeBattery(this.userProfile, this.userProfile.email).subscribe(
         res => {
           console.log(res);
-          this.userProfile = res;
-          console.log("Profile returned from HYPERLEDGER", this.userProfile)
+          //this.userProfile = res;
+          //console.log("Profile returned from HYPERLEDGER", this.userProfile)
           localStorage.setItem("activeProfile", JSON.stringify(this.userProfile));
         //Show a notifcation
         this.snackBar.open("Success: Battery removed!");    
