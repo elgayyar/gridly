@@ -46,4 +46,9 @@ export class RegisterService {
     return this.http.put<JSON>(this.ledgerDomain+'/gridly.producer.Producer/'+ email, producer);
   }
 
+  //Remove a battery from the producers profile
+  removeBattery(producer, email) {
+    return this.http.put<JSON>(this.ledgerDomain+'/gridly.producer.Producer/'+ email, producer);
+  }
+
 }

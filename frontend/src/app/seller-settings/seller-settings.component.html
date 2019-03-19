@@ -91,34 +91,17 @@
                       Add Battery
                   </button>
               <ng-template #removeBattery>
-                  <button mat-stroked-button class="sell-button" (click)="removeBattery()">
+                  <button mat-stroked-button class="sell-button" data-toggle="modal" data-target="#batteryRemove" (click)="deleteBattery()">
                       <i class="material-icons" >battery_charging_full</i>
                       Remove Battery
                   </button>
               </ng-template>
             </mat-card-header>
             <mat-card-content>
-              
+
+                <!-- Displays the battery information -->
                 <div fxFlex="100%" fxFlex.xs="100%" *ngIf="userProfile.battery !== undefined; else noBattery">
                     <div fxFlex="50%" fxFlex.xs="100%">
-                      <!--
-                      <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayout="2%" fxLayoutAlign="center" class="form-container">
-                        <p [(ngModel)]="serialNumber"> Serial Number: {{ serialNumber }} </p>
-                      </div>
-                      <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayout="2%" fxLayoutAlign="center" class="form-container">
-                        <p [(ngModel)]="manufacturer"> Manufacturer: {{ manufacturer }} </p>
-                      </div>
-                      <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayout="2%" fxLayoutAlign="center" class="form-container">
-                        <p [(ngModel)]="model"> Model: {{ model }} </p>
-                      </div>
-                      <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayout="2%" fxLayoutAlign="center" class="form-container">
-                        <p [(ngModel)]="maxCapacity"> Max Capacity: {{ maxCapacity}} </p>
-                      </div>
-                      <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayout="2%" fxLayoutAlign="center" class="form-container">
-                        <p [(ngModel)]="currentCapacity"> Current Capacity: {{ currentCapacity }} </p>
-                      </div>
-                    -->
-              
                       <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayout="2%" fxLayoutAlign="center" class="form-container">
                           <mat-form-field class="form-space" >
                               <input matInput placeholder="Serial Number" [(ngModel)]="serialNumber" disabled>
@@ -296,6 +279,19 @@ aria-labelledby="visualizeTreatmentsModal" aria-hidden="true">
     <div class="modal-content">
       <div class="modal-body">
         <h3 class="red scanning-title">Validating Sale...</h3>
+        <div class="spinner red"></div>
+        </div>
+      </div>
+    </div>
+</div>
+
+<!-- Deleting Battery modal -->
+<div class="modal fade" id="batteryRemove" tabindex="-1" role="dialog"
+aria-labelledby="visualizeTreatmentsModal" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-body">
+        <h3 class="red scanning-title">Removing battery...</h3>
         <div class="spinner red"></div>
         </div>
       </div>
