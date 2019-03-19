@@ -8,6 +8,7 @@ import {MatSort, MatTableDataSource, MatPaginator} from '@angular/material';
   styleUrls: ['./production-modal.component.css']
 })
 export class ProductionModalComponent implements OnInit {
+  hasTransactions;
   co2Savings = "28 kg";
   dollarSavings = "$15.12";
   userProfile;  
@@ -40,7 +41,7 @@ export class ProductionModalComponent implements OnInit {
     
     //for top 3 buyers
     this.getTransactionData();
-
+    
     //for recent 5 transactions
     this.transactionService.getSellerTransactions(this.userProfile.email,).subscribe(res => {
       this.transactionsList = JSON.parse(JSON.stringify(res));
@@ -90,6 +91,13 @@ export class ProductionModalComponent implements OnInit {
     this.transactionService.getSellerTransactions(this.userProfile.email).subscribe(res => {
       console.log("transaction service, getBuyerTransactions returned: ", res);
       this.rawData = res;
+      console.log("Transaction length: ", this.rawData.length);
+      //If lenght of transactions is greater than  show the dhasboard
+      if(this.rawData.length > 0) {
+        this.hasTransactions = true;
+      } else {
+        this.hasTransactions = false;
+      }
       this.getProductionHistoryByDay();
       this.getBuyerNames();
     });

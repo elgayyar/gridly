@@ -31,3 +31,11 @@ th, td {
     background: #B00F3B !important;
     cursor: pointer;
 }
+
+.empty-card {
+    height: 600px;
+}
+
+.empty-text {
+    padding-right: 10%; 
+}
