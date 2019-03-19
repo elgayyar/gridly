@@ -463,14 +463,23 @@ selectBuyer(b){
         //localStorage.setItem("activeProfile", JSON.stringify(this.userProfile));
         //this.disabled = true;
         localStorage.setItem("activeProfile", JSON.stringify(this.userProfile));
+        //Update the battery animation
+        
+        //Add a notification
+        this.snackBar.open("Success: Battery added!");    
+        setTimeout( () => { 
+          this.snackBar.dismiss();
+          this.setBatteryCapacity();
+        }, 1500 );     
       },
       error => {
         console.log("Error response from hyperledger", error);
+        //Add a notification
+        this.snackBar.open("Error: Please try again!");    
+        setTimeout( () => { 
+          this.snackBar.dismiss();
+        }, 1500 );           
       });
-
-    //Update the battery animation
-    this.setBatteryCapacity();
-    
     }
 
     //Removes a battery from the users profile
