@@ -66,7 +66,7 @@ sortAvailableConsumers(){
     console.log(this.userProfile.minSellingPrice);
     console.log(this.consumers[i].maxPurchasePrice);
     if(this.consumers[i].maxPurchasePrice >= this.userProfile.minSellingPrice){
-      console.log('FOUND ONE')
+      console.log('FOUND ONE');
       if(this.userProfile.friends.includes("resource:gridly.user.User#"+this.consumers[i].email)){
         // This could mess stuff up!!!!
         this.consumers[i].isFriend = true;

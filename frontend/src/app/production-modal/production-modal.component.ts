@@ -11,11 +11,14 @@ export class ProductionModalComponent implements OnInit {
   co2Savings = "28 kg";
   dollarSavings = "$15.12";
   userProfile;  
-  topBuyers = [];
   rawData
   totalQuantity
   monthHistory = []
   topBuyersData;
+  
+  public production =[];
+  public topBuyers = [];
+
 
   //for recent transactions
   transactionsList = []
@@ -40,7 +43,6 @@ export class ProductionModalComponent implements OnInit {
 
     //for recent 5 transactions
     this.transactionService.getSellerTransactions(this.userProfile.email,).subscribe(res => {
-      console.log("transaction service, getBuyerTransactions returned: ", res);
       this.transactionsList = JSON.parse(JSON.stringify(res));
       this.reformatTimeStamp();
 
@@ -48,10 +50,8 @@ export class ProductionModalComponent implements OnInit {
         // convert date object into number to resolve issue in typescript
         return  +new Date(b.timeStamp) - +new Date(a.timeStamp);
       });
-      console.log("sorted by time : ", this.transactionsList);
 
       this.transactionsList=this.transactionsList.slice(0,5);
-      console.log("most recent 5 transactions ", this.transactionsList);
 
       this.dataSource=new MatTableDataSource(this.transactionsList);
       this.dataSource.sort = this.sort;
@@ -65,26 +65,21 @@ export class ProductionModalComponent implements OnInit {
     this.transactionsList.forEach(e => {
       let T = /T/gi;
       this.replacedTime = e.timeStamp.replace(T, " ");
-      console.log ("replaced Time: ", this.replacedTime);
       let splicedTime = this.replacedTime.slice(0, -8) 
-      console.log ("spliced Time: ", splicedTime);
       e.timeStamp = splicedTime;
     })
     this.transactionsList = [...this.transactionsList];
-    console.log("done reformatting time: ", this.transactionsList);
   }
   
   getBuyerNamesLeo(){
     this.transactionsList.forEach(e => {
       let buyerEmail = e.buyer.slice(34);
-      console.log("buyerEmail: ", buyerEmail);
       
       this.transactionService.getBuyerProfile(buyerEmail).subscribe(res =>{
         let buyer = JSON.parse(JSON.stringify(res));
         this.buyerFirstName = buyer[0].fname;
         this.buyerLastName = buyer[0].lname;
         this.buyerName = this.buyerFirstName + " " + this.buyerLastName;
-        console.log("buyername: ", this.buyerName);
         e.buyer = this.buyerName;
       })
       //this.updateDataSource();
@@ -92,7 +87,7 @@ export class ProductionModalComponent implements OnInit {
   }
 
   getTransactionData(){
-    this.transactionService.getBuyerTransactions(this.userProfile.email).subscribe(res => {
+    this.transactionService.getSellerTransactions(this.userProfile.email).subscribe(res => {
       console.log("transaction service, getBuyerTransactions returned: ", res);
       this.rawData = res;
       this.getProductionHistoryByDay();
@@ -163,7 +158,7 @@ export class ProductionModalComponent implements OnInit {
           "value": context.totalQuantity
         }
       ];
-    }, 1000);
+    }, 1500);
   }
 
   getProductionHistoryByDay(){
@@ -193,6 +188,134 @@ export class ProductionModalComponent implements OnInit {
           }
       }
   }
+
+  this.production = [
+    {
+      "name": "Production",
+      "series": [
+        {
+          "name": this.monthHistory[0].date,
+          "value": this.monthHistory[0].quantity
+        },
+        {
+          "name": this.monthHistory[1].date,
+          "value": this.monthHistory[1].quantity
+        },
+        {
+          "name": this.monthHistory[2].date,
+          "value": this.monthHistory[2].quantity
+        },
+        {
+          "name": this.monthHistory[3].date,
+          "value": this.monthHistory[3].quantity
+        },
+        {
+          "name": this.monthHistory[4].date,
+          "value": this.monthHistory[4].quantity
+        },
+        {
+          "name": this.monthHistory[5].date,
+          "value": this.monthHistory[5].quantity
+        },
+        {
+          "name": this.monthHistory[6].date,
+          "value": this.monthHistory[6].quantity
+        },
+        {
+          "name": this.monthHistory[7].date,
+          "value": this.monthHistory[7].quantity
+        },
+        {
+          "name": this.monthHistory[8].date,
+          "value": this.monthHistory[8].quantity
+        },
+        {
+          "name": this.monthHistory[9].date,
+          "value": this.monthHistory[9].quantity
+        },
+        {
+          "name": this.monthHistory[10].date,
+          "value": this.monthHistory[10].quantity
+        },
+        {
+          "name": this.monthHistory[11].date,
+          "value": this.monthHistory[11].quantity
+        },
+        {
+          "name": this.monthHistory[12].date,
+          "value": this.monthHistory[12].quantity
+        },
+        {
+          "name": this.monthHistory[13].date,
+          "value": this.monthHistory[13].quantity
+        },
+        {
+          "name": this.monthHistory[14].date,
+          "value": this.monthHistory[14].quantity
+        },
+        {
+          "name": this.monthHistory[15].date,
+          "value": this.monthHistory[15].quantity
+        },
+        {
+          "name": this.monthHistory[16].date,
+          "value": this.monthHistory[16].quantity
+        },
+        {
+          "name": this.monthHistory[17].date,
+          "value": this.monthHistory[17].quantity
+        },
+        {
+          "name": this.monthHistory[18].date,
+          "value": this.monthHistory[18].quantity
+        },
+        {
+          "name": this.monthHistory[19].date,
+          "value": this.monthHistory[19].quantity
+        },
+        {
+          "name": this.monthHistory[20].date,
+          "value": this.monthHistory[20].quantity
+        },
+        {
+          "name": this.monthHistory[21].date,
+          "value": this.monthHistory[21].quantity
+        },
+        {
+          "name": this.monthHistory[22].date,
+          "value": this.monthHistory[22].quantity
+        },
+        {
+          "name": this.monthHistory[23].date,
+          "value": this.monthHistory[23].quantity
+        },
+        {
+          "name": this.monthHistory[24].date,
+          "value": this.monthHistory[24].quantity
+        },
+        {
+          "name": this.monthHistory[25].date,
+          "value": this.monthHistory[25].quantity
+        },
+        {
+          "name": this.monthHistory[26].date,
+          "value": this.monthHistory[26].quantity
+        },
+        {
+          "name": this.monthHistory[27].date,
+          "value": this.monthHistory[27].quantity
+        },
+        {
+          "name": this.monthHistory[28].date,
+          "value": this.monthHistory[28].quantity
+        },
+        {
+          "name": this.monthHistory[29].date,
+          "value": this.monthHistory[29].quantity
+        }
+      ]
+    }
+  ]
 }
 //========================UI and Graph Stuff==================================
 // data goes here
@@ -226,7 +349,7 @@ public dollarData = [
 /*********************************************** Top Friends Pie Chart  ************************************/
 topBuyersView: any[] = [500, 300];
 
-view: any[] = [500, 300];
+view: any[] = [600, 400];
 
   // options for the chart
   showXAxis = true;
@@ -252,5 +375,7 @@ view: any[] = [500, 300];
   explodeSlices = false;
   doughnut = true;
   title = "Electricity Provider Breakdown";
+
+
 
 }

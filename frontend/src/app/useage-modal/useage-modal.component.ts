@@ -8,8 +8,8 @@ import {MatSort, MatTableDataSource, MatPaginator} from '@angular/material';
   styleUrls: ['./useage-modal.component.css']
 })
 export class UseageModalComponent implements OnInit {
-  co2Savings = "23 kg";
-  dollarSavings = "$14.32";
+  co2Savings = "23kg";
+  dollarSavings = "$14.20";
 
   userProfile;
   rawData;
@@ -158,7 +158,7 @@ getTopSellers(){
     context.topSellers = [ 
       {
         "name": context.topSellersData[0].name,
-        "value": context.topSellersData[1].totalSold
+        "value": context.topSellersData[0].totalSold
       },
       {
         "name": context.topSellersData[1].name,
@@ -202,7 +202,8 @@ for(var k=0; k<this.rawData.length;k++){
     }
 }
 
-
+// this.co2Savings =(0.85*this.totalQuantity).toString() + "kg";
+// this.dollarSavings = "$" + (0.06*this.totalQuantity).toString();
 
 this.consumption = [
   {
@@ -395,7 +396,7 @@ public card = [
 
 
 
-  view: any[] = [500, 300];
+  view: any[] = [600, 400];
 
   // options for the chart
   showXAxis = true;
