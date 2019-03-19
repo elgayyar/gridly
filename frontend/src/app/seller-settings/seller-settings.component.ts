@@ -119,6 +119,10 @@ postTrade(){
         this.snackBar.open("Success: Sell order complete!");    
         setTimeout( () => { 
           this.snackBar.dismiss();
+          this.currentCapacity -= this.quantity;
+          this.setBatteryCapacity();
+          //this.userProfile.battery.currentCapacity -= this.quantity;
+          //console.log(this.userProfile.battery.currentCapacity);
         }, 1500 );
       },
       error => {
