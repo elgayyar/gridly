@@ -3,7 +3,6 @@ import { AuthService } from '../services/auth.service';
 import { AuthGuard } from '../guards/auth.guard';
 import { Router } from "@angular/router";
 
-
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',

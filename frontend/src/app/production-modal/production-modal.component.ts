@@ -2,12 +2,15 @@ import { Component, OnInit, ViewChild} from '@angular/core';
 import { TransactionsService } from '../services/transactions.service';
 import {MatSort, MatTableDataSource, MatPaginator} from '@angular/material';
 
+declare var $: any;
+
 @Component({
   selector: 'app-production-modal',
   templateUrl: './production-modal.component.html',
   styleUrls: ['./production-modal.component.css']
 })
 export class ProductionModalComponent implements OnInit {
+  loading;
   hasTransactions;
   co2Savings = "28 kg";
   dollarSavings = "$15.12";
@@ -37,6 +40,7 @@ export class ProductionModalComponent implements OnInit {
   constructor(private transactionService: TransactionsService) { }
 
   ngOnInit() {
+    this.loading = true;
     this.userProfile = JSON.parse(localStorage.getItem("activeProfile"));
     
     //for top 3 buyers
@@ -92,7 +96,7 @@ export class ProductionModalComponent implements OnInit {
       console.log("transaction service, getBuyerTransactions returned: ", res);
       this.rawData = res;
       console.log("Transaction length: ", this.rawData.length);
-      //If lenght of transactions is greater than  show the dhasboard
+      //If lenght of transactions is greater than  show the dashboard
       if(this.rawData.length > 0) {
         this.hasTransactions = true;
       } else {
@@ -196,7 +200,8 @@ export class ProductionModalComponent implements OnInit {
           }
       }
   }
-
+  
+  this.loading = false;
   this.production = [
     {
       "name": "Production",

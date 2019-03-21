@@ -8,9 +8,10 @@ import {MatSort, MatTableDataSource, MatPaginator} from '@angular/material';
   styleUrls: ['./useage-modal.component.css']
 })
 export class UseageModalComponent implements OnInit {
+  loading;
+  hasTransactions;
   co2Savings = "23kg";
   dollarSavings = "$14.20";
-
   userProfile;
   rawData;
   topSellersData = [];
@@ -36,6 +37,7 @@ export class UseageModalComponent implements OnInit {
   constructor(private transactionService: TransactionsService) { }
 
   ngOnInit() {
+    this.loading = true;
     this.monthHistory = [];
     this.userProfile = JSON.parse(localStorage.getItem("activeProfile"));
     
@@ -84,6 +86,12 @@ getTransactionData(){
   this.transactionService.getBuyerTransactions(this.userProfile.email,).subscribe(res => {
     console.log("transaction service, getBuyerTransactions returned: ", res);
     this.rawData = res;
+    //If lenght of transactions is greater than 0 show the dashboard
+    if(this.rawData.length > 0) {
+      this.hasTransactions = true;
+    } else {
+      this.hasTransactions = false;
+    }
     this.getConsumptionHistoryByDay();
     this.getSellerNames();
   });
@@ -204,7 +212,7 @@ for(var k=0; k<this.rawData.length;k++){
 
 // this.co2Savings =(0.85*this.totalQuantity).toString() + "kg";
 // this.dollarSavings = "$" + (0.06*this.totalQuantity).toString();
-
+this.loading = false;
 this.consumption = [
   {
     "name": "Consumption",

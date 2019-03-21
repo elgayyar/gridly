@@ -1,3 +1,5 @@
+<div class="loader"*ngIf="loading; else dashboard">Loading...</div>  
+<ng-template #dashboard>
   <!-- Row 1 -->
   <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayout="2%" fxLayoutAlign="center" fxFill>
     <div *ngIf="hasTransactions; else noTransactions">
@@ -131,12 +133,9 @@
       <div fxFlex="55%" fxFlex.xs="100%">
           <mat-card class="home-card empty-card animated fadeIn">
               <mat-card-header>
-                  <span class="dashboard-title">Welcome to Gridly!</span>        
+                  <span class="dashboard-title">Dashboard is empty!</span>        
               </mat-card-header>
-              <mat-card-content class="home-card useage-card">
-                  <!--
-                    <p class="empty-text">Your dashboard is empty right now!</p>
-                  -->
+              <mat-card-content class="home-card useage-card"> 
                   <svg xmlns="http://www.w3.org/2000/svg" width="500" height="450" viewBox="250 50 500 500">
                     <style>
                       @-webkit-keyframes draw { to { stroke-dashoffset: 0; } } @keyframes draw { to { stroke-dashoffset: 0; } } .path { animation: draw 10s linear infinite; stroke-dasharray : 100, 10, 200, 10; stroke-dashoffset: 1000; stroke-width: 3px; stroke: #373B46; fill: none; } .path-01 { -webkit-animation-delay: 0s; animation-delay: 0s; } .path-02 { -webkit-animation-delay: 1s; animation-delay: 1s; } .path-03 { -webkit-animation-delay: 2s; animation-delay: 2s; } .path-04 { -webkit-animation-delay: 3s; animation-delay: 3s; }
@@ -241,3 +240,5 @@
           </mat-card>
         </div>
   </ng-template>
+
+</ng-template>

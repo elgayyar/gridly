@@ -109,16 +109,11 @@ postTrade(){
       res => {
         console.log("Response from fabric:");
         console.log(res);
-        //Show the spinner for 1.5 seconds
-        /*
-        setTimeout( () => { 
-          $('#trading').modal('hide');
-        }, 1500 );
-        */  
         //Show a notifcation
         this.snackBar.open("Success: Sell order complete!");    
         setTimeout( () => { 
           this.snackBar.dismiss();
+          //Update the battery display
           this.currentCapacity -= this.quantity;
           this.setBatteryCapacity();
           //this.userProfile.battery.currentCapacity -= this.quantity;
@@ -127,11 +122,6 @@ postTrade(){
       },
       error => {
         console.log("Error response from hyperledger: ", error);
-        /*
-        setTimeout( () => { 
-          $('#trading').modal('hide');
-        }, 1500 );  
-        */
         //Show a notifcation
         this.snackBar.open("Failure: Unable to process! Please try again.");   
         setTimeout( () => { 
@@ -145,11 +135,6 @@ selectBuyer(b){
   console.log("clicked", b)
   this.selectedConsumer = b;
 }
-
-
-
-
-
 
   //********************************** London Hydro Pricing Card ********************************* */
   autoTicks = true;

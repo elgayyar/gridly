@@ -34,3 +34,12 @@ svg {
   position: absolute;
 }
 
+.london-hydro-logo {
+  background-image: linear-gradient(
+    rgba(255,255,255,0.7),
+    rgba(0,0,0,0.3)),url("../logo-london-hydro.png");
+
+    height: 48px;
+    width: 48px;
+}
+
