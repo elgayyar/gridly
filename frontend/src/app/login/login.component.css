@@ -25,7 +25,7 @@
 .background {
     background-image: linear-gradient(
         rgba(255,255,255,0.7),
-        rgba(0,0,0,0.3)),url("../world.png");
+        rgba(0,0,0,0.3)),url("../london.png");
     
         height: 100%;
     
