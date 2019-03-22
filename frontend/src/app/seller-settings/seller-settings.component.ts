@@ -4,8 +4,9 @@ import { AuthService } from '../services/auth.service';
 import { AuthGuard } from '../guards/auth.guard';
 import { RegisterService } from '../services/register.service';
 import { Router } from '@angular/router';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatTooltipModule, MatSnackBar}  from '@angular/material';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSnackBar}  from '@angular/material';
 import { TradeService } from '../services/trade.service';
+
 
 declare var $: any;
 
@@ -108,25 +109,19 @@ postTrade(){
       res => {
         console.log("Response from fabric:");
         console.log(res);
-        //Show the spinner for 1.5 seconds
-        /*
-        setTimeout( () => { 
-          $('#trading').modal('hide');
-        }, 1500 );
-        */  
         //Show a notifcation
         this.snackBar.open("Success: Sell order complete!");    
         setTimeout( () => { 
           this.snackBar.dismiss();
+          //Update the battery display
+          this.currentCapacity -= this.quantity;
+          this.setBatteryCapacity();
+          //this.userProfile.battery.currentCapacity -= this.quantity;
+          //console.log(this.userProfile.battery.currentCapacity);
         }, 1500 );
       },
       error => {
         console.log("Error response from hyperledger: ", error);
-        /*
-        setTimeout( () => { 
-          $('#trading').modal('hide');
-        }, 1500 );  
-        */
         //Show a notifcation
         this.snackBar.open("Failure: Unable to process! Please try again.");   
         setTimeout( () => { 
@@ -140,11 +135,6 @@ selectBuyer(b){
   console.log("clicked", b)
   this.selectedConsumer = b;
 }
-
-
-
-
-
 
   //********************************** London Hydro Pricing Card ********************************* */
   autoTicks = true;
@@ -462,21 +452,55 @@ selectBuyer(b){
         //this.userProfile = res;
         //localStorage.setItem("activeProfile", JSON.stringify(this.userProfile));
         //this.disabled = true;
-        localStorage.setItem("activeProfile", JSON.stringify(this.userProfile));
+        localStorage.setItem("activeProfile", JSON.stringify(this.userProfile));        
+        //Add a notification
+        this.snackBar.open("Success: Battery added!");    
+        setTimeout( () => { 
+          this.snackBar.dismiss();
+          //Update the battery animation
+          this.setBatteryCapacity();
+        }, 1500 );     
       },
       error => {
         console.log("Error response from hyperledger", error);
+        //Add a notification
+        this.snackBar.open("Error: Please try again!");    
+        setTimeout( () => { 
+          this.snackBar.dismiss();
+        }, 1500 );           
       });
-
-    //Update the battery animation
-    this.setBatteryCapacity();
-    
     }
 
     //Removes a battery from the users profile
-    removeBattery() {
-      this.userProfile.battery = null;
+    deleteBattery() {
+      //setTimeout( () => { 
+        //$('#batteryRemove').modal('hide');
+      //}, 1000 );
+      console.log("Remove battery clicked");
+      delete this.userProfile.battery;
+      //this.userProfile.battery = null;
       console.log("After remove battery", this.userProfile);
+      this.registerService.removeBattery(this.userProfile, this.userProfile.email).subscribe(
+        res => {
+          console.log(res);
+          //this.userProfile = res;
+          //console.log("Profile returned from HYPERLEDGER", this.userProfile)
+          localStorage.setItem("activeProfile", JSON.stringify(this.userProfile));
+        //Show a notifcation
+        $('#batteryRemove').modal('hide');
+        this.snackBar.open("Success: Battery removed!");    
+        setTimeout( () => { 
+          this.snackBar.dismiss();
+        }, 1500 );          
+        },
+        error => {
+          console.log("Error response from hyperledger", error);
+          $('#batteryRemove').modal('hide');
+          this.snackBar.open("Error: Please try again!");    
+          setTimeout( () => { 
+            this.snackBar.dismiss();
+          }, 1500 );   
+        });
     }
 
   //Snackbar for notifications

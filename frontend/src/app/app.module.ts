@@ -46,7 +46,6 @@ import {MatSortModule} from '@angular/material/sort'
 import { MatChipsModule } from '@angular/material/chips';
 import { ProductionModalComponent } from './production-modal/production-modal.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -100,8 +99,7 @@ import { ProductionModalComponent } from './production-modal/production-modal.co
       apiKey: 'AIzaSyDzjuXUKgTu4BjnL66oUP0jiGz30zuSuaM'
     }),
     FusionChartsModule,
-    MatSortModule
-    
+    MatSortModule,
   ],
   providers: [AuthGuard, AuthService,HttpClient,AdminService],
   bootstrap: [AppComponent]

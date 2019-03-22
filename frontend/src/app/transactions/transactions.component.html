@@ -3,7 +3,10 @@
   <div  fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayout="1%" fxLayoutAlign="center" fxFill>
     <div fxFlex="100%" fxFlex.xs="100%">
      
-      <mat-card class="home-card" fxFlex="50%" fxLayoutDesign="left" >
+      <mat-card class="home-card aminated fadeIn" fxFlex="50%" fxLayoutDesign="left">
+          <mat-card-header class="card-title">
+              <mat-card-title>Transaction History</mat-card-title>
+          </mat-card-header>
       <table mat-table #table [dataSource]="dataSource" matSort matSortActive="timeStamp" matSortDirection="asc" class="mat-elevation-z8">
         
         <ng-container matColumnDef="timeStamp">
@@ -47,7 +50,12 @@
     </mat-card>
     
       <mat-card class="home-card" fxFlex="50%" fxLayoutDesign="left" *ngIf="transactionsList.length != 0">
-      <span fxLayoutDesign="left" class="graph-title">Transaction Behaviour</span>
+              <mat-card-header class="card-title">
+                  <mat-card-title>Transaction Behaviour</mat-card-title>
+              </mat-card-header>
+      <!--
+        <span fxLayoutDesign="left" class="graph-title">Transaction Behaviour</span>
+      -->        
         <ngx-charts-line-chart
         [legend]="legend"
         [scheme]="colorScheme"
@@ -68,16 +76,6 @@
     </mat-card>
     </div>
   </div>
+  </app-main-nav>
 
-  <!-- Show this when there are no transactions -->
-  <ng-template #noTransactions>
-      <div fxFlex="25%" fxFlex.xs="100%"></div>
-      <div fxFlex="50%" fxFlex.xs="100%">
-          <mat-card class="home-card" fxFlex="100%" fxLayoutDesign="left">
-              <mat-card-title>There are no transactions to display.</mat-card-title>
-          </mat-card> 
-      </div>
-      <div fxFlex="25%" fxFlex.xs="100%"></div>
-  </ng-template>
 
-</app-main-nav>

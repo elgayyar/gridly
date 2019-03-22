@@ -7,11 +7,20 @@
                   <mat-card-title>My Profile</mat-card-title>
                   <span class="fill-space"></span>
                   <div *ngIf="disabled; else edit">
-                        <span><i class="material-icons profile-icon" (click)="editProfile()" matTooltip="Edit profile">edit</i></span>
+                        <button mat-stroked-button class="sell-button" (click)="editProfile()">
+                            <i class="material-icons" >edit</i>
+                            Edit Profile
+                        </button>
                   </div>
                   <ng-template #edit>
-                        <span><i class="material-icons profile-icon" (click)="save()" matTooltip="Save changes">save</i></span>
-                        <span><i class="material-icons profile-icon" (click)="cancel()" matTooltip="Cancel changes">close</i></span>
+                      <button mat-stroked-button class="sell-button button-space" data-toggle="modal" data-target="#saving" (click)="save()">
+                          <i class="material-icons" >save</i>
+                          Save
+                      </button>
+                      <button mat-stroked-button class="cancel-button" (click)="cancel()">
+                          <i class="material-icons" >close</i>
+                          Cancel
+                      </button>
                   </ng-template>
                 </mat-card-header>
                 <mat-card-content >
@@ -107,4 +116,17 @@
         </div>
       </div>    
 </app-main-nav>
+
+<!-- Saving modal -->
+<div class="modal fade" id="saving" tabindex="-1" role="dialog"
+aria-labelledby="visualizeTreatmentsModal" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-body">
+        <h3 class="red scanning-title">Saving changes...</h3>
+        <div class="spinner red"></div>
+        </div>
+      </div>
+    </div>
+</div>
 

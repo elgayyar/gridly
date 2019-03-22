@@ -91,34 +91,17 @@
                       Add Battery
                   </button>
               <ng-template #removeBattery>
-                  <button mat-stroked-button class="sell-button" (click)="removeBattery()">
+                  <button mat-stroked-button class="sell-button" data-toggle="modal" data-target="#batteryRemove" (click)="deleteBattery()" matTooltip="Current capacity: ">
                       <i class="material-icons" >battery_charging_full</i>
                       Remove Battery
                   </button>
               </ng-template>
             </mat-card-header>
             <mat-card-content>
-              
+
+                <!-- Displays the battery information -->
                 <div fxFlex="100%" fxFlex.xs="100%" *ngIf="userProfile.battery !== undefined; else noBattery">
                     <div fxFlex="50%" fxFlex.xs="100%">
-                      <!--
-                      <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayout="2%" fxLayoutAlign="center" class="form-container">
-                        <p [(ngModel)]="serialNumber"> Serial Number: {{ serialNumber }} </p>
-                      </div>
-                      <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayout="2%" fxLayoutAlign="center" class="form-container">
-                        <p [(ngModel)]="manufacturer"> Manufacturer: {{ manufacturer }} </p>
-                      </div>
-                      <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayout="2%" fxLayoutAlign="center" class="form-container">
-                        <p [(ngModel)]="model"> Model: {{ model }} </p>
-                      </div>
-                      <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayout="2%" fxLayoutAlign="center" class="form-container">
-                        <p [(ngModel)]="maxCapacity"> Max Capacity: {{ maxCapacity}} </p>
-                      </div>
-                      <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayout="2%" fxLayoutAlign="center" class="form-container">
-                        <p [(ngModel)]="currentCapacity"> Current Capacity: {{ currentCapacity }} </p>
-                      </div>
-                    -->
-              
                       <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayout="2%" fxLayoutAlign="center" class="form-container">
                           <mat-form-field class="form-space" >
                               <input matInput placeholder="Serial Number" [(ngModel)]="serialNumber" disabled>
@@ -148,8 +131,8 @@
                   <!-- Battery Animation -->
                   <div fxFlex="50%" fxFlex.xs="100%" class="battery-container">
                       <div class="pole"></div>  
-                      <div id="battery" class="outer">
-                        <div id="battery-height" class="inner" (click)="setBatteryCapacity()"></div>
+                      <div id="battery" matTooltip="Current capacity: " class="outer" >
+                        <div id="battery-height" matTooltip="Current capacity: " class="inner"></div>
                       </div>                       
                   </div>
                 </div>
@@ -165,49 +148,6 @@
           </mat-card>
         </div>
       </div>
-      <!-- Row 2 --> 
-      <!--
-      <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayout="2%" fxLayoutAlign="center">
-          <div fxFlex="100%" fxFlex.xs="100%">                          
-                          <mat-card class="settings-card" fxFlex="100%" fxLayoutDesign="left">
-                              <mat-card-content>
-                                  <div fxFlex="50%" fxFlex.xs="100%">
-                                    <mat-card-title>Sell Energy</mat-card-title>
-                                    <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayout="2%" fxLayoutAlign="center" class="form-container">
-                                      <mat-form-field class="form-space" >
-                                        <input matInput (change)="sortAvailableConsumers()" [(ngModel)]="userProfile.minSellingPrice" placeholder="Price">
-                                      </mat-form-field>
-                                    </div>
-                                    <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayout="2%" fxLayoutAlign="center" class="form-container">
-                                      <mat-form-field class="form-space" >
-                                          <input [(ngModel)]="quantity" matInput placeholder="Quantity">
-                                      </mat-form-field>
-                                    </div>
-                                    <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayout="2%" fxLayoutAlign="center" class="form-container">
-                                        <button [disabled]="!this.selectedConsumer" (click)="postTrade()" mat-stroked-button class="sell-button">Sell</button>
-                                    </div>
-                                  </div>
-                                  <div fxFlex="50%" fxFlex.xs="100%">
-                                      <mat-card-title>Available Buyers</mat-card-title>
-                                      <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayout="2%" fxLayoutAlign="center" class="form-container">
-                                        <mat-list class="list-size">
-                                          <ng-container *ngFor="let buyer of availableConsumers">
-                                          <mat-list-item (click)="selectBuyer(buyer)" [class.selected]="buyer === selectedConsumer" class="battery-list"> 
-                                            <mat-divider></mat-divider>
-                                            {{ buyer.fname + " " + buyer.lname }}
-                                          </mat-list-item>
-                                        </ng-container>
-                                        </mat-list> 
-                                    </div>
-                                  </div>
-                              </mat-card-content>
-                              <mat-card-actions>
-                              </mat-card-actions>
-                            </mat-card>
- 
-          </div>
-        </div>
-      -->
 </app-main-nav>
 
 <!-- Scanning modal -->
@@ -296,6 +236,19 @@ aria-labelledby="visualizeTreatmentsModal" aria-hidden="true">
     <div class="modal-content">
       <div class="modal-body">
         <h3 class="red scanning-title">Validating Sale...</h3>
+        <div class="spinner red"></div>
+        </div>
+      </div>
+    </div>
+</div>
+
+<!-- Deleting Battery modal -->
+<div class="modal fade" id="batteryRemove" tabindex="-1" role="dialog"
+aria-labelledby="visualizeTreatmentsModal" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-body">
+        <h3 class="red scanning-title">Removing battery...</h3>
         <div class="spinner red"></div>
         </div>
       </div>

@@ -3,6 +3,9 @@ import { AuthService } from '../services/auth.service';
 import { AuthGuard } from '../guards/auth.guard';
 import { RegisterService } from '../services/register.service';
 import { Router } from '@angular/router';
+import { MatSnackBar}  from '@angular/material';
+
+declare var $: any;
 
 @Component({
   selector: 'app-user-profile',
@@ -15,7 +18,8 @@ export class UserProfileComponent implements OnInit {
   disabled = true;
 
   constructor(private authService: AuthService,
-              private registerService: RegisterService) { }
+              private registerService: RegisterService,
+              private snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.userProfile = JSON.parse(localStorage.getItem("activeProfile"));
@@ -52,9 +56,18 @@ export class UserProfileComponent implements OnInit {
         this.userProfile = res;
         localStorage.setItem("activeProfile", JSON.stringify(this.userProfile));
         this.disabled = true;
+        $("#saving").modal('hide');
+        this.snackBar.open("Success: Profile has been updated!"); 
+        setTimeout( () => { 
+          this.snackBar.dismiss();
+        }, 1500 );
       },
       error => {
         console.log("Error response from hyperledger");
+        this.snackBar.open("Error: Please try again!"); 
+        setTimeout( () => { 
+          this.snackBar.dismiss();
+        }, 1500 );
       });
   }
 
@@ -66,9 +79,24 @@ export class UserProfileComponent implements OnInit {
         this.userProfile = res;
         localStorage.setItem("activeProfile", JSON.stringify(this.userProfile));
         this.disabled = true;
+        $("#saving").modal('hide');
+        this.snackBar.open("Success: Profile has been updated!"); 
+        setTimeout( () => { 
+          this.snackBar.dismiss();
+        }, 1500 );
       },
       error => {
         console.log("Error response from hyperledger");
+        $("#saving").modal('hide');
+        this.snackBar.open("Error: Please try again!"); 
+        setTimeout( () => { 
+          this.snackBar.dismiss();
+        }, 1500 );
       });
   }
+
+    //Snackbar for notifications
+    openSnackBar(message: string) {
+      this.snackBar.open(message);
+    }
 }
